@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
-import { MainNav } from '../components/main-nav';
-import { MobileNav } from '../components/mobile-nav';
+import { MainNav } from './main-nav';
+import { MobileNav } from './mobile-nav';
 import { ModeToggle } from '@/components/mode-toggle';
 import { Button, buttonVariants } from '@/components/ui/button';
 

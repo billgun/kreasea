@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { createClient } from '@/utils/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -44,6 +45,7 @@ const defaultValues: Partial<LoginFormValues> = {
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -65,7 +67,7 @@ export default function LoginForm() {
       form.setError('root', { message: error.message });
       throw new Error('Could not authenticate user');
     }
-    console.log(data);
+    router.push('/');
   }
 
   return (
