@@ -18,6 +18,42 @@ export async function getSession() {
   }
 }
 
+export async function getUser() {
+  const supabase = createServerSupabaseClient();
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
+export async function getUserProfile() {
+  const supabase = createServerSupabaseClient();
+  try {
+    const userJson = JSON.parse(
+      cookies().get(
+        `sb-${process.env.NEXT_PUBLIC_SUPABASE_REFERENCE}-auth-token`
+      )?.value || ''
+    );
+
+    const user = userJson.user;
+
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .select('username, name,avatar_url')
+      .eq('id', user.id)
+      .single();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
 export async function getUserDetails() {
   const supabase = createServerSupabaseClient();
   try {
