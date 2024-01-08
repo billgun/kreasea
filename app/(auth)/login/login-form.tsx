@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 import { createClient } from '@/utils/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -46,6 +47,7 @@ const defaultValues: Partial<LoginFormValues> = {
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -67,6 +69,7 @@ export default function LoginForm() {
       form.setError('root', { message: error.message });
       throw new Error('Could not authenticate user');
     }
+    toast({ title: 'Logged in', description: 'Welcome back!' });
     router.push('/');
   }
 
