@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { cache } from 'react';
 
 export const createServerSupabaseClient = cache(() => createClient(cookies()));
@@ -35,7 +36,7 @@ export async function signOut() {
   const supabase = createServerSupabaseClient();
   try {
     await supabase.auth.signOut();
-    return;
+    redirect('/');
   } catch (error) {
     console.error('Error:', error);
     return null;
