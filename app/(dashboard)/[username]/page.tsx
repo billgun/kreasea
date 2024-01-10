@@ -10,6 +10,7 @@ import { createClient } from '@/utils/supabase/server';
 import { CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 import { ProfileEdit } from './components/profile-edit';
 import React from 'react';
+import { ProfilePost } from './components/profile-post';
 
 interface UsernamePageProps {
   params: {
@@ -21,5 +22,12 @@ export default async function UsernamePage({
   params,
   children,
 }: UsernamePageProps) {
-  return <div>Test</div>;
+  return (
+    <div className='flex w-full flex-col gap-4'>
+      <ProfilePost className='mx-auto w-[36rem]' />
+      <ProfilePost className='mx-auto w-[36rem]' />
+      <ProfilePost className='mx-auto w-[36rem]' />
+      <ProfilePost className='mx-auto w-[36rem]' />
+    </div>
+  );
 }

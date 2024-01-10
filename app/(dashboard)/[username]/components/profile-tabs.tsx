@@ -36,7 +36,7 @@ export function ProfileTabs({ username }: ProfileTabsProps) {
     <nav className='flex w-full justify-center border-b pt-2'>
       <Tabs>
         <div className='flex space-x-8 '>
-          <TabLink href={`/${username}/home`}>Home</TabLink>
+          <TabLink href={`/${username}`}>Home</TabLink>
           <TabLink href={`/${username}/about`}>About</TabLink>
           <div className='border-b-2 border-transparent pb-2'>Membership</div>
           <div className='border-b-2 border-transparent pb-2'>About</div>
