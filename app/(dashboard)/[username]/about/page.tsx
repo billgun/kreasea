@@ -8,18 +8,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 import { CalendarDaysIcon, MapPinIcon } from 'lucide-react';
-import { ProfileEdit } from './components/profile-edit';
 import React from 'react';
 
-interface UsernamePageProps {
+interface AboutPageProps {
   params: {
     username: string;
   };
   children: React.ReactNode;
 }
-export default async function UsernamePage({
-  params,
-  children,
-}: UsernamePageProps) {
-  return <div>Test</div>;
+export default async function AboutPage({ params, children }: AboutPageProps) {
+  return <div>About a</div>;
 }

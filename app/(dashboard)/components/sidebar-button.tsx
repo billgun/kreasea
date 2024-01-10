@@ -12,15 +12,12 @@ interface UsernamePageProps {
 }
 export function SidebarButton({ href, children }: UsernamePageProps) {
   const pathname = usePathname();
+
   return (
     <Button
       asChild
-      className={cn(
-        pathname === href
-          ? buttonVariants({ variant: 'secondary' })
-          : buttonVariants({ variant: 'ghost' }),
-        'w-full justify-start'
-      )}
+      variant={pathname === href ? 'secondary' : 'ghost'}
+      className={'w-full justify-start'}
     >
       <Link href={href}>{children}</Link>
     </Button>

@@ -4,8 +4,12 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
-export function ModeToggle() {
+interface ModeToggleProps {
+  className?: string;
+}
+export function ModeToggle({ className }: ModeToggleProps) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -22,11 +26,21 @@ export function ModeToggle() {
     <>
       {theme === 'light' ? (
         <Button variant='outline' size='icon' onClick={() => setTheme('dark')}>
-          <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all' />
+          <Sun
+            className={cn(
+              `h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all`,
+              className
+            )}
+          />
         </Button>
       ) : (
         <Button variant='outline' size='icon' onClick={() => setTheme('light')}>
-          <Moon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all ' />
+          <Moon
+            className={cn(
+              `h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all`,
+              className
+            )}
+          />
         </Button>
       )}
       <span className='sr-only'>Toggle theme</span>

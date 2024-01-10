@@ -15,33 +15,39 @@ import {
 import { LogOutIcon } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
+import { ModeToggle } from '@/components/mode-toggle';
+import { revalidatePath } from 'next/cache';
 
 export function AvatarNav() {
   const router = useRouter();
   const signOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    return router.refresh();
+    return router.push('/home');
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
+        <Button variant='ghost' className='flex w-full justify-start'>
           <Avatar className='h-9 w-9'>
             <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
             <AvatarFallback>SC</AvatarFallback>
           </Avatar>
+          <DropdownMenuLabel className='font-normal '>
+            <div className='flex flex-col space-y-1 text-left'>
+              <p className='text-sm font-medium leading-none'>shadcn</p>
+              <p className='text-xs leading-none text-muted-foreground'>
+                m@example.com
+              </p>
+            </div>
+          </DropdownMenuLabel>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
-        <DropdownMenuLabel className='font-normal'>
-          <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>shadcn</p>
-            <p className='text-xs leading-none text-muted-foreground'>
-              m@example.com
-            </p>
-          </div>
-        </DropdownMenuLabel>
+        <DropdownMenuItem>
+          <ModeToggle />
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
