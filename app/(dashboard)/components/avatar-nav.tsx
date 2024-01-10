@@ -14,16 +14,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { LogOutIcon } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ModeToggle } from '@/components/mode-toggle';
 import { revalidatePath } from 'next/cache';
 
 export function AvatarNav() {
   const router = useRouter();
+  const pathname = usePathname();
   const signOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    return router.push('/home');
+    if (!(pathname === '/')) {
+      router.push('/');
+    }
+    return router.refresh();
   };
 
   return (
