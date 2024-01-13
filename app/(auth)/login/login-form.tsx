@@ -71,6 +71,7 @@ export default function LoginForm() {
     }
     toast({ title: 'Logged in', description: 'Welcome back!' });
     router.push('/');
+    router.refresh();
   }
 
   return (

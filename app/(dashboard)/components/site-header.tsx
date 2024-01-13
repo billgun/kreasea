@@ -24,6 +24,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import Link from 'next/link';
 
 export function SiteHeader() {
   return (
@@ -32,24 +33,15 @@ export function SiteHeader() {
         <MainNav />
         <MobileNav />
         <div className='flex flex-1 items-center justify-between space-x-2 md:justify-end'>
-          <div className='w-full flex-1 md:w-auto md:flex-none'>
-            {/* <Button
-              variant='outline'
-              className={cn(
-                'relative h-8 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64'
-              )}
-            >
-              <span className='hidden lg:inline-flex'>
-                Search your favorite creator...
-              </span>
-              <span className='inline-flex lg:hidden'>Search...</span>
-            </Button> */}
-          </div>
+          <div className='w-full flex-1 md:w-auto md:flex-none'></div>
           <nav className='flex items-center gap-1'>
-            <Button variant='outline' size='icon'>
-              <BellIcon className='h-[1.2rem] w-[1.2rem]' />
+            <Button variant={'outline'} asChild>
+              <Link href={'/login'}>Login</Link>
             </Button>
-            <AvatarNav />
+            <Button asChild>
+              <Link href={'/signup'}>Get Started</Link>
+            </Button>
+            <ModeToggle />
           </nav>
         </div>
       </div>
