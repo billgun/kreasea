@@ -10,8 +10,10 @@ import { createClient } from '@/utils/supabase/server';
 import {
   CalendarDaysIcon,
   ChevronRight,
+  Globe,
   Instagram,
   MapPinIcon,
+  Twitter,
 } from 'lucide-react';
 import { ProfileEdit } from './components/profile-edit';
 import React from 'react';
@@ -26,6 +28,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import Link from 'next/link';
 
 interface UsernamePageLayoutProps {
   params: {
@@ -49,6 +52,9 @@ export default async function UsernamePageLayout({
   if (error) {
     return;
   }
+
+  let dummyText =
+    'Muse Communication is trusted by our clients and has been named as the agent of more than 30 well-known anime and manga copyright partners in the global anime market. The company has expanded its influence in the anime and manga community by expanding its presence in the media, becoming a strategic marketing partner for its clients, and creating licensing opportunities. We provide our clients with a wide range of professional services in licensing, distribution, development, sales, and promotion to meet all their needs and achieve benefits. We provide clients with an all-rounded service to satisfy all your distribution needs.\n\nWe work with over a hundred different entertainment platforms including internet services, TV stations, TV/OTT platforms across the whole of Asia.';
 
   return (
     <div>
@@ -96,17 +102,42 @@ export default async function UsernamePageLayout({
                 <ChevronRight className='h-4 w-4 ' />
               </div>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-[425px]'>
+            <DialogContent className='sm:max-w-lg'>
               <DialogHeader>
-                <DialogTitle>Edit profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when you're
-                  done.
-                </DialogDescription>
+                <DialogTitle>About</DialogTitle>
+                <div className='grid gap-4 whitespace-pre-wrap py-4 text-sm'>
+                  {dummyText}
+                </div>
               </DialogHeader>
-              <div className='grid gap-4 py-4'></div>
+              <DialogHeader>
+                <DialogTitle>Links</DialogTitle>
+                <Link
+                  className='flex items-center'
+                  href={'https://billgun.github.io'}
+                  target='_blank'
+                >
+                  <Globe className='mr-2 h-4 w-4 ' />
+                  https://billgun.github.io/
+                </Link>
+                <Link
+                  className='flex items-center'
+                  href={'https://x.com/billgundev'}
+                  target='_blank'
+                >
+                  <Icons.twitter className='mr-2 h-4 w-4 fill-current' />
+                  @billgundev
+                </Link>
+                <Link
+                  className='flex items-center'
+                  href={'https://instagram.com/bill_gun'}
+                  target='_blank'
+                >
+                  <Instagram className='mr-2 h-4 w-4' />
+                  @bill_gun
+                </Link>
+              </DialogHeader>
               <DialogFooter>
-                <Button type='submit'>Save changes</Button>
+                <Button type='submit'>Share</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
