@@ -5,28 +5,58 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Sidebar } from './components/sidebar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { ProfilePost } from './[username]/components/profile-post';
 
 export default async function DashboardPage() {
   return (
-    <div className='h-full px-4 py-6 lg:px-8'>
-      <div className='flex items-center justify-between'>
-        <div className='space-y-1'>
-          <h2 className='text-2xl font-semibold tracking-tight'>Listen Now</h2>
-          <p className='text-sm text-muted-foreground'>
-            Top picks for you. Updated daily.
-          </p>
-        </div>
-      </div>
-      <Separator className='my-4' />
-      <div className='relative'></div>
-      <div className='mt-6 space-y-1'>
-        <h2 className='text-2xl font-semibold tracking-tight'>Made for You</h2>
-        <p className='text-sm text-muted-foreground'>
-          Your personal playlists. Updated daily.
-        </p>
-      </div>
-      <Separator className='my-4' />
-      <div className='relative'></div>
+    <div className='container grid grid-cols-3 px-4 py-6 lg:px-8'>
+      <Tabs defaultValue='following' className='col-span-2 w-full'>
+        <TabsList className='grid w-full grid-cols-2'>
+          <TabsTrigger value='following'>Following</TabsTrigger>
+          <TabsTrigger value='featured'>Featured</TabsTrigger>
+        </TabsList>
+        <TabsContent value='following'>
+          <ProfilePost />
+          <ProfilePost />
+          <ProfilePost />
+          <ProfilePost />
+          <ProfilePost />
+        </TabsContent>
+        <TabsContent value='featured'>
+          <Card>
+            <CardHeader>
+              <CardTitle>Password</CardTitle>
+              <CardDescription>
+                Change your password here. After saving, you'll be logged out.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className='space-y-2'>
+              <div className='space-y-1'>
+                <Label htmlFor='current'>Current password</Label>
+                <Input id='current' type='password' />
+              </div>
+              <div className='space-y-1'>
+                <Label htmlFor='new'>New password</Label>
+                <Input id='new' type='password' />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button>Save password</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

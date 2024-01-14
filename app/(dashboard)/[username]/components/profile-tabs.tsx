@@ -37,8 +37,7 @@ export function ProfileTabs({ username }: ProfileTabsProps) {
       <Tabs>
         <div className='flex space-x-8 '>
           <TabLink href={`/${username}`}>Home</TabLink>
-          <TabLink href={`/${username}/about`}>About</TabLink>
-          <div className='border-b-2 border-transparent pb-2'>Membership</div>
+          <TabLink href={`/${username}/membership`}>Membership</TabLink>
           <div className='border-b-2 border-transparent pb-2'>About</div>
         </div>
       </Tabs>

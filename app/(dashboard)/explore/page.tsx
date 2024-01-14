@@ -7,43 +7,27 @@ import { ProfileCard } from './components/profile-card';
 
 const categories = [
   {
-    name: 'Kreator Favorit',
+    name: 'Art',
     icon: <User className='mr-2 h-4 w-4' />,
   },
   {
-    name: 'Popular Items',
+    name: 'Music',
     icon: <User className='mr-2 h-4 w-4' />,
   },
   {
-    name: 'Latest Trends',
+    name: 'Games',
     icon: <User className='mr-2 h-4 w-4' />,
   },
   {
-    name: 'Top Sellers',
+    name: 'Writing',
     icon: <User className='mr-2 h-4 w-4' />,
   },
   {
-    name: 'Featured Products',
+    name: 'Photography',
     icon: <User className='mr-2 h-4 w-4' />,
   },
   {
-    name: 'Special Offers',
-    icon: <User className='mr-2 h-4 w-4' />,
-  },
-  {
-    name: 'Best Deals',
-    icon: <User className='mr-2 h-4 w-4' />,
-  },
-  {
-    name: 'New Arrivals',
-    icon: <User className='mr-2 h-4 w-4' />,
-  },
-  {
-    name: 'Customer Picks',
-    icon: <User className='mr-2 h-4 w-4' />,
-  },
-  {
-    name: 'Recommended',
+    name: 'Cosplay',
     icon: <User className='mr-2 h-4 w-4' />,
   },
 ];
