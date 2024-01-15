@@ -71,10 +71,10 @@ export async function Sidebar({ className }: SidebarProps) {
                 <BarChart2Icon className='mr-2 h-4 w-4' />
                 Dashboard
               </SidebarButton>
-              <Button variant='ghost' className='w-full justify-start'>
+              <SidebarButton href={`/supporters`}>
                 <UsersIcon className='mr-2 h-4 w-4' />
                 Supporters
-              </Button>
+              </SidebarButton>
             </div>
           </div>
         </div>

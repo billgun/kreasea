@@ -12,7 +12,7 @@ export function ProfileCard({ className, ...props }: ProfileProps) {
       <div className='w-full border border-muted-foreground pb-6 shadow-lg'>
         <Image
           alt='User background'
-          className='h-36 w-full bg-foreground'
+          className='h-24 w-full bg-foreground'
           height='96'
           src={'https://picsum.photos/id/666/1248'}
           style={{
@@ -22,7 +22,7 @@ export function ProfileCard({ className, ...props }: ProfileProps) {
           width='1248'
         />
         <div className='container flex justify-between'>
-          <Avatar className='-mt-14 h-16 w-16 border-2 lg:h-24 lg:w-24'>
+          <Avatar className='-mt-8 h-12 w-12 border-2 lg:h-16 lg:w-16'>
             <AvatarImage
               alt='user avatar'
               src={'https://github.com/shadcn.png'}
