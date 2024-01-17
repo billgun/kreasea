@@ -6,7 +6,7 @@
     "start": "next start",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
-    "supabase:db": "npx supabase gen types typescript --project-id mubdexekdfjhiwgkbdef --schema public > lib/types/database.ts"
+    "supabase:db": "npx supabase gen types typescript --project-id mubdexekdfjhiwgkbdef --schema public > types/database.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.3",

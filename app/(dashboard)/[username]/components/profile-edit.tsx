@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -10,34 +11,42 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { createClient } from '@/utils/supabase/server';
+import { cookies } from 'next/headers';
+import Image from 'next/image';
+import { ProfileEditForm } from './profile-edit-form';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
-export function ProfileEdit() {
+interface ProfileEditLayoutProps {
+  username: string;
+}
+
+export async function ProfileEdit({ username }: ProfileEditLayoutProps) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase
+    .from('user_profiles')
+    .select()
+    .eq('username', username)
+    .single();
+
+  if (error) {
+    return;
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant='secondary'>Edit Profile</Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[475px]'>
-        <DialogHeader>
+      <DialogContent className='max-w-xl p-0'>
+        <DialogHeader className='p-6 pb-0'>
           <DialogTitle>Edit Profile</DialogTitle>
-          <DialogDescription>
-            This will save the current playground state as a preset which you
-            can access later or share with others.
-          </DialogDescription>
         </DialogHeader>
-        <div className='grid gap-4 py-4'>
-          <div className='grid gap-2'>
-            <Label htmlFor='name'>Name</Label>
-            <Input id='name' autoFocus />
-          </div>
-          <div className='grid gap-2'>
-            <Label htmlFor='description'>Description</Label>
-            <Input id='description' />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type='submit'>Save</Button>
-        </DialogFooter>
+        <ScrollArea className='max-h-[75vh]'>
+          <ProfileEditForm profile={data} />
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );

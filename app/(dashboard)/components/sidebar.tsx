@@ -62,13 +62,13 @@ export async function Sidebar({ className }: SidebarProps) {
                 <UserIcon className='mr-2 h-4 w-4' />
                 Profile
               </SidebarButton>
+              <SidebarButton href={`/subscriptions`}>
+                <CrownIcon className='mr-2 h-4 w-4' />
+                My Subscriptions
+              </SidebarButton>
               <Button variant='ghost' className='w-full justify-start'>
                 <ShoppingBagIcon className='mr-2 h-4 w-4' />
                 Orders
-              </Button>
-              <Button variant='ghost' className='w-full justify-start'>
-                <CrownIcon className='mr-2 h-4 w-4' />
-                My Subscriptions
               </Button>
             </div>
           </div>

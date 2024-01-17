@@ -8,7 +8,7 @@ import { useState, useRef, ChangeEvent } from 'react';
 interface UseFileInputResult {
   previewImage: string;
   fileInputRef: React.RefObject<HTMLInputElement>;
-  handleButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleButtonClick: (e: React.MouseEvent<HTMLElement>) => void;
   handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,7 +16,7 @@ const useFileInput = (defaultImage?: string): UseFileInputResult => {
   const [previewImage, setPreviewImage] = useState<string>(defaultImage || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if (fileInputRef.current) {
       fileInputRef.current.click();

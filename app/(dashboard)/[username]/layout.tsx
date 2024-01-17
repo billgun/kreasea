@@ -60,7 +60,7 @@ export default async function UsernamePageLayout({
     <div className='w-full shadow-lg'>
       <Image
         alt='User background'
-        className='h-48 w-full bg-foreground'
+        className='h-64 w-full bg-foreground'
         height='96'
         src={'https://picsum.photos/id/666/1248'}
         style={{
@@ -70,11 +70,11 @@ export default async function UsernamePageLayout({
         width='1248'
       />
       <div className='container flex flex-row-reverse justify-between px-5 py-2'>
-        <ProfileEdit />
+        <ProfileEdit username={params.username} />
         <Avatar className='-mt-20 h-28 w-28 translate-x-1/3 border-2 lg:h-36 lg:w-36'>
           <AvatarImage
             alt='user avatar'
-            src={data.avatar_url}
+            src={data.avatar_url || ''}
             className='object-cover'
           />
           <AvatarFallback>CN</AvatarFallback>
@@ -96,7 +96,7 @@ export default async function UsernamePageLayout({
           <DialogTrigger asChild>
             <div className='flex cursor-pointer items-center gap-x-1'>
               <p className='line-clamp-3 overflow-hidden text-ellipsis text-sm text-accent-foreground/60'>
-                {data.about_you || 'No Description'}
+                {data.description || 'No Description'}
               </p>
               <ChevronRight className='h-4 w-4 ' />
             </div>

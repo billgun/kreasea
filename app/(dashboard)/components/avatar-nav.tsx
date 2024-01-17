@@ -12,7 +12,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOutIcon } from 'lucide-react';
+import { LogOutIcon, UserCogIcon } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { ModeToggle } from '@/components/mode-toggle';
@@ -55,9 +55,12 @@ export function AvatarNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
           <DropdownMenuItem>Terms of Use</DropdownMenuItem>
           <DropdownMenuItem>Privacy Policy</DropdownMenuItem>
+          <DropdownMenuItem>
+            <UserCogIcon className='mr-2 h-4 w-4' />
+            Account Setting
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={signOut}>
