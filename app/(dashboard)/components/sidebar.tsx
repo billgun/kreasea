@@ -4,8 +4,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   BarChart2,
   BarChart2Icon,
+  BellIcon,
   CrownIcon,
   HomeIcon,
+  MailIcon,
   NewspaperIcon,
   SearchIcon,
   ShoppingBagIcon,
@@ -47,6 +49,14 @@ export async function Sidebar({ className }: SidebarProps) {
               <SidebarButton href={`/explore`}>
                 <SearchIcon className='mr-2 h-4 w-4' />
                 Explore
+              </SidebarButton>
+              <SidebarButton href={`/notifications`}>
+                <BellIcon className='mr-2 h-4 w-4' />
+                Notifications
+              </SidebarButton>
+              <SidebarButton href={`/messages`}>
+                <MailIcon className='mr-2 h-4 w-4' />
+                Messages
               </SidebarButton>
               <SidebarButton href={`/${profile?.username}`}>
                 <UserIcon className='mr-2 h-4 w-4' />

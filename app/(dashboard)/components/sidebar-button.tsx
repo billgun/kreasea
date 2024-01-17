@@ -12,7 +12,6 @@ interface UsernamePageProps {
 }
 export function SidebarButton({ href, children }: UsernamePageProps) {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <Button
       asChild

@@ -96,7 +96,6 @@ export default function SignupForm() {
       form.setError('root', { message: authError.message });
     }
 
-    console.log(data);
   }
 
   return (

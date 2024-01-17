@@ -50,7 +50,7 @@ export default async function DashboardPageLayout({
           {session ? <Sidebar className={cn(`hidden lg:block`)} /> : <></>}
           <div
             className={cn(
-              `lg:border-l`,
+              `flex lg:border-l`,
               session ? `col-span-6 lg:col-span-5` : `col-span-6`
             )}
           >
