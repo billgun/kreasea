@@ -87,7 +87,9 @@ export default async function UsernamePageLayout({
           <div className='flex gap-x-2 text-sm font-semibold'>
             <p className=''>@{data.username}</p>
             <Separator className='h-4' orientation='vertical' />
-            <p className=''>0 followers</p>
+            <Link href={`/${params.username}/followers`}>
+              <p className=''>0 followers</p>
+            </Link>
             <Separator className='h-4' orientation='vertical' />
             <p className=''>0 posts</p>
           </div>
