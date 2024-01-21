@@ -5,6 +5,7 @@ import {
   BarChart2,
   BarChart2Icon,
   BellIcon,
+  CogIcon,
   CrownIcon,
   HomeIcon,
   MailIcon,
@@ -70,6 +71,10 @@ export async function Sidebar({ className }: SidebarProps) {
                 <ShoppingBagIcon className='mr-2 h-4 w-4' />
                 Orders
               </Button>
+              <SidebarButton href='/settings'>
+                <CogIcon className='mr-2 h-4 w-4' />
+                Settings
+              </SidebarButton>
             </div>
           </div>
           <div className='px-3 py-2'>

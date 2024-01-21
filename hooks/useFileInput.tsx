@@ -1,10 +1,5 @@
 import { useState, useRef, ChangeEvent } from 'react';
 
-// interface UseFileInputProps {
-//   // Any parameters you might need
-//   defaultImage?: string;
-// }
-
 interface UseFileInputResult {
   previewImage: string;
   fileInputRef: React.RefObject<HTMLInputElement>;
@@ -12,6 +7,12 @@ interface UseFileInputResult {
   handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * Custom hook for handling image file input and previewing images.
+ *
+ * @param {string} defaultImage - the default image to display
+ * @return {UseFileInputResult} an object containing the preview image, file input ref, and event handlers
+ */
 const useFileInput = (defaultImage?: string): UseFileInputResult => {
   const [previewImage, setPreviewImage] = useState<string>(defaultImage || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -34,8 +35,9 @@ const useFileInput = (defaultImage?: string): UseFileInputResult => {
       };
       reader.readAsDataURL(selectedFile);
     } else {
+      // Enable this to remove the preview image else it will remain
+      // setPreviewImage('');
       return;
-      setPreviewImage('');
     }
   };
 

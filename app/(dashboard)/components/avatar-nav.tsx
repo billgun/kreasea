@@ -17,6 +17,7 @@ import { createClient } from '@/utils/supabase/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { ModeToggle } from '@/components/mode-toggle';
 import { revalidatePath } from 'next/cache';
+import Link from 'next/link';
 
 export function AvatarNav() {
   const router = useRouter();
@@ -57,9 +58,11 @@ export function AvatarNav() {
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Terms of Use</DropdownMenuItem>
           <DropdownMenuItem>Privacy Policy</DropdownMenuItem>
-          <DropdownMenuItem>
-            <UserCogIcon className='mr-2 h-4 w-4' />
-            Account Setting
+          <DropdownMenuItem asChild>
+            <Link href={'/account'}>
+              <UserCogIcon className='mr-2 h-4 w-4' />
+              My Account
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

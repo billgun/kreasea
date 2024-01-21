@@ -18,7 +18,7 @@ const notifications = [
   },
 ];
 
-export default async function NotificationsPage() {
+export default function NotificationsPage() {
   return (
     <div className='container h-full px-4 py-6 lg:px-8'>
       <div className='flex items-center justify-between'>
