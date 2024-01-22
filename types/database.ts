@@ -89,6 +89,44 @@ export interface Database {
           }
         ]
       }
+      user_social_links: {
+        Row: {
+          facebook: string | null
+          id: string
+          instagram: string | null
+          twitch: string | null
+          twitter: string | null
+          website: string | null
+          youtube: string | null
+        }
+        Insert: {
+          facebook?: string | null
+          id: string
+          instagram?: string | null
+          twitch?: string | null
+          twitter?: string | null
+          website?: string | null
+          youtube?: string | null
+        }
+        Update: {
+          facebook?: string | null
+          id?: string
+          instagram?: string | null
+          twitch?: string | null
+          twitter?: string | null
+          website?: string | null
+          youtube?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_social_links_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never

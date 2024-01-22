@@ -10,15 +10,18 @@ import { createClient } from '@/utils/supabase/server';
 import {
   CalendarDaysIcon,
   ChevronRight,
+  FacebookIcon,
   Globe,
   Instagram,
   MapPinIcon,
+  TwitchIcon,
   Twitter,
+  YoutubeIcon,
 } from 'lucide-react';
 import { ProfileEdit } from './components/profile-edit';
 import React from 'react';
 import { ProfileTabs } from './components/profile-tabs';
-import { Icons } from '@/components/icons';
+import { Icons, TwitterXIcon } from '@/components/icons';
 import {
   Dialog,
   DialogContent,
@@ -45,9 +48,11 @@ export default async function UsernamePageLayout({
 
   const { data, error } = await supabase
     .from('user_profiles')
-    .select()
+    .select('*, user_social_links!inner(*)')
     .eq('username', params.username)
     .single();
+
+  console.log(data);
 
   if (error) {
     return;
@@ -110,16 +115,28 @@ export default async function UsernamePageLayout({
                 {dummyText}
               </div>
             </DialogHeader>
-            <DialogHeader>
+            {/* <DialogHeader>
               <DialogTitle>Links</DialogTitle>
-              <Link
-                className='flex items-center'
-                href={'https://billgun.github.io'}
-                target='_blank'
-              >
-                <Globe className='mr-2 h-4 w-4 ' />
-                https://billgun.github.io/
-              </Link>
+              {data.user_social_links?.website && (
+                <Link
+                  className='flex items-center'
+                  href={data.user_social_links.website}
+                  target='_blank'
+                >
+                  <Globe className='mr-2 h-4 w-4 ' />
+                  {data.user_social_links.website}
+                </Link>
+              )}
+              {data.user_social_links?.twitter && (
+                <Link
+                  className='flex items-center'
+                  href={data.user_social_links.twitter}
+                  target='_blank'
+                >
+                  <TwitterXIcon className='mr-2 h-4 w-4 ' />
+                  {data.user_social_links.twitter}
+                </Link>
+              )}
               <Link
                 className='flex items-center'
                 href={'https://x.com/billgundev'}
@@ -136,19 +153,79 @@ export default async function UsernamePageLayout({
                 <Instagram className='mr-2 h-4 w-4' />
                 @bill_gun
               </Link>
-            </DialogHeader>
+            </DialogHeader> */}
             <DialogFooter>
               <Button type='submit'>Share</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
         <div className='flex'>
-          <Button variant='ghost' className='w-full justify-start px-3 py-2'>
-            <Icons.twitter className='h-4 w-4 fill-current' />
-          </Button>
-          <Button variant='ghost' className='w-full justify-start px-3 py-2'>
-            <Instagram className='h-4 w-4' />
-          </Button>
+          {data.user_social_links?.website && (
+            <Button
+              variant='ghost'
+              className='w-full justify-start px-3 py-2'
+              asChild
+            >
+              <Link href={data.user_social_links.website} target='_blank'>
+                <Globe className='h-4 w-4' />
+              </Link>
+            </Button>
+          )}
+          {data.user_social_links?.twitter && (
+            <Button
+              variant='ghost'
+              className='w-full justify-start px-3 py-2'
+              asChild
+            >
+              <Link href={data.user_social_links.twitter} target='_blank'>
+                <TwitterXIcon className='h-4 w-4' />
+              </Link>
+            </Button>
+          )}
+          {data.user_social_links?.instagram && (
+            <Button
+              variant='ghost'
+              className='w-full justify-start px-3 py-2'
+              asChild
+            >
+              <Link href={data.user_social_links.instagram} target='_blank'>
+                <Instagram className='h-4 w-4' />
+              </Link>
+            </Button>
+          )}
+          {data.user_social_links?.youtube && (
+            <Button
+              variant='ghost'
+              className='w-full justify-start px-3 py-2'
+              asChild
+            >
+              <Link href={data.user_social_links.youtube} target='_blank'>
+                <YoutubeIcon className='h-4 w-4' />
+              </Link>
+            </Button>
+          )}
+          {data.user_social_links?.facebook && (
+            <Button
+              variant='ghost'
+              className='w-full justify-start px-3 py-2'
+              asChild
+            >
+              <Link href={data.user_social_links.facebook} target='_blank'>
+                <FacebookIcon className='h-4 w-4' />
+              </Link>
+            </Button>
+          )}
+          {data.user_social_links?.twitch && (
+            <Button
+              variant='ghost'
+              className='w-full justify-start px-3 py-2'
+              asChild
+            >
+              <Link href={data.user_social_links.twitch} target='_blank'>
+                <TwitchIcon className='h-4 w-4' />
+              </Link>
+            </Button>
+          )}
         </div>
         <ProfileTabs username={params.username} />
         {children}

@@ -17,6 +17,8 @@ import {
   TwitchIcon,
   YoutubeIcon,
 } from 'lucide-react';
+import SocialLinksPage from './social-links';
+import SocialLinksForm from './social-links-form';
 
 export default function AccountTabPage() {
   return (
@@ -47,51 +49,7 @@ export default function AccountTabPage() {
           <Button>Change Password</Button>
         </CardFooter>
       </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Social Links</CardTitle>
-          <CardDescription>
-            Add your social accounts to display them on your public profile.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className='grid w-full items-center gap-4'>
-              <div className='relative w-full'>
-                <GlobeIcon className='absolute left-2.5 top-3 h-4 w-4 text-muted-foreground' />
-                <Input placeholder='Your website' className='pl-10' />
-              </div>
-              <div className='relative w-full'>
-                <InstagramIcon className='absolute left-2.5 top-3 h-4 w-4 text-muted-foreground' />
-                <Input placeholder='Instagram' className='pl-10' />
-              </div>
-              <div className='relative w-full'>
-                <FacebookIcon className='absolute left-2.5 top-3 h-4 w-4 text-muted-foreground' />
-                <Input placeholder='Facebook' className='pl-10' />
-              </div>
-              <div className='relative w-full'>
-                <Icons.twitter className='absolute left-2.5 top-3 h-4 w-4 fill-current text-muted-foreground' />
-                <Input placeholder='X' className='pl-10' />
-              </div>
-              <div className='relative w-full'>
-                <TwitchIcon className='absolute left-2.5 top-3 h-4 w-4 text-muted-foreground' />
-                <Input placeholder='Twitch' className='pl-10' />
-              </div>
-              <div className='relative w-full'>
-                <DiscordIcon className='absolute left-2.5 top-3 h-4 w-4 text-muted-foreground' />
-                <Input placeholder='Discord' className='pl-10' />
-              </div>
-              <div className='relative w-full'>
-                <YoutubeIcon className='absolute left-2.5 top-3 h-4 w-4 text-muted-foreground' />
-                <Input placeholder='Youtube' className='pl-10' />
-              </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <Button>Save Changes</Button>
-        </CardFooter>
-      </Card>
+      <SocialLinksPage />
     </div>
   );
 }
