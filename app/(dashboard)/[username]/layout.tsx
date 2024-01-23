@@ -48,11 +48,9 @@ export default async function UsernamePageLayout({
 
   const { data, error } = await supabase
     .from('user_profiles')
-    .select('*, user_social_links!inner(*)')
+    .select('*, user_social_links(*)')
     .eq('username', params.username)
     .single();
-
-  console.log(data);
 
   if (error) {
     return;
@@ -65,14 +63,10 @@ export default async function UsernamePageLayout({
     <div className='w-full shadow-lg'>
       <Image
         alt='User background'
-        className='h-64 w-full bg-foreground'
-        height='96'
-        src={'https://picsum.photos/id/666/1248'}
-        style={{
-          aspectRatio: '100/100',
-          objectFit: 'cover',
-        }}
-        width='1248'
+        className='aspect-square h-64 w-full object-cover'
+        height={256}
+        src={data.background_url || ''}
+        width={1265}
       />
       <div className='container flex flex-row-reverse justify-between px-5 py-2'>
         <ProfileEdit username={params.username} />
@@ -80,7 +74,7 @@ export default async function UsernamePageLayout({
           <AvatarImage
             alt='user avatar'
             src={data.avatar_url || ''}
-            className='object-cover'
+            className='aspect-square w-full'
           />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>

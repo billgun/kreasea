@@ -47,10 +47,14 @@ export async function getUserProfile() {
       .select('username, name,avatar_url')
       .eq('id', user.id)
       .single();
+
+    if (!data) {
+      throw error;
+    }
     return data;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 

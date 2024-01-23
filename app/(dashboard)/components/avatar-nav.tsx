@@ -18,8 +18,17 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ModeToggle } from '@/components/mode-toggle';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
+import { Database } from '@/types/database';
 
-export function AvatarNav() {
+interface AvatarNavProps {
+  profile: {
+    username: string;
+    name: string;
+    avatar_url: string | null;
+  };
+}
+
+export function AvatarNav({ profile }: AvatarNavProps) {
   const router = useRouter();
   const pathname = usePathname();
   const signOut = async () => {
@@ -36,14 +45,19 @@ export function AvatarNav() {
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='flex w-full justify-start'>
           <Avatar className='h-9 w-9'>
-            <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-            <AvatarFallback>SC</AvatarFallback>
+            <AvatarImage
+              src={profile.avatar_url || ''}
+              alt={`${profile.username} avatar`}
+            />
+            <AvatarFallback>
+              {profile.name.slice(0, 1).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
           <DropdownMenuLabel className='font-normal '>
             <div className='flex flex-col space-y-1 text-left'>
-              <p className='text-sm font-medium leading-none'>shadcn</p>
+              <p className='text-sm font-medium leading-none'>{profile.name}</p>
               <p className='text-xs leading-none text-muted-foreground'>
-                m@example.com
+                @{profile.username}
               </p>
             </div>
           </DropdownMenuLabel>

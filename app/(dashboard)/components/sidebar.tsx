@@ -94,7 +94,7 @@ export async function Sidebar({ className }: SidebarProps) {
           </div>
         </div>
         <div className='px-3 py-2'>
-          <AvatarNav />
+          <AvatarNav profile={profile} />
         </div>
       </div>
     </div>

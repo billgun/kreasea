@@ -1,6 +1,15 @@
 'use client';
+import { Cropper } from '@/components/cropper';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -14,12 +23,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import useFileInput from '@/hooks/useFileInput';
+import useFileInputWithCropper from '@/hooks/useFileInputWithCropper';
 import { Database } from '@/types/database';
 import { createClient } from '@/utils/supabase/server';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, createRef, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -28,9 +38,11 @@ interface ProfileEditFormLayoutProps {
 }
 
 export function ProfileEditForm({ profile }: ProfileEditFormLayoutProps) {
-  const background = useFileInput(profile.background_url || '');
+  const [open, setOpen] = useState(false);
+  const [openCrop, setOpenCrop] = useState(false);
 
-  const avatar = useFileInput(profile.avatar_url || '');
+  const background = useFileInputWithCropper(profile.background_url || '');
+  const avatar = useFileInputWithCropper(profile.avatar_url || '');
 
   const profileEditSchema = z.object({
     avatar: z
@@ -76,7 +88,6 @@ export function ProfileEditForm({ profile }: ProfileEditFormLayoutProps) {
                       className='h-36 w-full bg-foreground'
                       height='96'
                       src={background.previewImage}
-                      // src={'https://picsum.photos/id/666/1248'}
                       style={{
                         aspectRatio: '100/100',
                         objectFit: 'cover',
@@ -90,17 +101,47 @@ export function ProfileEditForm({ profile }: ProfileEditFormLayoutProps) {
                       className='hidden'
                       placeholder='Picture'
                       type='file'
-                      accept='image/*, application/pdf'
+                      accept='image/*'
                       onChange={(event) => {
                         background.handleFileChange(event);
                         if (
                           event.target.files &&
                           event.target.files.length > 0
                         ) {
+                          setOpen(true);
                           onChange(event.target.files && event.target.files[0]);
                         }
                       }}
                     />
+                    <Dialog open={open} onOpenChange={setOpen}>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Image Crop</DialogTitle>
+                        </DialogHeader>
+                        <Cropper
+                          ref={background.cropperRef}
+                          style={{ height: 400, width: '100%' }}
+                          aspectRatio={1265 / 256}
+                          src={background.previewImage}
+                          viewMode={1}
+                          background={false}
+                          autoCropArea={1}
+                          checkOrientation={false}
+                          dragMode='move'
+                          zoomable={false}
+                        />
+                        <DialogFooter>
+                          <Button
+                            onClick={() => {
+                              setOpen(false);
+                              background.handleCropData();
+                            }}
+                          >
+                            Crop
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </>
                 </FormControl>
                 <FormMessage />
@@ -132,19 +173,49 @@ export function ProfileEditForm({ profile }: ProfileEditFormLayoutProps) {
                         className='hidden'
                         placeholder='Picture'
                         type='file'
-                        accept='image/*, application/pdf'
+                        accept='image/*'
                         onChange={(event) => {
                           avatar.handleFileChange(event);
                           if (
                             event.target.files &&
                             event.target.files.length > 0
                           ) {
+                            setOpenCrop(true);
                             onChange(
                               event.target.files && event.target.files[0]
                             );
                           }
                         }}
                       />
+                      <Dialog open={openCrop} onOpenChange={setOpenCrop}>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Image Crop</DialogTitle>
+                          </DialogHeader>
+                          <Cropper
+                            ref={avatar.cropperRef}
+                            style={{ height: 400, width: '100%' }}
+                            aspectRatio={1 / 1}
+                            src={avatar.previewImage}
+                            viewMode={1}
+                            background={false}
+                            autoCropArea={1}
+                            checkOrientation={false}
+                            dragMode='move'
+                            zoomable={false}
+                          />
+                          <DialogFooter>
+                            <Button
+                              onClick={() => {
+                                setOpenCrop(false);
+                                avatar.handleCropData();
+                              }}
+                            >
+                              Crop
+                            </Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
                     </>
                   </FormControl>
                   <FormMessage />
