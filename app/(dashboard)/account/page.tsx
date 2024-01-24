@@ -27,10 +27,37 @@ export default function AccountPage() {
       <Tabs defaultValue='account'>
         <TabsList>
           <TabsTrigger value='account'>Account</TabsTrigger>
+          <TabsTrigger value='payment'>Payment</TabsTrigger>
         </TabsList>
         <div className='grid grid-cols-4'>
           <TabsContent value='account' className='col-span-3'>
             <AccountTabPage />
+          </TabsContent>
+          <TabsContent value='payment' className='col-span-3'>
+            <Card>
+              <CardHeader>
+                <CardTitle>Payment Methods</CardTitle>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                <div className='flex w-full items-center justify-between'>
+                  <div>Paypal</div>
+                  <div>
+                    <Button>Connect</Button>
+                  </div>
+                </div>
+                <div className='flex w-full items-center justify-between'>
+                  <div>
+                    Stripe
+                    <div>
+                      Accept card payments, Apple Pay, Google Pay and more!
+                    </div>
+                  </div>
+                  <div>
+                    <Button>Connect</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </div>
       </Tabs>
