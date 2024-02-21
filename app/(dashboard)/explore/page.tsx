@@ -2,33 +2,38 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { Mail, Search, User } from 'lucide-react';
+import { Mail, Search, User, UserIcon } from 'lucide-react';
 import { ProfileCard } from './components/profile-card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
 
 const categories = [
   {
     name: 'Art',
-    icon: <User className='mr-2 h-4 w-4' />,
+    icon: UserIcon,
   },
   {
     name: 'Music',
-    icon: <User className='mr-2 h-4 w-4' />,
+    icon: UserIcon,
   },
   {
     name: 'Games',
-    icon: <User className='mr-2 h-4 w-4' />,
+    icon: UserIcon,
   },
   {
     name: 'Writing',
-    icon: <User className='mr-2 h-4 w-4' />,
+    icon: UserIcon,
   },
   {
     name: 'Photography',
-    icon: <User className='mr-2 h-4 w-4' />,
+    icon: UserIcon,
   },
   {
     name: 'Cosplay',
-    icon: <User className='mr-2 h-4 w-4' />,
+    icon: UserIcon,
   },
 ];
 
@@ -62,22 +67,6 @@ export default async function ExplorePage() {
           </div>
         </div>
       </form>
-
-      <ScrollArea>
-        <div className='mt-4 flex space-x-4 pb-4'>
-          {categories.map((category, i) => {
-            return (
-              <div key={i}>
-                <Button size={'lg'}>
-                  {category.icon}
-                  {category.name}
-                </Button>
-              </div>
-            );
-          })}
-        </div>
-        <ScrollBar orientation='horizontal' />
-      </ScrollArea>
 
       <div className='mt-4 grid grid-cols-1 gap-4 md:grid-cols-4'>
         <ProfileCard />

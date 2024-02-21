@@ -37,17 +37,17 @@ export default async function IndexPage() {
           </PageActions>
         </PageHeader>
       </div>
-      <div className='relative isolate overflow-hidden  px-6 py-24 text-center shadow-2xl sm:px-16'>
+      <div className='relative isolate h-[50vh] overflow-hidden px-6 py-24 text-center shadow-2xl sm:px-16'>
         <h2 className='mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl'>
           0% fee on donation / tips
         </h2>
-        <p className='mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300'>
+        <p className='mx-auto mt-6 max-w-xl text-lg leading-8'>
           Incididunt sint fugiat pariatur cupidatat consectetur sit cillum anim
           id veniam aliqua proident excepteur commodo do ea.
         </p>
         <div className='mt-10 flex items-center justify-center gap-x-6'>
           <Button>Get started</Button>
-          <Link href='#' className='text-sm font-semibold leading-6 text-white'>
+          <Link href='#' className='text-sm font-semibold leading-6'>
             Learn more <span aria-hidden='true'>→</span>
           </Link>
         </div>
