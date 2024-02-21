@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: 'Kofi Clone',
+  name: 'Kreasi',
   url: 'https://ui.shadcn.com',
   ogImage: 'https://ui.shadcn.com/og.jpg',
   description:
