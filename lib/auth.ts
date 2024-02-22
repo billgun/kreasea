@@ -61,18 +61,19 @@ export async function getUserProfile() {
 export async function getUserSocialLinks() {
   const supabase = createServerSupabaseClient();
   try {
-    const userJson = JSON.parse(
-      cookies().get(
-        `sb-${process.env.NEXT_PUBLIC_SUPABASE_REFERENCE}-auth-token`
-      )?.value || ''
-    );
+    const {
+      data: { user },
+      error: errorAuth,
+    } = await supabase.auth.getUser();
 
-    const user = userJson.user;
+    if (!user) {
+      throw errorAuth;
+    }
 
     const { data, error } = await supabase
       .from('user_social_links')
       .select('*')
-      .eq('id', user.id)
+      .eq('id', user?.id)
       .single();
     return data;
   } catch (error) {

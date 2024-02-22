@@ -71,10 +71,7 @@ export function ProfileEditForm({ profile }: ProfileEditFormLayoutProps) {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-8 p-6 pt-0'
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className='w-full'>
           <FormField
             control={form.control}

@@ -8,13 +8,14 @@ export async function postUserSocialMedia(socialMediaData: socialLinksSchema) {
   'use server';
   const supabase = createServerSupabaseClient();
   try {
-    const userJson = JSON.parse(
-      cookies().get(
-        `sb-${process.env.NEXT_PUBLIC_SUPABASE_REFERENCE}-auth-token`
-      )?.value || ''
-    );
+    const {
+      data: { user },
+      error: errorAuth,
+    } = await supabase.auth.getUser();
 
-    const user = userJson.user;
+    if (!user) {
+      throw errorAuth;
+    }
 
     const socialMediaDataWithUserId = {
       ...socialMediaData,

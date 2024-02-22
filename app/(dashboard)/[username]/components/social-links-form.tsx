@@ -23,9 +23,9 @@ import {
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { postUserSocialMedia } from '../actions';
 import { Database } from '@/types/database';
 import { useToast } from '@/components/ui/use-toast';
+import { postUserSocialMedia } from '../actions';
 
 const socialLinksSchema = z.object({
   website: z.string().optional().or(z.literal('')),

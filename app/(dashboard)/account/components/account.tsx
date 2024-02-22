@@ -10,15 +10,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  FacebookIcon,
-  GlobeIcon,
-  InstagramIcon,
-  TwitchIcon,
-  YoutubeIcon,
-} from 'lucide-react';
-import SocialLinksPage from './social-links';
-import SocialLinksForm from './social-links-form';
 
 export default function AccountTabPage() {
   return (
@@ -49,7 +40,6 @@ export default function AccountTabPage() {
           <Button>Change Password</Button>
         </CardFooter>
       </Card>
-      <SocialLinksPage />
     </div>
   );
 }
