@@ -34,14 +34,14 @@ export async function getUser() {
 export async function getUserProfile() {
   const supabase = createServerSupabaseClient();
   try {
-    const userJson = JSON.parse(
-      cookies().get(
-        `sb-${process.env.NEXT_PUBLIC_SUPABASE_REFERENCE}-auth-token`
-      )?.value || ''
-    );
+    const {
+      data: { user },
+      error: errorAuth,
+    } = await supabase.auth.getUser();
 
-    const user = userJson.user;
-
+    if (!user) {
+      throw errorAuth;
+    }
     const { data, error } = await supabase
       .from('user_profiles')
       .select('username, name,avatar_url')
