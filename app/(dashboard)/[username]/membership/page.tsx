@@ -16,10 +16,7 @@ interface MembershipPageProps {
   };
   children: React.ReactNode;
 }
-export default async function MembershipPage({
-  params,
-  children,
-}: MembershipPageProps) {
+export default async function MembershipPage() {
   return (
     <div className='grid w-full grid-cols-3 gap-4'>
       <div className='col-span-1'>

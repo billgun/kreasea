@@ -21,7 +21,7 @@ interface UsernamePageProps {
   };
   children: React.ReactNode;
 }
-export default function UsernamePage({ params, children }: UsernamePageProps) {
+export default function UsernamePage() {
   return (
     <div className='grid w-full grid-cols-2 gap-4'>
       <div className='col-span-1 flex flex-col gap-y-4'>

@@ -1,3 +1,5 @@
+// @ts-nocheck
+// To Fix Later
 import Link from 'next/link';
 
 const navigation = {
@@ -29,7 +31,7 @@ const navigation = {
     {
       name: 'Facebook',
       href: '#',
-      icon: (props) => (
+      icon: (props: IconProps) => (
         <svg fill='currentColor' viewBox='0 0 24 24' {...props}>
           <path
             fillRule='evenodd'

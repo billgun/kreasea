@@ -128,6 +128,7 @@ const useCombinedRefs = (
   return targetRef;
 };
 
+// eslint-disable-next-line react/display-name
 const ReactCropper = React.forwardRef<
   ReactCropperElement | HTMLImageElement,
   ReactCropperProps
