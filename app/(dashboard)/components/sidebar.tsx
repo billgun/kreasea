@@ -62,22 +62,22 @@ export async function Sidebar({ className }: SidebarProps) {
                     <BellIcon className='mr-2 h-4 w-4' />
                     Notifications
                   </SidebarButton>
-                  <SidebarButton href={`/messages`}>
+                  {/* <SidebarButton href={`/messages`}>
                     <MailIcon className='mr-2 h-4 w-4' />
                     Messages
-                  </SidebarButton>
+                  </SidebarButton> */}
                   <SidebarButton href={`/${profile?.username}`}>
                     <UserIcon className='mr-2 h-4 w-4' />
                     Profile
                   </SidebarButton>
-                  <SidebarButton href={`/subscriptions`}>
+                  {/* <SidebarButton href={`/subscriptions`}>
                     <CrownIcon className='mr-2 h-4 w-4' />
                     My Subscriptions
                   </SidebarButton>
                   <Button variant='ghost' className='w-full justify-start'>
                     <ShoppingBagIcon className='mr-2 h-4 w-4' />
                     Orders
-                  </Button>
+                  </Button> */}
                   <SidebarButton href='/settings'>
                     <CogIcon className='mr-2 h-4 w-4' />
                     Settings

@@ -21,7 +21,10 @@ import { ProfilePost } from './[username]/components/profile-post';
 export default async function DashboardPage() {
   return (
     <div className='container grid grid-cols-3 px-4 py-6 lg:px-8'>
-      <Tabs defaultValue='following' className='col-span-2 w-full'>
+      <Tabs
+        defaultValue='following'
+        className='col-span-3 w-full lg:col-span-2'
+      >
         <TabsList className='grid w-full grid-cols-2'>
           <TabsTrigger value='following'>Following</TabsTrigger>
           <TabsTrigger value='featured'>Featured</TabsTrigger>
