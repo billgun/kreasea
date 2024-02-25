@@ -23,6 +23,7 @@ import { Avatar } from '@radix-ui/react-avatar';
 import { AvatarNav } from './avatar-nav';
 import { siteConfig } from '@/config/site';
 import { Icons } from '@/components/icons';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -41,57 +42,64 @@ export async function Sidebar({ className }: SidebarProps) {
           </Link>
         </div>
         <div className='flex-1'>
-          <div className='px-3 py-2'>
-            <div className='space-y-1'>
-              <SidebarButton href={`/`}>
-                <HomeIcon className='mr-2 h-4 w-4' />
-                Home
-              </SidebarButton>
-              <SidebarButton href={`/explore`}>
-                <SearchIcon className='mr-2 h-4 w-4' />
-                Explore
-              </SidebarButton>
-              <SidebarButton href={`/notifications`}>
-                <BellIcon className='mr-2 h-4 w-4' />
-                Notifications
-              </SidebarButton>
-              <SidebarButton href={`/messages`}>
-                <MailIcon className='mr-2 h-4 w-4' />
-                Messages
-              </SidebarButton>
-              <SidebarButton href={`/${profile?.username}`}>
-                <UserIcon className='mr-2 h-4 w-4' />
-                Profile
-              </SidebarButton>
-              <SidebarButton href={`/subscriptions`}>
-                <CrownIcon className='mr-2 h-4 w-4' />
-                My Subscriptions
-              </SidebarButton>
-              <Button variant='ghost' className='w-full justify-start'>
-                <ShoppingBagIcon className='mr-2 h-4 w-4' />
-                Orders
-              </Button>
-              <SidebarButton href='/settings'>
-                <CogIcon className='mr-2 h-4 w-4' />
-                Settings
-              </SidebarButton>
-            </div>
-          </div>
-          <div className='px-3 py-2'>
-            <h2 className='mb-2 px-4 text-lg font-semibold tracking-tight'>
-              Creator
-            </h2>
-            <div className='space-y-1'>
-              <SidebarButton href={`/dashboard`}>
-                <BarChart2Icon className='mr-2 h-4 w-4' />
-                Dashboard
-              </SidebarButton>
-              <SidebarButton href={`/supporters`}>
-                <UsersIcon className='mr-2 h-4 w-4' />
-                Supporters
-              </SidebarButton>
-            </div>
-          </div>
+          <Tabs defaultValue='member' className='w-full '>
+            <TabsList className='grid w-full grid-cols-2 px-4'>
+              <TabsTrigger value='member'>Member</TabsTrigger>
+              <TabsTrigger value='creator'>Creator</TabsTrigger>
+            </TabsList>
+            <TabsContent value='member'>
+              <div className='px-3 py-2'>
+                <div className='space-y-1'>
+                  <SidebarButton href={`/`}>
+                    <HomeIcon className='mr-2 h-4 w-4' />
+                    Home
+                  </SidebarButton>
+                  <SidebarButton href={`/explore`}>
+                    <SearchIcon className='mr-2 h-4 w-4' />
+                    Explore
+                  </SidebarButton>
+                  <SidebarButton href={`/notifications`}>
+                    <BellIcon className='mr-2 h-4 w-4' />
+                    Notifications
+                  </SidebarButton>
+                  <SidebarButton href={`/messages`}>
+                    <MailIcon className='mr-2 h-4 w-4' />
+                    Messages
+                  </SidebarButton>
+                  <SidebarButton href={`/${profile?.username}`}>
+                    <UserIcon className='mr-2 h-4 w-4' />
+                    Profile
+                  </SidebarButton>
+                  <SidebarButton href={`/subscriptions`}>
+                    <CrownIcon className='mr-2 h-4 w-4' />
+                    My Subscriptions
+                  </SidebarButton>
+                  <Button variant='ghost' className='w-full justify-start'>
+                    <ShoppingBagIcon className='mr-2 h-4 w-4' />
+                    Orders
+                  </Button>
+                  <SidebarButton href='/settings'>
+                    <CogIcon className='mr-2 h-4 w-4' />
+                    Settings
+                  </SidebarButton>
+                </div>
+              </div>
+            </TabsContent>
+            <TabsContent value='creator'>
+              <div className='px-3 py-2'>
+                <div className='space-y-1'>
+                  <SidebarButton href={`/dashboard`}>
+                    <BarChart2Icon className='mr-2 h-4 w-4' />
+                    Dashboard
+                  </SidebarButton>
+                  <SidebarButton href={`/supporters`}>
+                    <UsersIcon className='mr-2 h-4 w-4' />
+                    Supporters
+                  </SidebarButton>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
         <div className='px-3 py-2'>
           <AvatarNav profile={profile} />

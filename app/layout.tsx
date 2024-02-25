@@ -1,10 +1,11 @@
 import './globals.css';
 import { Metadata, Viewport } from 'next';
 import { siteConfig } from '@/config/site';
-import { fontSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { Nunito_Sans } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: {
@@ -65,6 +66,12 @@ export const viewport: Viewport = {
   ],
 };
 
+// If loading a variable font, you don't need to specify the font weight
+const nunitoSans = Nunito_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -77,7 +84,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={cn(
             'min-h-screen bg-background font-sans antialiased',
-            fontSans.className
+            nunitoSans.className
           )}
         >
           <ThemeProvider
@@ -88,6 +95,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           >
             {children}
             <Toaster />
+            <TailwindIndicator />
           </ThemeProvider>
         </body>
       </html>

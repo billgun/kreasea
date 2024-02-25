@@ -61,7 +61,9 @@ export async function ProfileEdit({ username }: ProfileEditLayoutProps) {
                   </DialogDescription>
                 </DialogHeader>
                 <ScrollArea className='max-h-[75vh]'>
-                  <SocialLinksPage />
+                  <div className='pt-2'>
+                    <SocialLinksPage />
+                  </div>
                 </ScrollArea>
               </DialogContent>
             </Dialog>
