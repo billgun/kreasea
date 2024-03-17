@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { signIn } from './actions';
 
 const loginFormSchema = z.object({
   email: z
@@ -58,7 +59,7 @@ export default function LoginForm() {
 
     const supabase = createClient();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await signIn({
       email: formData.email,
       password: formData.password,
     });
@@ -69,7 +70,6 @@ export default function LoginForm() {
       form.setError('root', { message: error.message });
       throw new Error('Could not authenticate user');
     }
-    toast({ title: 'Logged in', description: 'Welcome back!' });
     router.push('/');
     router.refresh();
   }

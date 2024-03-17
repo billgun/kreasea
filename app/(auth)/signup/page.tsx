@@ -1,32 +1,12 @@
 import Link from 'next/link';
-import { z } from 'zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-// import ErrorMessage from '@/components/ui/ErrorMessage';
-// import { signUp } from '@/actions/signup';
-import { useState } from 'react';
 import { Icons } from '@/components/icons';
 import SignupForm from './signup-form';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { ChevronLeft } from 'lucide-react';
-
-const SignUpSchema = z.object({
-  username: z.string().min(1),
-  email: z.string().email('Invalid email address').min(1),
-  password: z.string().min(1),
-  tnc: z.boolean().refine((value) => value === true, {
-    message: 'Checkbox must be checked',
-  }),
-});
-
-export type SignUp = z.infer<typeof SignUpSchema>;
+import { GoogleButton } from './components/google-button';
 
 export default function Signup() {
-  // const onSubmit = handleSubmit((data) => {
-  //   signUp(data);
-  // });
-
   return (
     <>
       <div className='flex min-h-full w-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -71,14 +51,7 @@ export default function Signup() {
               </div>
 
               <div className='mt-6 grid grid-cols-1 gap-4'>
-                <Button asChild variant={'default'} className='gap-3'>
-                  <Link href='#'>
-                    <Icons.google className='h-4 w-4' />
-                    <span className='text-sm font-semibold leading-6'>
-                      Google
-                    </span>
-                  </Link>
-                </Button>
+                <GoogleButton />
               </div>
             </div>
           </div>

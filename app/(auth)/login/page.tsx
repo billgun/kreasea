@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import LoginForm from './login-form';
 import { Icons } from '@/components/icons';
 import { siteConfig } from '@/config/site';
+import { GoogleButton } from '../signup/components/google-button';
 
 export default function Login() {
   return (
@@ -54,14 +55,7 @@ export default function Login() {
               </div>
 
               <div className='mt-6 grid grid-cols-1 gap-4'>
-                <Button asChild variant={'default'} className='gap-3'>
-                  <Link href='#'>
-                    <Icons.google className='h-4 w-4' />
-                    <span className='text-sm font-semibold leading-6'>
-                      Google
-                    </span>
-                  </Link>
-                </Button>
+                <GoogleButton />
               </div>
             </div>
           </div>

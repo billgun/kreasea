@@ -19,6 +19,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { signUp, signUpWithGoogle } from './actions';
 
 const signupFormSchema = z.object({
   username: z.string().min(1, {
@@ -61,7 +62,7 @@ export default function SignupForm() {
 
     const supabase = createClient();
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await signUp({
       email: formData.email,
       password: formData.password,
       options: {
@@ -95,7 +96,6 @@ export default function SignupForm() {
 
       form.setError('root', { message: authError.message });
     }
-
   }
 
   return (
