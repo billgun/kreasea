@@ -6,7 +6,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,7 +18,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { signUp, signUpWithGoogle } from './actions';
+import { signUp } from './actions';
 
 const signupFormSchema = z.object({
   username: z.string().min(1, {

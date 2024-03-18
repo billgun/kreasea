@@ -3,7 +3,6 @@
 import { createClient } from '@/lib/supabase/actions';
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 export async function signUp(credentials: SignUpWithPasswordCredentials) {
   const cookieStore = cookies();
@@ -13,7 +12,6 @@ export async function signUp(credentials: SignUpWithPasswordCredentials) {
 }
 
 export async function signUpWithGoogle() {
-  console.log('google');
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -25,5 +23,5 @@ export async function signUpWithGoogle() {
     throw error;
   }
 
-  redirect(data.url);
+  // redirect(data.url);
 }

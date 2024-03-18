@@ -1,11 +1,5 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
-
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { Sidebar } from './components/sidebar';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Card,
   CardContent,
@@ -14,11 +8,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { getUserProfile } from '@/lib/auth';
 import { ProfilePost } from './[username]/components/profile-post';
+import { StatusUpdateForm } from './components/status-update-form';
 
 export default async function DashboardPage() {
+  const profile = await getUserProfile();
+
   return (
     <div className='container grid grid-cols-3 px-4 py-6 lg:px-8'>
       <Tabs
@@ -29,6 +28,20 @@ export default async function DashboardPage() {
           <TabsTrigger value='following'>Following</TabsTrigger>
           <TabsTrigger value='featured'>Featured</TabsTrigger>
         </TabsList>
+        <div className='w-full rounded-lg py-4'>
+          <div className='flex items-start space-x-2'>
+            <Avatar className='mt-1 h-9 w-9'>
+              <AvatarImage
+                src={profile.avatar_url || ''}
+                alt={`${profile.username} avatar`}
+              />
+              <AvatarFallback>
+                {profile.name.slice(0, 1).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <StatusUpdateForm />
+          </div>
+        </div>
         <TabsContent value='following'>
           <ProfilePost />
           <ProfilePost />

@@ -1,14 +1,11 @@
-import Link from 'next/link';
-import { cookies } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
-import LoginForm from './login-form';
 import { Icons } from '@/components/icons';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { siteConfig } from '@/config/site';
+import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
 import { GoogleButton } from '../signup/components/google-button';
+import LoginForm from './login-form';
 
 export default function Login() {
   return (

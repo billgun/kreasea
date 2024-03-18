@@ -1,29 +1,20 @@
+import { Icons } from '@/components/icons';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { siteConfig } from '@/config/site';
+import { getUserProfile } from '@/lib/auth';
 import { cn } from '@/lib/utils';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
-  BarChart2,
   BarChart2Icon,
   BellIcon,
   CogIcon,
-  CrownIcon,
   HomeIcon,
-  MailIcon,
-  NewspaperIcon,
   SearchIcon,
-  ShoppingBagIcon,
   UserIcon,
-  Users2Icon,
   UsersIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { getUser, getUserProfile } from '@/lib/auth';
-import { SidebarButton } from './sidebar-button';
-import { Avatar } from '@radix-ui/react-avatar';
 import { AvatarNav } from './avatar-nav';
-import { siteConfig } from '@/config/site';
-import { Icons } from '@/components/icons';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { SidebarButton } from './sidebar-button';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 

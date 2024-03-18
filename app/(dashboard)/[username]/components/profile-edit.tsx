@@ -1,28 +1,27 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
 import { ProfileEditForm } from './profile-edit-form';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import SocialLinksPage from './social-links';
 
 interface ProfileEditLayoutProps {
   username: string;
+  children: React.ReactNode;
 }
 
-export async function ProfileEdit({ username }: ProfileEditLayoutProps) {
+export async function ProfileEdit({
+  username,
+  children,
+}: ProfileEditLayoutProps) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -38,9 +37,7 @@ export async function ProfileEdit({ username }: ProfileEditLayoutProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant='secondary'>Edit Profile</Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className='max-w-xl p-0'>
         <DialogHeader className='p-6 pb-0'>
           <DialogTitle>Edit Profile</DialogTitle>

@@ -1,37 +1,31 @@
-import { Metadata } from 'next';
 import Image from 'next/image';
 
-import { Button } from '@/components/ui/button';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
+import { TwitterXIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { cookies } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
-import {
-  CalendarDaysIcon,
-  ChevronRight,
-  FacebookIcon,
-  Globe,
-  Instagram,
-  MapPinIcon,
-  TwitchIcon,
-  Twitter,
-  YoutubeIcon,
-} from 'lucide-react';
-import { ProfileEdit } from './components/profile-edit';
-import React from 'react';
-import { ProfileTabs } from './components/profile-tabs';
-import { Icons, TwitterXIcon } from '@/components/icons';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Separator } from '@/components/ui/separator';
+import { createClient } from '@/utils/supabase/server';
+import {
+  ChevronRight,
+  FacebookIcon,
+  Globe,
+  Instagram,
+  TwitchIcon,
+  YoutubeIcon,
+} from 'lucide-react';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import React from 'react';
+import { ProfileEdit } from './components/profile-edit';
+import { ProfileTabs } from './components/profile-tabs';
 
 interface UsernamePageLayoutProps {
   params: {
@@ -68,9 +62,9 @@ export default async function UsernamePageLayout({
         src={data.background_url || ''}
         width={1265}
       />
-      <div className='container flex flex-row-reverse justify-between px-5 py-2'>
-        <ProfileEdit username={params.username} />
-        <Avatar className='-mt-20 h-28 w-28 translate-x-1/3 border-2 lg:h-36 lg:w-36'>
+      <div className='container flex flex-row justify-between px-5 py-2'>
+        <div> </div>
+        <Avatar className='-mt-20 h-28 w-28 translate-x-[60%] border-2 lg:h-36 lg:w-36'>
           <AvatarImage
             alt='user avatar'
             src={data.avatar_url || ''}
@@ -78,7 +72,12 @@ export default async function UsernamePageLayout({
           />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <div></div>
+        <div>
+          <Button>Create</Button>
+          <ProfileEdit username={params.username}>
+            <Button variant='secondary'>Edit Profile</Button>
+          </ProfileEdit>
+        </div>
       </div>
       <div className='mx-auto flex max-w-[980px] flex-col items-center gap-1'>
         <div className='flex flex-col items-center'>
@@ -109,45 +108,6 @@ export default async function UsernamePageLayout({
                 {dummyText}
               </div>
             </DialogHeader>
-            {/* <DialogHeader>
-              <DialogTitle>Links</DialogTitle>
-              {data.user_social_links?.website && (
-                <Link
-                  className='flex items-center'
-                  href={data.user_social_links.website}
-                  target='_blank'
-                >
-                  <Globe className='mr-2 h-4 w-4 ' />
-                  {data.user_social_links.website}
-                </Link>
-              )}
-              {data.user_social_links?.twitter && (
-                <Link
-                  className='flex items-center'
-                  href={data.user_social_links.twitter}
-                  target='_blank'
-                >
-                  <TwitterXIcon className='mr-2 h-4 w-4 ' />
-                  {data.user_social_links.twitter}
-                </Link>
-              )}
-              <Link
-                className='flex items-center'
-                href={'https://x.com/billgundev'}
-                target='_blank'
-              >
-                <Icons.twitter className='mr-2 h-4 w-4 fill-current' />
-                @billgundev
-              </Link>
-              <Link
-                className='flex items-center'
-                href={'https://instagram.com/bill_gun'}
-                target='_blank'
-              >
-                <Instagram className='mr-2 h-4 w-4' />
-                @bill_gun
-              </Link>
-            </DialogHeader> */}
             <DialogFooter>
               <Button type='submit'>Share</Button>
             </DialogFooter>

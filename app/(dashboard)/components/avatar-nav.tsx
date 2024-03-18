@@ -1,7 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { ModeToggle } from '@/components/mode-toggle';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,16 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOutIcon, MoreHorizontalIcon, UserCogIcon } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
-import { usePathname, useRouter } from 'next/navigation';
-import { ModeToggle } from '@/components/mode-toggle';
-import { revalidatePath } from 'next/cache';
+import { LogOutIcon, MoreHorizontalIcon, UserCogIcon } from 'lucide-react';
 import Link from 'next/link';
-import { Database } from '@/types/database';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface AvatarNavProps {
   profile: {
