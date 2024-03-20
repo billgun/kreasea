@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator';
 import { siteConfig } from '@/config/site';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { GoogleButton } from '../signup/components/google-button';
+import { GoogleButton } from '../components/google-button';
 import LoginForm from './login-form';
 
 export default function Login() {

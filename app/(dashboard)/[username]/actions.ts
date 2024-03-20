@@ -60,3 +60,24 @@ export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
     return null;
   }
 }
+
+export async function getPosts() {
+  'use server';
+  const supabase = createServerSupabaseClient();
+  try {
+    const {
+      data: { user },
+      error: errorAuth,
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      throw errorAuth;
+    }
+
+    const { data, error } = await supabase.from('user_post').select('*');
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}

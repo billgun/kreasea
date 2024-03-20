@@ -67,7 +67,7 @@ export default function SignupForm() {
       options: {
         data: {
           name: formData.username,
-          user_name: formData.username,
+          username: formData.username,
         },
         emailRedirectTo: `${origin}/auth/callback`,
       },

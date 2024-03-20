@@ -1,11 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import React, { createRef, useState } from 'react';
-import { ProfilePost } from './components/profile-post';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -14,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import React from 'react';
 
 interface UsernamePageProps {
   params: {
@@ -25,10 +22,10 @@ export default function UsernamePage() {
   return (
     <div className='grid w-full grid-cols-2 gap-4'>
       <div className='col-span-1 flex flex-col gap-y-4'>
+        {/* <ProfilePost className='w-full' />
         <ProfilePost className='w-full' />
         <ProfilePost className='w-full' />
-        <ProfilePost className='w-full' />
-        <ProfilePost className='w-full' />
+        <ProfilePost className='w-full' /> */}
       </div>
       <div className='col-span-1'>
         <Card>

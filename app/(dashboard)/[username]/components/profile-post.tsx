@@ -1,7 +1,7 @@
 'use client';
 
 import { Icons } from '@/components/icons';
-import { Alert } from '@/components/ui/alert';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Card,
   CardContent,
@@ -23,82 +23,106 @@ import {
   AlertTriangle,
   Facebook,
   Heart,
-  Link,
+  LinkIcon,
   MessageCircle,
   MoreHorizontal,
   Share,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface ProfilePostProps {
   className?: string;
+  profile: {
+    username: string;
+    name: string;
+    avatar_url: string | null;
+  };
 }
-export function ProfilePost({ className }: ProfilePostProps) {
+export function ProfilePost({ className, profile }: ProfilePostProps) {
   const [isLiked, setIsLiked] = useState(false);
 
   const onClickLike = () => {
     setIsLiked(!isLiked);
   };
   return (
-    <Card className={`${className}`}>
-      <CardHeader className='space-y-0'>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Nov 20, 2023</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
-      <CardFooter className='justify-between'>
-        <div className='flex items-center justify-start gap-x-4'>
-          <div
-            className='flex cursor-pointer flex-row items-center'
-            onClick={onClickLike}
-          >
-            <Heart
-              className={cn(
-                `h-5 w-5 stroke-none`,
-                isLiked ? 'fill-red-500' : 'fill-muted-foreground'
-              )}
+    <div>
+      <Card className={`${className}`}>
+        <CardContent className='flex items-center gap-x-2 py-0 pt-2'>
+          <Avatar className='mt-1 h-9 w-9'>
+            <AvatarImage
+              src={profile.avatar_url || ''}
+              alt={`${profile.username} avatar`}
             />
-            2
+            <AvatarFallback>
+              {profile.name.slice(0, 1).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <Link href={`${profile.username}`} className='hover:underline'>
+            {' '}
+            {profile.name}
+          </Link>
+          <p>@{profile.username}</p>
+        </CardContent>
+        <CardHeader className='space-y-0 pt-2'>
+          <CardTitle>Card Title</CardTitle>
+          <CardDescription>Nov 20, 2023</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>Card Content</p>
+        </CardContent>
+        <CardFooter className='justify-between'>
+          <div className='flex items-center justify-start gap-x-4'>
+            <div
+              className='flex cursor-pointer flex-row items-center'
+              onClick={onClickLike}
+            >
+              <Heart
+                className={cn(
+                  `h-5 w-5 stroke-none`,
+                  isLiked ? 'fill-red-500' : 'fill-muted-foreground'
+                )}
+              />
+              2
+            </div>
+            {/* <div className='flex flex-row items-center'> */}
+            <MessageCircle className='h-5 w-5 fill-muted-foreground stroke-none' />
+            {/* </div> */}
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Share className='h-5 w-5 stroke-muted-foreground' />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Share this post</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <LinkIcon className='mr-2 h-4 w-4' />
+                  Copy link
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icons.twitter className='mr-2 h-4 w-4 fill-current' />
+                  Share on X
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Facebook className='mr-2 h-4 w-4' />
+                  Share on Facebook
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-          {/* <div className='flex flex-row items-center'> */}
-          <MessageCircle className='h-5 w-5 fill-muted-foreground stroke-none' />
-          {/* </div> */}
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Share className='h-5 w-5 stroke-muted-foreground' />
+              <MoreHorizontal className='h-5 w-5 stroke-muted-foreground' />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Share this post</DropdownMenuLabel>
-              <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link className='mr-2 h-4 w-4' />
-                Copy link
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Icons.twitter className='mr-2 h-4 w-4 fill-current' />
-                Share on X
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Facebook className='mr-2 h-4 w-4' />
-                Share on Facebook
+                <AlertTriangle className='mr-2 h-4 w-4' />
+                Report this post
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <MoreHorizontal className='h-5 w-5 stroke-muted-foreground' />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <AlertTriangle className='mr-2 h-4 w-4' />
-              Report this post
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

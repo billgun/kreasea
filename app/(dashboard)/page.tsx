@@ -43,11 +43,11 @@ export default async function DashboardPage() {
           </div>
         </div>
         <TabsContent value='following'>
-          <ProfilePost />
-          <ProfilePost />
-          <ProfilePost />
-          <ProfilePost />
-          <ProfilePost />
+          <ProfilePost profile={profile} />
+          <ProfilePost profile={profile} />
+          <ProfilePost profile={profile} />
+          <ProfilePost profile={profile} />
+          <ProfilePost profile={profile} />
         </TabsContent>
         <TabsContent value='featured'>
           <Card>
