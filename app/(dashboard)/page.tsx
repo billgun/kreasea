@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getUserProfile } from '@/lib/auth';
-import { ProfilePost } from './[username]/components/profile-post';
 import { StatusUpdateForm } from './components/status-update-form';
 
 export default async function DashboardPage() {
@@ -43,11 +42,22 @@ export default async function DashboardPage() {
           </div>
         </div>
         <TabsContent value='following'>
-          <ProfilePost profile={profile} />
-          <ProfilePost profile={profile} />
-          <ProfilePost profile={profile} />
-          <ProfilePost profile={profile} />
-          <ProfilePost profile={profile} />
+          {/* <ProfilePost
+            profile={profile}
+            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
+          />
+          <ProfilePost
+            profile={profile}
+            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
+          />
+          <ProfilePost
+            profile={profile}
+            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
+          />
+          <ProfilePost
+            profile={profile}
+            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
+          /> */}
         </TabsContent>
         <TabsContent value='featured'>
           <Card>

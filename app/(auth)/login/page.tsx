@@ -61,7 +61,7 @@ export default function Login() {
             New to {siteConfig.name}?{' '}
             <Link
               href='/signup'
-              className='font-semibold leading-6 text-foreground hover:text-foreground/80'
+              className='font-semibold leading-6 text-primary hover:text-primary/80'
             >
               Let&apos;s get started
             </Link>

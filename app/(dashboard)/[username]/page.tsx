@@ -1,5 +1,3 @@
-'use client';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,22 +8,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import React from 'react';
+import { UsernamePostFeed } from './components/username-post-feed';
 
 interface UsernamePageProps {
   params: {
     username: string;
   };
-  children: React.ReactNode;
 }
-export default function UsernamePage() {
+export default async function UsernamePage({ params }: UsernamePageProps) {
   return (
     <div className='grid w-full grid-cols-2 gap-4'>
       <div className='col-span-1 flex flex-col gap-y-4'>
-        {/* <ProfilePost className='w-full' />
-        <ProfilePost className='w-full' />
-        <ProfilePost className='w-full' />
-        <ProfilePost className='w-full' /> */}
+        <UsernamePostFeed username={params.username} />
       </div>
       <div className='col-span-1'>
         <Card>

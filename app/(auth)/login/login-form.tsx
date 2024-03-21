@@ -6,14 +6,12 @@ import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
 import { createClient } from '@/utils/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -48,7 +46,6 @@ const defaultValues: Partial<LoginFormValues> = {
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -64,7 +61,6 @@ export default function LoginForm() {
       password: formData.password,
     });
 
-    setIsLoading(false);
     if (error) {
       console.log(error.message);
       form.setError('root', { message: error.message });
@@ -72,6 +68,7 @@ export default function LoginForm() {
     }
     router.push('/');
     router.refresh();
+    setIsLoading(false);
   }
 
   return (
@@ -85,7 +82,7 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input placeholder='Your name' {...field} required />
+                <Input {...field} required />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -58,6 +58,52 @@ export async function getUserProfile() {
   }
 }
 
+export async function getUserProfileByUsername({
+  username,
+}: {
+  username: string;
+}) {
+  const supabase = createServerSupabaseClient();
+  try {
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .select('username, name, avatar_url')
+      .eq('username', username)
+      .single();
+
+    if (!data) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export async function getUserPostsByUsername({
+  username,
+}: {
+  username: string;
+}) {
+  const supabase = createServerSupabaseClient();
+  try {
+    const { data, error } = await supabase
+      .from('user_posts')
+      .select('id, title, content, created_at, user_id(username)')
+      .eq('user_id.username', username)
+      .order('created_at', { ascending: false });
+
+    if (!data) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
 export async function getUserSocialLinks() {
   const supabase = createServerSupabaseClient();
   try {

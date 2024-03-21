@@ -1,7 +1,6 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import { account } from '@/app/actions/stripe';
-import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function PlaygroundPage() {
   const formAction = async (data: FormData): Promise<void> => {
@@ -9,11 +8,24 @@ export default function PlaygroundPage() {
     await account();
   };
   return (
-    <div className='container grid grid-cols-3 px-4 py-6 lg:px-8'>
-      <form action={formAction}>
-        ZA playground
-        <Link href={'/account/stripe/connect'}>Stripe</Link>
-      </form>
+    <div className='max-w-[500px]'>
+      <div className='flex'>
+        <div>
+          <Avatar>
+            <AvatarImage src='https://github.com/shadcn.png' />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+        <div>
+          <div>Name</div>
+          <div>
+            Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum
+            Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum
+            Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum
+            Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum Lipsum{' '}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

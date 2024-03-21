@@ -27,16 +27,16 @@ import React from 'react';
 import { ProfileEdit } from './components/profile-edit';
 import { ProfileTabs } from './components/profile-tabs';
 
-interface UsernamePageLayoutProps {
+interface UsernameLayoutProps {
   params: {
     username: string;
   };
   children: React.ReactNode;
 }
-export default async function UsernamePageLayout({
+export default async function UsernameLayout({
   params,
   children,
-}: UsernamePageLayoutProps) {
+}: UsernameLayoutProps) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 

@@ -36,9 +36,7 @@ export function StatusUpdateForm() {
   function onSubmit(values: statusUpdateSchema) {
     setIsLoading(true);
     try {
-      postStatusUpdate(values).then(() => {
-        form.reset();
-      });
+      postStatusUpdate(values);
     } catch (error) {
       console.log(error);
     } finally {
@@ -56,7 +54,7 @@ export function StatusUpdateForm() {
             <FormItem>
               <FormControl>
                 <Textarea
-                  className='border-none bg-transparent text-white placeholder-gray-400 focus:ring-0'
+                  className='border-none bg-transparent focus:ring-0'
                   placeholder='What is happening?!'
                   {...field}
                 />

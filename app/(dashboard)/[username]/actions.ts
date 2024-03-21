@@ -51,7 +51,7 @@ export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
     };
 
     const { data, error } = await supabase
-      .from('user_post')
+      .from('user_posts')
       .insert(statusUpdateWithUserId);
     console.log(data);
     return data;

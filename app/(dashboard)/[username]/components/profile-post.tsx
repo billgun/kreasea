@@ -3,14 +3,6 @@
 import { Icons } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -18,10 +10,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
+import { cn, formatPostDate } from '@/lib/utils';
+import { Post } from '@/types/app';
 import {
   AlertTriangle,
-  Facebook,
+  FacebookIcon,
   Heart,
   LinkIcon,
   MessageCircle,
@@ -38,43 +31,47 @@ interface ProfilePostProps {
     name: string;
     avatar_url: string | null;
   };
+  post: Post;
 }
-export function ProfilePost({ className, profile }: ProfilePostProps) {
+export function ProfilePost({ className, profile, post }: ProfilePostProps) {
+  console.log(post);
+
   const [isLiked, setIsLiked] = useState(false);
 
   const onClickLike = () => {
     setIsLiked(!isLiked);
   };
+
   return (
-    <div>
-      <Card className={`${className}`}>
-        <CardContent className='flex items-center gap-x-2 py-0 pt-2'>
-          <Avatar className='mt-1 h-9 w-9'>
-            <AvatarImage
-              src={profile.avatar_url || ''}
-              alt={`${profile.username} avatar`}
-            />
-            <AvatarFallback>
-              {profile.name.slice(0, 1).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <Link href={`${profile.username}`} className='hover:underline'>
-            {' '}
-            {profile.name}
-          </Link>
-          <p>@{profile.username}</p>
-        </CardContent>
-        <CardHeader className='space-y-0 pt-2'>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Nov 20, 2023</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter className='justify-between'>
-          <div className='flex items-center justify-start gap-x-4'>
+    <>
+      <div className='flex items-center gap-x-2 py-0 pt-2'>
+        <Avatar className='mt-1 h-9 w-9'>
+          <AvatarImage
+            src={profile.avatar_url || ''}
+            alt={`${profile.username} avatar`}
+          />
+          <AvatarFallback>
+            {profile.name.slice(0, 1).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <Link
+          href={`${profile.username}`}
+          className='font-medium hover:underline'
+        >
+          {profile.name}
+        </Link>
+        <p className=''>@{profile.username}</p>·
+        <p className='text-sm text-muted-foreground'>
+          {formatPostDate(post.created_at)}
+        </p>
+      </div>
+      <div className='mt-2 space-y-2 rounded-lg rounded-tl-none border bg-card px-4 py-2 text-card-foreground shadow-sm'>
+        <p className='font-medium'>{post?.title || ''}</p>
+        <p>{post.content}</p>
+        <div className='flex justify-between'>
+          <div className='flex items-center justify-start gap-x-8'>
             <div
-              className='flex cursor-pointer flex-row items-center'
+              className='flex cursor-pointer flex-row items-center gap-x-2'
               onClick={onClickLike}
             >
               <Heart
@@ -85,9 +82,7 @@ export function ProfilePost({ className, profile }: ProfilePostProps) {
               />
               2
             </div>
-            {/* <div className='flex flex-row items-center'> */}
             <MessageCircle className='h-5 w-5 fill-muted-foreground stroke-none' />
-            {/* </div> */}
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Share className='h-5 w-5 stroke-muted-foreground' />
@@ -104,7 +99,7 @@ export function ProfilePost({ className, profile }: ProfilePostProps) {
                   Share on X
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Facebook className='mr-2 h-4 w-4' />
+                  <FacebookIcon className='mr-2 h-4 w-4' />
                   Share on Facebook
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -121,8 +116,8 @@ export function ProfilePost({ className, profile }: ProfilePostProps) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </CardFooter>
-      </Card>
-    </div>
+        </div>
+      </div>
+    </>
   );
 }

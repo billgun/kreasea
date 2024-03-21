@@ -8,28 +8,22 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import useFileInput from '@/hooks/useFileInput';
 import useFileInputWithCropper from '@/hooks/useFileInputWithCropper';
 import { Database } from '@/types/database';
-import { createClient } from '@/utils/supabase/server';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { cookies } from 'next/headers';
 import Image from 'next/image';
-import { ChangeEvent, createRef, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 

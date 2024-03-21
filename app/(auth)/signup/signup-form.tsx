@@ -122,7 +122,7 @@ export default function SignupForm() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input placeholder='Your name' {...field} required />
+                <Input {...field} required />
               </FormControl>
               <FormMessage />
             </FormItem>
