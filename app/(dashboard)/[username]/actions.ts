@@ -45,7 +45,6 @@ export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
     }
 
     const statusUpdateWithUserId = {
-      title: 'status',
       content: statusUpdate.status,
       user_id: user.id,
     };

@@ -45,9 +45,7 @@ export default function Login() {
                   <Separator className='my-4 bg-foreground' />
                 </div>
                 <div className='relative flex justify-center text-sm font-medium leading-6'>
-                  <span className='bg-card px-6 text-foreground'>
-                    Or continue with
-                  </span>
+                  <span className='bg-card px-6 text-foreground'>or</span>
                 </div>
               </div>
 

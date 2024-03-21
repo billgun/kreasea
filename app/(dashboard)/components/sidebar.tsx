@@ -23,7 +23,7 @@ export async function Sidebar({ className }: SidebarProps) {
 
   return (
     <div className={cn('', className)}>
-      <div className='sticky top-0 flex h-screen flex-col py-4'>
+      <div className={cn(`sticky top-0 flex h-screen flex-col py-4`)}>
         <div className='px-3 py-2'>
           <Link href='/' className='mb-2 flex items-center space-x-2 px-4'>
             <Icons.logo className='h-6 w-6' />

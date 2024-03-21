@@ -9,10 +9,10 @@ export async function UsernamePostFeed({ username }: UsernamePostFeedProps) {
   const posts = await getUserPostsByUsername({ username });
 
   return (
-    <div>
+    <>
       {posts.map((post) => (
         <ProfilePost key={post.id} post={post} profile={profile} />
       ))}
-    </div>
+    </>
   );
 }

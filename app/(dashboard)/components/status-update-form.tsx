@@ -54,7 +54,7 @@ export function StatusUpdateForm() {
             <FormItem>
               <FormControl>
                 <Textarea
-                  className='border-none bg-transparent focus:ring-0'
+                  className='resize-none border bg-transparent focus:ring-0'
                   placeholder='What is happening?!'
                   {...field}
                 />

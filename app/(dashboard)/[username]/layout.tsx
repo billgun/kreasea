@@ -25,7 +25,6 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
 import { ProfileEdit } from './components/profile-edit';
-import { ProfileTabs } from './components/profile-tabs';
 
 interface UsernameLayoutProps {
   params: {
@@ -181,7 +180,8 @@ export default async function UsernameLayout({
             </Button>
           )}
         </div>
-        <ProfileTabs username={params.username} />
+        <Separator />
+        {/* <ProfileTabs username={params.username} /> */}
         {children}
       </div>
     </div>

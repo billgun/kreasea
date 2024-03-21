@@ -12,7 +12,7 @@ export function GoogleButton() {
   const supabase = createClient();
   return (
     <Button
-      variant={'default'}
+      variant={'secondary'}
       className='w-full font-semibold'
       onClick={async () =>
         await supabase.auth.signInWithOAuth({
@@ -25,7 +25,9 @@ export function GoogleButton() {
     >
       <>
         <Icons.google className='mr-2 h-4 w-4' />
-        <span className='text-sm font-semibold leading-6'>Google</span>
+        <span className='text-sm font-semibold leading-6 text-foreground'>
+          Continue with Google
+        </span>
       </>
     </Button>
   );

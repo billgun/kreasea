@@ -27,7 +27,7 @@ export default async function DashboardPage() {
           <TabsTrigger value='following'>Following</TabsTrigger>
           <TabsTrigger value='featured'>Featured</TabsTrigger>
         </TabsList>
-        <div className='w-full rounded-lg py-4'>
+        <div className='w-full rounded-lg bg-card px-2 py-4'>
           <div className='flex items-start space-x-2'>
             <Avatar className='mt-1 h-9 w-9'>
               <AvatarImage

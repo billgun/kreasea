@@ -61,6 +61,7 @@ export default function LoginForm() {
       password: formData.password,
     });
 
+    setIsLoading(false);
     if (error) {
       console.log(error.message);
       form.setError('root', { message: error.message });
@@ -68,7 +69,6 @@ export default function LoginForm() {
     }
     router.push('/');
     router.refresh();
-    setIsLoading(false);
   }
 
   return (

@@ -34,6 +34,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.0",
     "geist": "^1.2.2",
+    "jotai": "^2.7.1",
     "lucide-react": "^0.359.0",
     "next": "latest",
     "next-themes": "^0.3.0",

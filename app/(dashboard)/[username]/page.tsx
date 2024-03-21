@@ -18,7 +18,7 @@ interface UsernamePageProps {
 export default async function UsernamePage({ params }: UsernamePageProps) {
   return (
     <div className='grid w-full grid-cols-2 gap-4'>
-      <div className='col-span-1 flex flex-col gap-y-4'>
+      <div className='col-span-1 flex flex-col pb-8'>
         <UsernamePostFeed username={params.username} />
       </div>
       <div className='col-span-1'>
