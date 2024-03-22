@@ -1,5 +1,3 @@
-'use client';
-
 import { Icons } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -10,19 +8,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { cn, formatPostDate } from '@/lib/utils';
+import { formatPostDate } from '@/lib/utils';
 import { Post } from '@/types/app';
 import {
   AlertTriangle,
   FacebookIcon,
-  Heart,
   LinkIcon,
   MessageCircle,
   MoreHorizontal,
   Share,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import PostLikeButton from './post-like-button';
 
 interface ProfilePostProps {
   className?: string;
@@ -33,15 +30,11 @@ interface ProfilePostProps {
   };
   post: Post;
 }
-export function ProfilePost({ className, profile, post }: ProfilePostProps) {
-  console.log(post);
-
-  const [isLiked, setIsLiked] = useState(false);
-
-  const onClickLike = () => {
-    setIsLiked(!isLiked);
-  };
-
+export async function ProfilePost({
+  className,
+  profile,
+  post,
+}: ProfilePostProps) {
   return (
     <>
       <div className='flex items-center gap-x-2 py-0 pt-2'>
@@ -65,23 +58,12 @@ export function ProfilePost({ className, profile, post }: ProfilePostProps) {
           {formatPostDate(post.created_at)}
         </p>
       </div>
-      <div className='mt-2 space-y-2 rounded-lg rounded-tl-none border bg-card px-4 py-2 text-card-foreground shadow-sm'>
+      <div className='mt-2 space-y-2 rounded-lg rounded-tl-none border bg-card p-4 text-card-foreground shadow-sm'>
         <p className='font-medium'>{post?.title || ''}</p>
         <p>{post.content}</p>
         <div className='flex justify-between'>
           <div className='flex items-center justify-start gap-x-8'>
-            <div
-              className='flex cursor-pointer flex-row items-center gap-x-2'
-              onClick={onClickLike}
-            >
-              <Heart
-                className={cn(
-                  `h-5 w-5 stroke-none`,
-                  isLiked ? 'fill-red-500' : 'fill-muted-foreground'
-                )}
-              />
-              2
-            </div>
+            <PostLikeButton />
             <MessageCircle className='h-5 w-5 fill-muted-foreground stroke-none' />
             <DropdownMenu>
               <DropdownMenuTrigger>

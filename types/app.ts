@@ -1,5 +1,5 @@
 export interface Post {
-  title: string;
+  title: string | null;
   content: string;
-  created_at: Date;
+  created_at: string;
 }
