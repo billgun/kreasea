@@ -91,14 +91,15 @@ export async function getUserPostsByUsername({
     const { data, error } = await supabase
       .from('user_posts')
       .select(
-        `id, title, content, created_at, user_id(username), user_post_likes(count)`
+        `id, title, content, created_at, user_profiles!public_user_post_duplicate_user_id_fkey!inner(username), user_post_likes(count), is_liked:user_profiles!user_post_likes(id)`
       )
-      .eq('user_id.username', username)
+      .eq('user_profiles.username', username)
       .order('created_at', { ascending: false });
 
     if (!data) {
       throw error;
     }
+    console.log(`/${username}`);
     return data;
   } catch (error) {
     console.error('Error:', error);
@@ -123,19 +124,6 @@ export async function getUserSocialLinks() {
       .select('*')
       .eq('id', user?.id)
       .single();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    return null;
-  }
-}
-
-export async function postPostLike({ postId }: { postId: string }) {
-  const supabase = createServerSupabaseClient();
-  try {
-    const { data, error } = await supabase
-      .from('user_post_likes')
-      .upsert({ post_id: postId });
     return data;
   } catch (error) {
     console.error('Error:', error);

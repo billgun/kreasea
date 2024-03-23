@@ -12,7 +12,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { createClient } from '@/utils/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -53,8 +52,6 @@ export default function LoginForm() {
   });
   async function onSubmit(formData: LoginFormValues) {
     setIsLoading(true);
-
-    const supabase = createClient();
 
     const { error } = await signIn({
       email: formData.email,

@@ -3,15 +3,27 @@
 import { cn } from '@/lib/utils';
 import { HeartIcon } from 'lucide-react';
 import { useState } from 'react';
+import { deletePostLike, postPostLike } from './actions';
 
-export default function PostLikeButton() {
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
+interface PostLikeButtonProps {
+  postId: string;
+  postLikes: number;
+  postIsLiked: boolean;
+}
+export default function PostLikeButton({
+  postId,
+  postLikes,
+  postIsLiked,
+}: PostLikeButtonProps) {
+  const [likes, setLikes] = useState(postLikes);
+  const [isLiked, setIsLiked] = useState(postIsLiked);
 
   const onClickLike = () => {
     if (isLiked) {
+      deletePostLike({ postId });
       setLikes(likes - 1); // Decrease likes if already liked
     } else {
+      postPostLike({ postId });
       setLikes(likes + 1); // Increase likes if not liked
     }
     setIsLiked(!isLiked);

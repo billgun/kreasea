@@ -63,7 +63,11 @@ export async function ProfilePost({
         <p>{post.content}</p>
         <div className='flex justify-between'>
           <div className='flex items-center justify-start gap-x-8'>
-            <PostLikeButton />
+            <PostLikeButton
+              postId={post.id}
+              postLikes={post?.user_post_likes[0]?.count}
+              postIsLiked={post?.is_liked[0]?.id}
+            />
             <MessageCircle className='h-5 w-5 fill-muted-foreground stroke-none' />
             <DropdownMenu>
               <DropdownMenuTrigger>
