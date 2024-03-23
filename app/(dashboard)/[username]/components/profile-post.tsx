@@ -12,6 +12,7 @@ const ProfilePostHeader = React.forwardRef<
     {...props}
   />
 ));
+ProfilePostHeader.displayName = 'ProfilePostHeader';
 
 const ProfilePostContent = React.forwardRef<
   HTMLDivElement,
@@ -26,5 +27,6 @@ const ProfilePostContent = React.forwardRef<
     {...props}
   />
 ));
+ProfilePostContent.displayName = 'ProfilePostContent';
 
 export { ProfilePostContent, ProfilePostHeader };
