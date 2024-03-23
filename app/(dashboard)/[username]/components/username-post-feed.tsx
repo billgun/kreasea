@@ -1,20 +1,127 @@
-import { getUserPostsByUsername, getUserProfileByUsername } from '@/lib/auth';
-import { ProfilePost } from './profile-post';
+// TODO: Add alert dialog for delete
+'use client';
+import { Icons } from '@/components/icons';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { formatPostDate } from '@/lib/utils';
+import { Post } from '@/types/app';
+import {
+  AlertTriangleIcon,
+  FacebookIcon,
+  LinkIcon,
+  MessageCircleIcon,
+  MoreHorizontalIcon,
+  ShareIcon,
+  Trash2Icon,
+} from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { deletePost } from './actions';
+import PostLikeButton from './post-like-button';
+import { ProfilePostContent, ProfilePostHeader } from './profile-post';
 
 interface UsernamePostFeedProps {
-  username: string;
+  profile: any;
+  posts: Post[];
 }
 
 export const revalidate = 0;
 
-export async function UsernamePostFeed({ username }: UsernamePostFeedProps) {
-  const profile = await getUserProfileByUsername({ username });
-  const posts = await getUserPostsByUsername({ username });
+export function UsernamePostFeed({ profile, posts }: UsernamePostFeedProps) {
+  const [userPosts, setUserPosts] = useState(posts);
+  const onClickDelete = ({ postId }: { postId: string }) => {
+    deletePost({ postId });
+    const updatedList = userPosts.filter((post) => post.id !== postId);
+    setUserPosts(updatedList);
+  };
 
   return (
     <>
-      {posts.map((post) => (
-        <ProfilePost key={post.id} post={post} profile={profile} />
+      {userPosts.map((post) => (
+        // <ProfilePost key={post.id} post={post} profile={profile} />
+        <div key={post.id}>
+          <ProfilePostHeader>
+            <div className='flex items-center gap-x-2 py-0'>
+              <Avatar className='mt-1 h-9 w-9'>
+                <AvatarImage
+                  src={profile.avatar_url || ''}
+                  alt={`${profile.username} avatar`}
+                />
+                <AvatarFallback>
+                  {profile.name.slice(0, 1).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              <Link
+                href={`${profile.username}`}
+                className='font-medium hover:underline'
+              >
+                {profile.name}
+              </Link>
+              <p className=''>@{profile.username}</p>·
+              <p className='text-sm text-muted-foreground'>
+                {formatPostDate(post.created_at)}
+              </p>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <MoreHorizontalIcon className='h-5 w-5 stroke-muted-foreground' />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem
+                  className='text-destructive focus:text-destructive'
+                  onClick={() => onClickDelete({ postId: post.id })}
+                >
+                  <Trash2Icon className='mr-2 h-4 w-4' />
+                  Delete this post
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <AlertTriangleIcon className='mr-2 h-4 w-4' />
+                  Report this post
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ProfilePostHeader>
+          <ProfilePostContent>
+            <p className='font-medium'>{post?.title || ''}</p>
+            <p>{post.content}</p>
+            <div className='flex items-center justify-start gap-x-8'>
+              <PostLikeButton
+                postId={post.id}
+                postLikes={post?.user_post_likes[0]?.count}
+                postIsLiked={post?.is_liked[0]?.id}
+              />
+              <MessageCircleIcon className='h-5 w-5 fill-muted-foreground stroke-none' />
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <ShareIcon className='h-5 w-5 stroke-muted-foreground' />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Share this post</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <LinkIcon className='mr-2 h-4 w-4' />
+                    Copy link
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Icons.twitter className='mr-2 h-4 w-4 fill-current' />
+                    Share on X
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <FacebookIcon className='mr-2 h-4 w-4' />
+                    Share on Facebook
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </ProfilePostContent>
+        </div>
       ))}
     </>
   );

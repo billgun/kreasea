@@ -24,3 +24,14 @@ export async function deletePostLike({ postId }: { postId: string }) {
     return null;
   }
 }
+
+export async function deletePost({ postId }: { postId: string }) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  try {
+    await supabase.from('user_posts').delete().eq('id', postId);
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}

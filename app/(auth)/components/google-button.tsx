@@ -19,6 +19,10 @@ export function GoogleButton() {
           provider: 'google',
           options: {
             redirectTo: `${location.origin}/auth/callback?provider=google`,
+            queryParams: {
+              access_type: 'offline',
+              prompt: 'consent',
+            },
           },
         })
       }
