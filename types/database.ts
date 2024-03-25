@@ -9,25 +9,60 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      user_followers: {
+      user_following: {
         Row: {
-          follower_id: string
+          following_id: string
           user_id: string
         }
         Insert: {
-          follower_id: string
-          user_id: string
+          following_id: string
+          user_id?: string
         }
         Update: {
-          follower_id?: string
+          following_id?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "public_user_followers_user_id_fkey"
+            foreignKeyName: "public_user_following_following_id_fkey"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_following_following_id_fkey"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "user_profile_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_following_following_id_fkey"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_following_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
-            referencedRelation: "users"
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_following_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profile_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_following_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -59,7 +94,35 @@ export type Database = {
             foreignKeyName: "user_message_from_user_fkey"
             columns: ["from_user"]
             isOneToOne: false
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_message_from_user_fkey"
+            columns: ["from_user"]
+            isOneToOne: false
+            referencedRelation: "user_profile_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_message_from_user_fkey"
+            columns: ["from_user"]
+            isOneToOne: false
             referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_message_to_user_fkey"
+            columns: ["to_user"]
+            isOneToOne: false
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_message_to_user_fkey"
+            columns: ["to_user"]
+            isOneToOne: false
+            referencedRelation: "user_profile_view"
             referencedColumns: ["id"]
           },
           {
@@ -90,6 +153,27 @@ export type Database = {
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "user_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_post_likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "user_posts_feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_post_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_post_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profile_view"
             referencedColumns: ["id"]
           },
           {
@@ -130,6 +214,20 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "public_user_post_duplicate_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_user_post_duplicate_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profile_view"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "public_user_post_duplicate_user_id_fkey"
             columns: ["user_id"]
@@ -213,6 +311,20 @@ export type Database = {
             foreignKeyName: "user_social_links_id_fkey"
             columns: ["id"]
             isOneToOne: true
+            referencedRelation: "newview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_social_links_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "user_profile_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_social_links_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
             referencedRelation: "user_profiles"
             referencedColumns: ["id"]
           },
@@ -220,7 +332,62 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      newview: {
+        Row: {
+          avatar_url: string | null
+          background_url: string | null
+          created_at: string | null
+          description: string | null
+          has_followed: boolean | null
+          id: string | null
+          name: string | null
+          username: string | null
+          website_url: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_posts_feed: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string | null
+          is_liked: boolean | null
+          like_count: number | null
+          title: string | null
+          username: string | null
+        }
+        Relationships: []
+      }
+      user_profile_view: {
+        Row: {
+          avatar_url: string | null
+          background_url: string | null
+          created_at: string | null
+          description: string | null
+          has_followed: boolean | null
+          id: string | null
+          name: string | null
+          username: string | null
+          website_url: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       change_user_password: {

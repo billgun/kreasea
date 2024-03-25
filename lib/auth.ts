@@ -1,4 +1,5 @@
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/lib/supabase/server';
+import { Post } from '@/types/app';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
@@ -44,7 +45,7 @@ export async function getUserProfile() {
     }
     const { data, error } = await supabase
       .from('user_profiles')
-      .select('username, name,avatar_url')
+      .select('username, name, avatar_url')
       .eq('id', user.id)
       .single();
 
@@ -58,6 +59,17 @@ export async function getUserProfile() {
   }
 }
 
+interface UserProfile {
+  avatar_url: string | null;
+  background_url: string | null;
+  created_at: string | null;
+  description: string | null;
+  has_followed: boolean;
+  id: string;
+  name: string | null;
+  username: string;
+  website_url: string | null;
+}
 export async function getUserProfileByUsername({
   username,
 }: {
@@ -66,14 +78,15 @@ export async function getUserProfileByUsername({
   const supabase = createServerSupabaseClient();
   try {
     const { data, error } = await supabase
-      .from('user_profiles')
-      .select('username, name, avatar_url')
+      .from('user_profile_view')
+      .select('*')
       .eq('username', username)
-      .single();
+      .single<UserProfile>();
 
     if (!data) {
       throw error;
     }
+    console.log('data', data);
     return data;
   } catch (error) {
     console.error('Error:', error);
@@ -92,7 +105,8 @@ export async function getUserPostsByUsername({
       .from('user_posts_feed')
       .select(`*`)
       .eq('username', username)
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .returns<Post[]>();
 
     if (!data) {
       throw error;

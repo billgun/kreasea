@@ -1,13 +1,16 @@
+import { Database } from '@/types/database';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-type MiddlewareClientProps = {
-  request: NextRequest;
-  response: NextResponse;
-};
+export const createClient = (request: NextRequest) => {
+  // Create an unmodified response
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
 
-export function createClient({ request, response }: MiddlewareClientProps) {
-  return createServerClient(
+  const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -16,6 +19,7 @@ export function createClient({ request, response }: MiddlewareClientProps) {
           return request.cookies.get(name)?.value;
         },
         set(name: string, value: string, options: CookieOptions) {
+          // If the cookie is updated, update the cookies for the request and response
           request.cookies.set({
             name,
             value,
@@ -33,6 +37,7 @@ export function createClient({ request, response }: MiddlewareClientProps) {
           });
         },
         remove(name: string, options: CookieOptions) {
+          // If the cookie is removed, update the cookies for the request and response
           request.cookies.set({
             name,
             value: '',
@@ -52,4 +57,6 @@ export function createClient({ request, response }: MiddlewareClientProps) {
       },
     }
   );
-}
+
+  return { supabase, response };
+};

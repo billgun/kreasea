@@ -13,7 +13,7 @@ import {
   getUserProfile,
   getUserProfileByUsername,
 } from '@/lib/auth';
-import { UsernamePostFeed } from './components/username-post-feed';
+import { UsernamePostFeed } from './components/username-post-feed/username-post-feed';
 
 interface UsernamePageProps {
   params: {
@@ -23,6 +23,7 @@ interface UsernamePageProps {
 export default async function UsernamePage({ params }: UsernamePageProps) {
   const user = await getUserProfile();
   const profile = await getUserProfileByUsername({ username: params.username });
+  console.log(profile);
   const posts = await getUserPostsByUsername({ username: params.username });
 
   return (

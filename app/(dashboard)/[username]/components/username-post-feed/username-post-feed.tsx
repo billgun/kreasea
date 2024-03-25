@@ -23,9 +23,9 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import PostLikeButton from '../post-like-button/post-like-button';
+import { ProfilePostContent, ProfilePostHeader } from '../profile-post';
 import { deletePost } from './actions';
-import PostLikeButton from './post-like-button';
-import { ProfilePostContent, ProfilePostHeader } from './profile-post';
 
 interface UsernamePostFeedProps {
   sessionUsername: string;
@@ -40,6 +40,7 @@ export function UsernamePostFeed({
   profile,
   posts,
 }: UsernamePostFeedProps) {
+  console.log('profile', profile);
   const [userPosts, setUserPosts] = useState(posts);
   const onClickDelete = ({ postId }: { postId: string }) => {
     deletePost({ postId });

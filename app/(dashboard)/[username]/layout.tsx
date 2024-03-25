@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { TwitterXIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -12,7 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
-import { createClient } from '@/utils/supabase/server';
+import { getUserProfile, getUserProfileByUsername } from '@/lib/auth';
 import {
   ChevronRight,
   FacebookIcon,
@@ -21,10 +19,12 @@ import {
   TwitchIcon,
   YoutubeIcon,
 } from 'lucide-react';
-import { cookies } from 'next/headers';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { getSocialLinksByUsername } from './actions';
 import { ProfileEdit } from './components/profile-edit';
+import { UserFollowButton } from './components/user-follow-button/user-follow-button';
 
 interface UsernameLayoutProps {
   params: {
@@ -36,18 +36,13 @@ export default async function UsernameLayout({
   params,
   children,
 }: UsernameLayoutProps) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-
-  const { data, error } = await supabase
-    .from('user_profiles')
-    .select('*, user_social_links(*)')
-    .eq('username', params.username)
-    .single();
-
-  if (error) {
-    return;
-  }
+  const session = await getUserProfile();
+  const userProfile = await getUserProfileByUsername({
+    username: params.username,
+  });
+  const socialLinks = await getSocialLinksByUsername({
+    username: params.username,
+  });
 
   let dummyText =
     'Muse Communication is trusted by our clients and has been named as the agent of more than 30 well-known anime and manga copyright partners in the global anime market. The company has expanded its influence in the anime and manga community by expanding its presence in the media, becoming a strategic marketing partner for its clients, and creating licensing opportunities. We provide our clients with a wide range of professional services in licensing, distribution, development, sales, and promotion to meet all their needs and achieve benefits. We provide clients with an all-rounded service to satisfy all your distribution needs.\n\nWe work with over a hundred different entertainment platforms including internet services, TV stations, TV/OTT platforms across the whole of Asia.';
@@ -58,7 +53,7 @@ export default async function UsernameLayout({
         alt='User background'
         className='aspect-square h-64 w-full object-cover'
         height={256}
-        src={data.background_url || ''}
+        src={userProfile.background_url || ''}
         width={1265}
       />
       <div className='container flex flex-row justify-between px-5 py-2'>
@@ -66,23 +61,33 @@ export default async function UsernameLayout({
         <Avatar className='-mt-20 h-28 w-28 translate-x-[60%] border-2 lg:h-36 lg:w-36'>
           <AvatarImage
             alt='user avatar'
-            src={data.avatar_url || ''}
+            src={userProfile.avatar_url || ''}
             className='aspect-square w-full'
           />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div>
-          <Button>Create</Button>
-          <ProfileEdit username={params.username}>
-            <Button variant='secondary'>Edit Profile</Button>
-          </ProfileEdit>
+          {session.username === params.username ? (
+            <div>
+              <Button>Create</Button>
+              <ProfileEdit username={params.username}>
+                <Button variant='secondary'>Edit Profile</Button>
+              </ProfileEdit>
+            </div>
+          ) : (
+            // <></>
+            <UserFollowButton
+              userId={userProfile.id}
+              hasFollowed={userProfile.has_followed}
+            />
+          )}
         </div>
       </div>
       <div className='mx-auto flex max-w-[980px] flex-col items-center gap-1'>
         <div className='flex flex-col items-center'>
-          <h2 className='text-lg font-bold'>{data.name}</h2>
+          <h2 className='text-lg font-bold'>{userProfile.name}</h2>
           <div className='flex gap-x-2 text-sm font-semibold'>
-            <p className=''>@{data.username}</p>
+            <p className=''>@{userProfile.username}</p>
             <Separator className='h-4' orientation='vertical' />
             <Link href={`/${params.username}/followers`}>
               <p className=''>0 followers</p>
@@ -95,7 +100,7 @@ export default async function UsernameLayout({
           <DialogTrigger asChild>
             <div className='flex cursor-pointer items-center gap-x-1'>
               <p className='line-clamp-3 overflow-hidden text-ellipsis text-sm text-accent-foreground/60'>
-                {data.description || 'No Description'}
+                {userProfile.description || 'No Description'}
               </p>
               <ChevronRight className='h-4 w-4 ' />
             </div>
@@ -113,68 +118,68 @@ export default async function UsernameLayout({
           </DialogContent>
         </Dialog>
         <div className='flex'>
-          {data.user_social_links?.website && (
+          {socialLinks?.website && (
             <Button
               variant='ghost'
               className='w-full justify-start px-3 py-2'
               asChild
             >
-              <Link href={data.user_social_links.website} target='_blank'>
+              <Link href={socialLinks.website} target='_blank'>
                 <Globe className='h-4 w-4' />
               </Link>
             </Button>
           )}
-          {data.user_social_links?.twitter && (
+          {socialLinks?.twitter && (
             <Button
               variant='ghost'
               className='w-full justify-start px-3 py-2'
               asChild
             >
-              <Link href={data.user_social_links.twitter} target='_blank'>
+              <Link href={socialLinks.twitter} target='_blank'>
                 <TwitterXIcon className='h-4 w-4' />
               </Link>
             </Button>
           )}
-          {data.user_social_links?.instagram && (
+          {socialLinks?.instagram && (
             <Button
               variant='ghost'
               className='w-full justify-start px-3 py-2'
               asChild
             >
-              <Link href={data.user_social_links.instagram} target='_blank'>
+              <Link href={socialLinks.instagram} target='_blank'>
                 <Instagram className='h-4 w-4' />
               </Link>
             </Button>
           )}
-          {data.user_social_links?.youtube && (
+          {socialLinks?.youtube && (
             <Button
               variant='ghost'
               className='w-full justify-start px-3 py-2'
               asChild
             >
-              <Link href={data.user_social_links.youtube} target='_blank'>
+              <Link href={socialLinks.youtube} target='_blank'>
                 <YoutubeIcon className='h-4 w-4' />
               </Link>
             </Button>
           )}
-          {data.user_social_links?.facebook && (
+          {socialLinks?.facebook && (
             <Button
               variant='ghost'
               className='w-full justify-start px-3 py-2'
               asChild
             >
-              <Link href={data.user_social_links.facebook} target='_blank'>
+              <Link href={socialLinks.facebook} target='_blank'>
                 <FacebookIcon className='h-4 w-4' />
               </Link>
             </Button>
           )}
-          {data.user_social_links?.twitch && (
+          {socialLinks?.twitch && (
             <Button
               variant='ghost'
               className='w-full justify-start px-3 py-2'
               asChild
             >
-              <Link href={data.user_social_links.twitch} target='_blank'>
+              <Link href={socialLinks.twitch} target='_blank'>
                 <TwitchIcon className='h-4 w-4' />
               </Link>
             </Button>

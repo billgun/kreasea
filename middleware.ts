@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createClient } from '@/utils/supabase/middleware';
+import { createClient } from './lib/supabase/middleware';
 export async function middleware(request: NextRequest) {
   try {
     // This `try/catch` block is only here for the interactive tutorial.
