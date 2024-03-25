@@ -89,11 +89,9 @@ export async function getUserPostsByUsername({
   const supabase = createServerSupabaseClient();
   try {
     const { data, error } = await supabase
-      .from('user_posts')
-      .select(
-        `id, title, content, created_at, user_profiles!public_user_post_duplicate_user_id_fkey!inner(username), user_post_likes(count), is_liked:user_profiles!user_post_likes(id)`
-      )
-      .eq('user_profiles.username', username)
+      .from('user_posts_feed')
+      .select(`*`)
+      .eq('username', username)
       .order('created_at', { ascending: false });
 
     if (!data) {

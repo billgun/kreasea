@@ -28,13 +28,18 @@ import PostLikeButton from './post-like-button';
 import { ProfilePostContent, ProfilePostHeader } from './profile-post';
 
 interface UsernamePostFeedProps {
+  sessionUsername: string;
   profile: any;
   posts: Post[];
 }
 
 export const revalidate = 0;
 
-export function UsernamePostFeed({ profile, posts }: UsernamePostFeedProps) {
+export function UsernamePostFeed({
+  sessionUsername,
+  profile,
+  posts,
+}: UsernamePostFeedProps) {
   const [userPosts, setUserPosts] = useState(posts);
   const onClickDelete = ({ postId }: { postId: string }) => {
     deletePost({ postId });
@@ -45,7 +50,6 @@ export function UsernamePostFeed({ profile, posts }: UsernamePostFeedProps) {
   return (
     <>
       {userPosts.map((post) => (
-        // <ProfilePost key={post.id} post={post} profile={profile} />
         <div key={post.id}>
           <ProfilePostHeader>
             <div className='flex items-center gap-x-2 py-0'>
@@ -74,17 +78,20 @@ export function UsernamePostFeed({ profile, posts }: UsernamePostFeedProps) {
                 <MoreHorizontalIcon className='h-5 w-5 stroke-muted-foreground' />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem
-                  className='text-destructive focus:text-destructive'
-                  onClick={() => onClickDelete({ postId: post.id })}
-                >
-                  <Trash2Icon className='mr-2 h-4 w-4' />
-                  Delete this post
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <AlertTriangleIcon className='mr-2 h-4 w-4' />
-                  Report this post
-                </DropdownMenuItem>
+                {sessionUsername === profile.username ? (
+                  <DropdownMenuItem
+                    className='text-destructive focus:text-destructive'
+                    onClick={() => onClickDelete({ postId: post.id })}
+                  >
+                    <Trash2Icon className='mr-2 h-4 w-4' />
+                    Delete this post
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem>
+                    <AlertTriangleIcon className='mr-2 h-4 w-4' />
+                    Report this post
+                  </DropdownMenuItem>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </ProfilePostHeader>
@@ -94,8 +101,8 @@ export function UsernamePostFeed({ profile, posts }: UsernamePostFeedProps) {
             <div className='flex items-center justify-start gap-x-8'>
               <PostLikeButton
                 postId={post.id}
-                postLikes={post?.user_post_likes[0]?.count}
-                postIsLiked={post?.is_liked[0]?.id}
+                postLikes={post.like_count}
+                postIsLiked={post.is_liked}
               />
               <MessageCircleIcon className='h-5 w-5 fill-muted-foreground stroke-none' />
               <DropdownMenu>

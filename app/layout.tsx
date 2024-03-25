@@ -1,11 +1,12 @@
-import './globals.css';
-import { Metadata, Viewport } from 'next';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
-import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { siteConfig } from '@/config/site';
+import { cn } from '@/lib/utils';
+import { Analytics } from '@vercel/analytics/react';
+import { Metadata, Viewport } from 'next';
 import { Nunito_Sans } from 'next/font/google';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: {
@@ -96,6 +97,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
             <Toaster />
             <TailwindIndicator />
+            <Analytics />
           </ThemeProvider>
         </body>
       </html>
