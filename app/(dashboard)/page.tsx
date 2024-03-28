@@ -12,6 +12,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getUserProfile } from '@/lib/auth';
+import ImageSvg from '@/public/undraw_friendship_mni7.svg';
+import Image from 'next/image';
+import Link from 'next/link';
 import { StatusUpdateForm } from './components/status-update-form';
 
 export default async function DashboardPage() {
@@ -42,22 +45,22 @@ export default async function DashboardPage() {
           </div>
         </div>
         <TabsContent value='following'>
-          {/* <ProfilePost
-            profile={profile}
-            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
-          />
-          <ProfilePost
-            profile={profile}
-            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
-          />
-          <ProfilePost
-            profile={profile}
-            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
-          />
-          <ProfilePost
-            profile={profile}
-            post={{ title: 'Dummy Title', content: 'Dummy Content' }}
-          /> */}
+          <div className='flex min-h-[30vh] flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm'>
+            <div className='flex flex-col items-center gap-1 p-12 py-20 text-center'>
+              <Image className='max-w-[60%]' src={ImageSvg} alt='icon' />
+              <h3 className='text-2xl font-bold tracking-tight'>
+                Kamu tidak mengikuti siapapun
+              </h3>
+              <p className='text-sm text-muted-foreground'>
+                Yuk ikuti kreator favoritmu dan dapatkan update terkini
+              </p>
+              <Button asChild>
+                <Link className='mt-2' href='/explore'>
+                  Explore Now
+                </Link>
+              </Button>
+            </div>
+          </div>
         </TabsContent>
         <TabsContent value='featured'>
           <Card>

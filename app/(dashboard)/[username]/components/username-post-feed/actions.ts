@@ -1,11 +1,9 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/actions';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 
 export async function deletePost({ postId }: { postId: string }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     await supabase.from('user_posts').delete().eq('id', postId);
   } catch (error) {

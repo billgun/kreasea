@@ -1,13 +1,9 @@
 import { createClient } from '@/lib/supabase/server';
 import { Post } from '@/types/app';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { cache } from 'react';
-
-export const createServerSupabaseClient = cache(() => createClient(cookies()));
 
 export async function getSession() {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const {
       data: { session },
@@ -20,7 +16,7 @@ export async function getSession() {
 }
 
 export async function getUser() {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const {
       data: { user },
@@ -33,7 +29,7 @@ export async function getUser() {
 }
 
 export async function getUserProfile() {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const {
       data: { user },
@@ -75,7 +71,7 @@ export async function getUserProfileByUsername({
 }: {
   username: string;
 }) {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const { data, error } = await supabase
       .from('user_profile_view')
@@ -99,7 +95,7 @@ export async function getUserPostsByUsername({
 }: {
   username: string;
 }) {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const { data, error } = await supabase
       .from('user_posts_feed')
@@ -120,7 +116,7 @@ export async function getUserPostsByUsername({
 }
 
 export async function getUserSocialLinks() {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const {
       data: { user },
@@ -144,7 +140,7 @@ export async function getUserSocialLinks() {
 }
 
 export async function getUserDetails() {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     const { data: userDetails } = await supabase
       .from('users')
@@ -158,7 +154,7 @@ export async function getUserDetails() {
 }
 
 export async function signOut() {
-  const supabase = createServerSupabaseClient();
+  const supabase = createClient();
   try {
     await supabase.auth.signOut();
     redirect('/');

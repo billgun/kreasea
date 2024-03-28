@@ -1,11 +1,9 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/actions';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 
 export async function postUserFollow({ userId }: { userId: string }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     await supabase.from('user_following').upsert({ following_id: userId });
   } catch (error) {
@@ -15,8 +13,7 @@ export async function postUserFollow({ userId }: { userId: string }) {
 }
 
 export async function deleteUserFollow({ userId }: { userId: string }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     await supabase.from('user_following').delete().eq('following_id', userId);
   } catch (error) {

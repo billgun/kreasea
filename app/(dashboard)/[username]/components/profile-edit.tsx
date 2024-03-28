@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
 import { ProfileEditForm } from './profile-edit-form';
 import SocialLinksPage from './social-links';
 
@@ -22,8 +21,7 @@ export async function ProfileEdit({
   username,
   children,
 }: ProfileEditLayoutProps) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('user_profiles')

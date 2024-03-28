@@ -1,14 +1,12 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/actions';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 import { statusUpdateSchema } from '../components/status-update-form';
 import { socialLinksSchema } from './components/social-links-form';
 
 export async function postUserSocialMedia(socialMediaData: socialLinksSchema) {
   'use server';
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     const {
       data: { user },
@@ -35,8 +33,7 @@ export async function postUserSocialMedia(socialMediaData: socialLinksSchema) {
 }
 
 export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     const {
       data: { user },
@@ -65,8 +62,7 @@ export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
 
 export async function getPosts() {
   'use server';
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     const {
       data: { user },
@@ -90,8 +86,7 @@ export async function getSocialLinksByUsername({
 }: {
   username: string;
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   try {
     const { data, error } = await supabase
       .from('user_social_links')
