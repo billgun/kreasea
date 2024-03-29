@@ -8,7 +8,7 @@ export async function postUserFollow({ userId }: { userId: string }) {
     await supabase.from('user_following').upsert({ following_id: userId });
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -18,6 +18,6 @@ export async function deleteUserFollow({ userId }: { userId: string }) {
     await supabase.from('user_following').delete().eq('following_id', userId);
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }

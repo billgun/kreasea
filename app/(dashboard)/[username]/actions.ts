@@ -28,7 +28,7 @@ export async function postUserSocialMedia(socialMediaData: socialLinksSchema) {
     return data;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -52,11 +52,10 @@ export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
     const { data, error } = await supabase
       .from('user_posts')
       .insert(statusUpdateWithUserId);
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -77,7 +76,7 @@ export async function getPosts() {
     return data;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -96,6 +95,25 @@ export async function getSocialLinksByUsername({
     return data;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
+  }
+}
+
+export async function getPostCountByUsername({
+  username,
+}: {
+  username: string;
+}) {
+  const supabase = createClient();
+  try {
+    const { data, count, error } = await supabase
+      .from('user_following')
+      .select('following_id!inner(username)', { count: 'exact', head: true })
+      .eq('following_id.username', username);
+
+    return count || 0;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
   }
 }

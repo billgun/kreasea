@@ -23,7 +23,6 @@ interface UsernamePageProps {
 export default async function UsernamePage({ params }: UsernamePageProps) {
   const user = await getUserProfile();
   const profile = await getUserProfileByUsername({ username: params.username });
-  console.log(profile);
   const posts = await getUserPostsByUsername({ username: params.username });
 
   return (

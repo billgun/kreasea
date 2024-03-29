@@ -11,7 +11,7 @@ export async function getSession() {
     return session;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -24,7 +24,7 @@ export async function getUser() {
     return user;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -82,7 +82,6 @@ export async function getUserProfileByUsername({
     if (!data) {
       throw error;
     }
-    console.log('data', data);
     return data;
   } catch (error) {
     console.error('Error:', error);
@@ -107,7 +106,6 @@ export async function getUserPostsByUsername({
     if (!data) {
       throw error;
     }
-    console.log(`/${username}`);
     return data;
   } catch (error) {
     console.error('Error:', error);
@@ -135,7 +133,7 @@ export async function getUserSocialLinks() {
     return data;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -149,7 +147,7 @@ export async function getUserDetails() {
     return userDetails;
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -160,6 +158,6 @@ export async function signOut() {
     redirect('/');
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }

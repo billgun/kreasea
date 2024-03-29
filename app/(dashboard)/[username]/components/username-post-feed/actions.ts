@@ -8,6 +8,6 @@ export async function deletePost({ postId }: { postId: string }) {
     await supabase.from('user_posts').delete().eq('id', postId);
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }

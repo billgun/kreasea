@@ -22,7 +22,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { getSocialLinksByUsername } from './actions';
+import { getPostCountByUsername, getSocialLinksByUsername } from './actions';
 import { ProfileEdit } from './components/profile-edit';
 import { UserFollowButton } from './components/user-follow-button/user-follow-button';
 
@@ -41,6 +41,10 @@ export default async function UsernameLayout({
     username: params.username,
   });
   const socialLinks = await getSocialLinksByUsername({
+    username: params.username,
+  });
+  const postCount = await getPostCountByUsername({ username: params.username });
+  const followerCount = await getPostCountByUsername({
     username: params.username,
   });
 
@@ -90,10 +94,14 @@ export default async function UsernameLayout({
             <p className=''>@{userProfile.username}</p>
             <Separator className='h-4' orientation='vertical' />
             <Link href={`/${params.username}/followers`}>
-              <p className=''>0 followers</p>
+              <p className=''>
+                {`${followerCount} ${followerCount < 2 ? 'followers' : 'follower'}`}{' '}
+              </p>
             </Link>
             <Separator className='h-4' orientation='vertical' />
-            <p className=''>0 posts</p>
+            <p className=''>
+              {`${postCount} ${postCount < 2 ? 'posts' : 'post'}`}{' '}
+            </p>
           </div>
         </div>
         <Dialog>

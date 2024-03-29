@@ -8,7 +8,7 @@ export async function postPostLike({ postId }: { postId: string }) {
     await supabase.from('user_post_likes').upsert({ post_id: postId });
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }
 
@@ -18,6 +18,6 @@ export async function deletePostLike({ postId }: { postId: string }) {
     await supabase.from('user_post_likes').delete().eq('post_id', postId);
   } catch (error) {
     console.error('Error:', error);
-    return null;
+    throw error;
   }
 }

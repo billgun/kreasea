@@ -9,8 +9,8 @@ interface AboutPageProps {
 }
 export default function FollowersPage() {
   return (
-    <div className='bg-[#1a1a1a] p-4 text-white'>
-      <div className='flex items-center justify-between rounded-md bg-[#292929] p-4'>
+    <div className='p-4 '>
+      <div className='flex items-center justify-between rounded-md bg-card p-4'>
         <div className='flex items-center space-x-3'>
           <Avatar>
             <AvatarImage
@@ -21,14 +21,14 @@ export default function FollowersPage() {
           </Avatar>
           <div>
             <div className='font-semibold'>Vishal Singh</div>
-            <div className='text-sm text-gray-400'>@vishal2376</div>
+            <div className='text-sm text-muted-foreground'>@vishal2376</div>
             <div className='text-sm'>
               Android Dev (Kotlin) | Rust 🦀 | Blender 🚀 Sharing Progress Daily
               🎉
             </div>
           </div>
         </div>
-        <Button className='bg-blue-600 hover:bg-blue-700'>Following</Button>
+        <Button>Following</Button>
       </div>
       <div className='mt-2 flex items-center justify-between rounded-md bg-[#292929] p-4'>
         <div className='flex items-center space-x-3'>
