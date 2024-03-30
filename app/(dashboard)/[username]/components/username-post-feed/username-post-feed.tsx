@@ -29,7 +29,6 @@ import { deletePost } from './actions';
 
 interface UsernamePostFeedProps {
   sessionUsername: string;
-  profile: any;
   posts: Post[];
 }
 
@@ -37,10 +36,8 @@ export const revalidate = 0;
 
 export function UsernamePostFeed({
   sessionUsername,
-  profile,
   posts,
 }: UsernamePostFeedProps) {
-  console.log('profile', profile);
   const [userPosts, setUserPosts] = useState(posts);
   const onClickDelete = ({ postId }: { postId: string }) => {
     deletePost({ postId });
@@ -56,20 +53,20 @@ export function UsernamePostFeed({
             <div className='flex items-center gap-x-2 py-0'>
               <Avatar className='mt-1 h-9 w-9'>
                 <AvatarImage
-                  src={profile.avatar_url || ''}
-                  alt={`${profile.username} avatar`}
+                  src={post.avatar_url || ''}
+                  alt={`${post.username} avatar`}
                 />
                 <AvatarFallback>
-                  {profile.name.slice(0, 1).toUpperCase()}
+                  {post.name?.slice(0, 1).toUpperCase() || 'N/A'}
                 </AvatarFallback>
               </Avatar>
               <Link
-                href={`${profile.username}`}
+                href={`${post.username}`}
                 className='font-medium hover:underline'
               >
-                {profile.name}
+                {post.name}
               </Link>
-              <p className=''>@{profile.username}</p>·
+              <p className=''>@{post.username}</p>·
               <p className='text-sm text-muted-foreground'>
                 {formatPostDate(post.created_at)}
               </p>
@@ -79,7 +76,7 @@ export function UsernamePostFeed({
                 <MoreHorizontalIcon className='h-5 w-5 stroke-muted-foreground' />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                {sessionUsername === profile.username ? (
+                {sessionUsername === post.username ? (
                   <DropdownMenuItem
                     className='text-destructive focus:text-destructive'
                     onClick={() => onClickDelete({ postId: post.id })}

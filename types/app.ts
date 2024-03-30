@@ -6,4 +6,7 @@ export interface Post {
   created_at: string;
   like_count: any;
   is_liked: any;
+  username: string;
+  name: string;
+  avatar_url: string | null;
 }

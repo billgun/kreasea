@@ -10,8 +10,7 @@ import {
 } from '@/components/ui/card';
 import {
   getUserPostsByUsername,
-  getUserProfile,
-  getUserProfileByUsername,
+  getUserProfile
 } from '@/lib/auth';
 import { UsernamePostFeed } from './components/username-post-feed/username-post-feed';
 
@@ -22,17 +21,12 @@ interface UsernamePageProps {
 }
 export default async function UsernamePage({ params }: UsernamePageProps) {
   const user = await getUserProfile();
-  const profile = await getUserProfileByUsername({ username: params.username });
   const posts = await getUserPostsByUsername({ username: params.username });
 
   return (
     <div className='grid w-full grid-cols-2 gap-4'>
       <div className='col-span-1 flex flex-col pb-8'>
-        <UsernamePostFeed
-          profile={profile}
-          posts={posts}
-          sessionUsername={user.username}
-        />
+        <UsernamePostFeed posts={posts} sessionUsername={user.username} />
       </div>
       <div className='col-span-1'>
         <Card>
