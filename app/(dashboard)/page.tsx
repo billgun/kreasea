@@ -11,7 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getUserProfile } from '@/lib/auth';
+import { getUserPostsBySessionAndFollowing, getUserProfile } from '@/lib/auth';
 import ImageSvg from '@/public/undraw_friendship_mni7.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,6 +19,7 @@ import { StatusUpdateForm } from './components/status-update-form';
 
 export default async function DashboardPage() {
   const profile = await getUserProfile();
+  const posts = await getUserPostsBySessionAndFollowing();
 
   return (
     <div className='container grid grid-cols-3 px-4 py-6 lg:px-8'>

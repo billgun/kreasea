@@ -20,7 +20,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import useFileInputWithCropper from '@/hooks/useFileInputWithCropper';
-import { Database } from '@/types/database';
+import { Tables } from '@/types/database';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -28,7 +28,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 interface ProfileEditFormLayoutProps {
-  profile: Database['public']['Tables']['user_profiles']['Row'];
+  profile: Tables<'user_profiles'>;
 }
 
 export function ProfileEditForm({ profile }: ProfileEditFormLayoutProps) {

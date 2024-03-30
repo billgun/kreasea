@@ -22,7 +22,11 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { getPostCountByUsername, getSocialLinksByUsername } from './actions';
+import {
+  getFollowerCountByUsername,
+  getPostCountByUsername,
+  getSocialLinksByUsername,
+} from './actions';
 import { ProfileEdit } from './components/profile-edit';
 import { UserFollowButton } from './components/user-follow-button/user-follow-button';
 
@@ -44,12 +48,9 @@ export default async function UsernameLayout({
     username: params.username,
   });
   const postCount = await getPostCountByUsername({ username: params.username });
-  const followerCount = await getPostCountByUsername({
+  const followerCount = await getFollowerCountByUsername({
     username: params.username,
   });
-
-  let dummyText =
-    'Muse Communication is trusted by our clients and has been named as the agent of more than 30 well-known anime and manga copyright partners in the global anime market. The company has expanded its influence in the anime and manga community by expanding its presence in the media, becoming a strategic marketing partner for its clients, and creating licensing opportunities. We provide our clients with a wide range of professional services in licensing, distribution, development, sales, and promotion to meet all their needs and achieve benefits. We provide clients with an all-rounded service to satisfy all your distribution needs.\n\nWe work with over a hundred different entertainment platforms including internet services, TV stations, TV/OTT platforms across the whole of Asia.';
 
   return (
     <div className='w-full shadow-lg'>
@@ -95,12 +96,12 @@ export default async function UsernameLayout({
             <Separator className='h-4' orientation='vertical' />
             <Link href={`/${params.username}/followers`}>
               <p className=''>
-                {`${followerCount} ${followerCount < 2 ? 'followers' : 'follower'}`}{' '}
+                {`${followerCount} ${followerCount >= 2 ? 'followers' : 'follower'}`}{' '}
               </p>
             </Link>
             <Separator className='h-4' orientation='vertical' />
             <p className=''>
-              {`${postCount} ${postCount < 2 ? 'posts' : 'post'}`}{' '}
+              {`${postCount} ${postCount >= 2 ? 'posts' : 'post'}`}{' '}
             </p>
           </div>
         </div>
@@ -117,7 +118,7 @@ export default async function UsernameLayout({
             <DialogHeader>
               <DialogTitle>About</DialogTitle>
               <div className='grid gap-4 whitespace-pre-wrap py-4 text-sm'>
-                {dummyText}
+                {userProfile.description}
               </div>
             </DialogHeader>
             <DialogFooter>

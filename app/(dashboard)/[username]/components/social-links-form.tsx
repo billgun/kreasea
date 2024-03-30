@@ -1,6 +1,6 @@
 'use client';
 
-import { DiscordIcon, Icons, TwitterXIcon } from '@/components/icons';
+import { Icons, TwitterXIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import {
@@ -11,7 +11,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useToast } from '@/components/ui/use-toast';
+import { Tables } from '@/types/database';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   FacebookIcon,
@@ -23,8 +24,6 @@ import {
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Database } from '@/types/database';
-import { useToast } from '@/components/ui/use-toast';
 import { postUserSocialMedia } from '../actions';
 
 const socialLinksSchema = z.object({
@@ -125,9 +124,7 @@ const socialLinks: {
 ];
 
 interface SocialLinksFormProps {
-  userSocialLinks:
-    | Database['public']['Tables']['user_social_links']['Row']
-    | null;
+  userSocialLinks: Tables<'user_social_links'> | null;
 }
 
 export default function SocialLinksForm({

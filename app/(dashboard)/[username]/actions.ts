@@ -107,6 +107,25 @@ export async function getPostCountByUsername({
   const supabase = createClient();
   try {
     const { data, count, error } = await supabase
+      .from('user_posts')
+      .select('user_id!inner(username)', { count: 'exact', head: true })
+      .eq('user_id.username', username);
+
+    return count || 0;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export async function getFollowerCountByUsername({
+  username,
+}: {
+  username: string;
+}) {
+  const supabase = createClient();
+  try {
+    const { data, count, error } = await supabase
       .from('user_following')
       .select('following_id!inner(username)', { count: 'exact', head: true })
       .eq('following_id.username', username);

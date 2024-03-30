@@ -113,6 +113,26 @@ export async function getUserPostsByUsername({
   }
 }
 
+export async function getUserPostsBySessionAndFollowing() {
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase
+      .from('user_home_feed')
+      .select(`*`)
+      .order('created_at', { ascending: false })
+      .returns<Post[]>();
+
+    if (!data) {
+      throw error;
+    }
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
 export async function getUserSocialLinks() {
   const supabase = createClient();
   try {
