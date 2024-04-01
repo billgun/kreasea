@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: 'Kreasea',
-  url: 'https://ui.shadcn.com',
+  url: 'https://kreasea.com',
   ogImage: 'https://ui.shadcn.com/og.jpg',
   description:
-    'Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.',
+    'Tempatnya komunitas kreator Indonesia! Dapatkan support untuk kreasi-kreasimu',
   links: {
-    twitter: 'https://twitter.com/shadcn',
-    github: 'https://github.com/shadcn-ui/ui',
+    twitter: 'https://twitter.com/billgundev',
+    github: 'https://github.com/billgun',
   },
 };
 

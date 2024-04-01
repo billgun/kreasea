@@ -6,13 +6,15 @@ import { ArrowRightIcon } from 'lucide-react';
 export function Announcement() {
   return (
     <Link
-      href='/docs/changelog'
+      href='/signup'
       className='inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium'
     >
       🎉 <Separator className='mx-2 h-4' orientation='vertical' />
-      <span className='sm:hidden'>Sign up now and get an exclusive badge</span>
+      <span className='sm:hidden'>
+        Daftar sekarang dan dapatkan badge ekslusif.
+      </span>
       <span className='hidden sm:inline'>
-        Become one of our first creator and get exclusive badge.
+        Jadi salah satu kreator pertama kami dan dapatkan badge ekslusif.
       </span>
       <ArrowRightIcon className='ml-1 h-4 w-4' />
     </Link>
