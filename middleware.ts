@@ -20,6 +20,9 @@ export async function middleware(request: NextRequest) {
       }
     }
 
+    if (session) {
+      await supabase.auth.getUser();
+    }
     return response;
   } catch (e) {
     // If you are here, a Supabase client could not be created!

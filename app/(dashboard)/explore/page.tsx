@@ -1,14 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { Mail, Search, User, UserIcon } from 'lucide-react';
+import { Search, UserIcon } from 'lucide-react';
+import { getCreators } from './actions';
 import { ProfileCard } from './components/profile-card';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
 
 const categories = [
   {
@@ -38,6 +33,7 @@ const categories = [
 ];
 
 export default async function ExplorePage() {
+  const users = await getCreators();
   return (
     <div className='container h-full px-4 py-6 lg:px-8'>
       <div className='flex items-center justify-between'>
@@ -69,12 +65,9 @@ export default async function ExplorePage() {
       </form>
 
       <div className='mt-4 grid grid-cols-1 gap-4 md:grid-cols-4'>
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
-        <ProfileCard />
+        {users.map((user) => (
+          <ProfileCard key={user.id} profile={user} />
+        ))}
       </div>
     </div>
   );

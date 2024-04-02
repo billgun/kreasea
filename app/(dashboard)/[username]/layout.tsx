@@ -54,22 +54,28 @@ export default async function UsernameLayout({
 
   return (
     <div className='w-full shadow-lg'>
-      <Image
-        alt='User background'
-        className='aspect-square h-64 w-full object-cover'
-        height={256}
-        src={userProfile.background_url || ''}
-        width={1265}
-      />
+      {userProfile.background_url ? (
+        <Image
+          alt='User background'
+          className='aspect-square h-64 w-full bg-card object-cover'
+          height={256}
+          src={userProfile.background_url}
+          width={1265}
+        />
+      ) : (
+        <div className='aspect-square h-64 w-full object-cover'></div>
+      )}
       <div className='container flex flex-row justify-between px-5 py-2'>
         <div> </div>
         <Avatar className='-mt-20 h-28 w-28 translate-x-[60%] border-2 lg:h-36 lg:w-36'>
           <AvatarImage
             alt='user avatar'
-            src={userProfile.avatar_url || ''}
+            src={userProfile.avatar_url || undefined}
             className='aspect-square w-full'
           />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>
+            {userProfile.name?.slice(0, 1).toUpperCase()}
+          </AvatarFallback>
         </Avatar>
         <div>
           {session.username === params.username ? (

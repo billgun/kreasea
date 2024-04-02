@@ -18,6 +18,8 @@ import Link from 'next/link';
 import { UsernamePostFeed } from './[username]/components/username-post-feed/username-post-feed';
 import { StatusUpdateForm } from './components/status-update-form';
 
+export const revalidate = 0;
+
 export default async function DashboardPage() {
   const profile = await getUserProfile();
   const posts = await getUserPostsBySessionAndFollowing();

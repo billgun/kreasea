@@ -125,7 +125,7 @@ export async function getUserPostsBySessionAndFollowing() {
     if (!data) {
       throw error;
     }
-    console.log(data);
+
     return data;
   } catch (error) {
     console.error('Error:', error);
