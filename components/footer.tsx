@@ -1,6 +1,7 @@
 // @ts-nocheck
 // To Fix Later
 import Link from 'next/link';
+import { Icons } from './icons';
 
 const navigation = {
   solutions: [
@@ -101,11 +102,7 @@ export function Footer() {
       <div className='mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32'>
         <div className='xl:grid xl:grid-cols-3 xl:gap-8'>
           <div className='space-y-8'>
-            <img
-              className='h-7'
-              src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-              alt='Company name'
-            />
+            <Icons.logo className='h-8 w-8' />
             <p className='text-sm leading-6'>
               Making the world a better place through constructing elegant
               hierarchies.
@@ -192,7 +189,7 @@ export function Footer() {
         </div>
         <div className='mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24'>
           <p className='text-xs leading-5 text-foreground/50'>
-            &copy; 2020 Your Company, Inc. All rights reserved.
+            &copy; 2024 Kreasea
           </p>
         </div>
       </div>

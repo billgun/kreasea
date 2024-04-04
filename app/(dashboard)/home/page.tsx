@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { FAQ } from './components/faq';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
+import { UsernameClaimForm } from './components/username-claim-form';
 
 export default async function IndexPage() {
   return (
@@ -24,17 +25,7 @@ export default async function IndexPage() {
             Beautifully designed components that you can copy and paste into
             your apps. Accessible. Customizable. Open Source.
           </PageHeaderDescription>
-          <PageActions>
-            <div className='flex items-center gap-4 bg-card p-4'>
-              <Input
-                className='h-11 rounded-md px-8'
-                placeholder='Klaim username'
-              />
-              <Button type='submit' size={'lg'}>
-                Klaim
-              </Button>
-            </div>
-          </PageActions>
+          <UsernameClaimForm />
         </PageHeader>
       </div>
       <div className='relative isolate h-[50vh] overflow-hidden px-6 py-24 text-center shadow-2xl sm:px-16'>

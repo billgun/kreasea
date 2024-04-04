@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signUp } from './actions';
+import { useSearchParams } from 'next/navigation';
 
 const signupFormSchema = z.object({
   username: z.string().min(1, {
@@ -49,6 +50,14 @@ const defaultValues: Partial<SignupFormValues> = {
 };
 
 export default function SignupForm() {
+  const username = useSearchParams().get('username');
+  console.log(username);
+  if (username) {
+    defaultValues.username = username;
+  } else {
+    defaultValues.username = '';
+  }
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<SignupFormValues>({
