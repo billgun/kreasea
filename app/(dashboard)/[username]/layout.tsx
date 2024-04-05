@@ -70,35 +70,39 @@ export default async function UsernameLayout({
         <div className='aspect-square h-64 w-full object-cover'></div>
       )}
       <div className='container flex flex-row justify-between px-5 py-2'>
-        <div> </div>
-        <Avatar className='-mt-20 h-28 w-28 translate-x-[60%] border-2 lg:h-36 lg:w-36'>
-          <AvatarImage
-            alt='user avatar'
-            src={userProfile.avatar_url || undefined}
-            className='aspect-square w-full'
-          />
-          <AvatarFallback>
-            {userProfile.name?.slice(0, 1).toUpperCase()}
-          </AvatarFallback>
-        </Avatar>
-        <div>
+        <div className='w-1/3'> </div>
+        <div className='flex w-1/3 items-center justify-center'>
+          <Avatar className='-mt-20 h-28 w-28 border-2 lg:h-36 lg:w-36'>
+            <AvatarImage
+              alt='user avatar'
+              src={userProfile.avatar_url || undefined}
+              className='aspect-square w-full'
+            />
+            <AvatarFallback>
+              {userProfile.name?.slice(0, 1).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+        </div>
+        <div className='flex w-1/3 justify-end gap-x-4'>
           {(user ? user.username : '') === params.username ? (
-            <div>
+            <>
               <Button>Create</Button>
               <ProfileEdit username={params.username}>
                 <Button variant='secondary'>Edit Profile</Button>
               </ProfileEdit>
-            </div>
+            </>
           ) : (
-            // <></>
-            <UserFollowButton
-              userId={userProfile.id}
-              hasFollowed={userProfile.has_followed}
-            />
+            <>
+              <Button>Donate</Button>
+              <UserFollowButton
+                userId={userProfile.id}
+                hasFollowed={userProfile.has_followed}
+              />
+            </>
           )}
         </div>
       </div>
-      <div className='mx-auto flex max-w-[980px] flex-col items-center gap-1'>
+      <div className='container mx-auto flex flex-col items-center gap-1'>
         <div className='flex flex-col items-center'>
           <h2 className='text-lg font-bold'>{userProfile.name}</h2>
           <div className='flex gap-x-2 text-sm font-semibold'>

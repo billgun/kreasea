@@ -1,4 +1,3 @@
-'use client';
 import { account } from '@/app/actions/stripe';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 

@@ -25,7 +25,7 @@ export function UserFollowButton({
   };
 
   return (
-    <Button onClick={onClickFollow}>
+    <Button variant={'secondary'} onClick={onClickFollow}>
       {isFollowed ? 'Unfollow' : 'Follow'}
     </Button>
   );

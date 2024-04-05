@@ -51,7 +51,7 @@ export default async function IndexPage() {
               <UsersIcon className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+2350</div>
+              <div className='text-2xl font-bold'>100</div>
               <p className='text-xs text-muted-foreground'>
                 +180.1% from last month
               </p>
@@ -63,7 +63,7 @@ export default async function IndexPage() {
               <HandCoinsIcon className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+12,234</div>
+              <div className='text-2xl font-bold'>Rp.1.000.000</div>
               <p className='text-xs text-muted-foreground'>
                 +19% from last month
               </p>
@@ -77,10 +77,7 @@ export default async function IndexPage() {
               <GemIcon className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+573</div>
-              <p className='text-xs text-muted-foreground'>
-                +201 since last hour
-              </p>
+              <div className='text-2xl font-bold'>Rp.3.000.000</div>
             </CardContent>
           </Card>
         </div>
