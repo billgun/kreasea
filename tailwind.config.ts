@@ -20,6 +20,7 @@ const config = {
     extend: {
       backgroundImage: {
         'kreasi-1': "url('/images/kreasi-1.png')",
+        'kreasi-2': "url('/images/kreasi-2.jpg')",
       },
       colors: {
         border: 'hsl(var(--border))',

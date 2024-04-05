@@ -16,30 +16,32 @@ export default async function IndexPage() {
   return (
     <>
       <div className='relative mx-auto h-[92vh] w-full bg-kreasi-1 bg-cover bg-no-repeat'>
-        <PageHeader className='xl:pt-48'>
+        <PageHeader className='space-y-4 xl:pt-48'>
           <Announcement />
           <PageHeaderHeading className='text-balance'>
-            All you need to make money doing what you love
+            Ruang untuk kamu berkreasi.
           </PageHeaderHeading>
           <PageHeaderDescription>
-            Beautifully designed components that you can copy and paste into
-            your apps. Accessible. Customizable. Open Source.
+            Tempat terbaik untuk membuat komunitas dengan fans, dan menerima
+            dukungan dari supporter untuk passion kamu!
           </PageHeaderDescription>
           <UsernameClaimForm />
         </PageHeader>
       </div>
-      <div className='relative isolate h-[50vh] overflow-hidden px-6 py-24 text-center shadow-2xl sm:px-16'>
+      <div className='relative isolate h-[50vh] space-y-4 overflow-hidden bg-card px-6 py-24 text-center shadow-2xl sm:px-16'>
         <h2 className='mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl'>
-          0% fee on donation / tips
+          Simpan uangmu lebih banyak!
         </h2>
-        <p className='mx-auto mt-6 max-w-xl text-lg leading-8'>
-          Incididunt sint fugiat pariatur cupidatat consectetur sit cillum anim
-          id veniam aliqua proident excepteur commodo do ea.
+        <p className='mx-auto max-w-xl text-balance text-lg leading-8 sm:text-xl'>
+          0-5% platform fees! Independen dan dibangun oleh kreator, kamu adalah
+          nomor 1 kami.
         </p>
-        <div className='mt-10 flex items-center justify-center gap-x-6'>
-          <Button>Get started</Button>
-          <Link href='#' className='text-sm font-semibold leading-6'>
-            Learn more <span aria-hidden='true'>→</span>
+        <p className='text-center text-muted-foreground sm:text-lg'>
+          Daftar sekarang juga, pendaftaran gratis!
+        </p>
+        <div className='flex items-center justify-center gap-x-6'>
+          <Link href={'/signup'}>
+            <Button>Ayo mulai!</Button>
           </Link>
         </div>
         <svg

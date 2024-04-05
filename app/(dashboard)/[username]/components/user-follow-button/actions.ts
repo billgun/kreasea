@@ -1,10 +1,19 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
 export async function postUserFollow({ userId }: { userId: string }) {
   const supabase = createClient();
   try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      redirect('/login');
+    }
+
     await supabase.from('user_following').upsert({ following_id: userId });
   } catch (error) {
     console.error('Error:', error);
@@ -15,6 +24,14 @@ export async function postUserFollow({ userId }: { userId: string }) {
 export async function deleteUserFollow({ userId }: { userId: string }) {
   const supabase = createClient();
   try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      redirect('/login');
+    }
+
     await supabase.from('user_following').delete().eq('following_id', userId);
   } catch (error) {
     console.error('Error:', error);

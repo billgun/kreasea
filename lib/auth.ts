@@ -20,7 +20,11 @@ export async function getUser() {
   try {
     const {
       data: { user },
+      error,
     } = await supabase.auth.getUser();
+    if (!user) {
+      throw error;
+    }
     return user;
   } catch (error) {
     console.error('Error:', error);
@@ -31,13 +35,33 @@ export async function getUser() {
 export async function getUserProfile() {
   const supabase = createClient();
   try {
+    const user = await getUser();
+
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .select('username, name, avatar_url')
+      .eq('id', user.id)
+      .single();
+
+    if (!data) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export async function getUserProfileNonStrict() {
+  const supabase = createClient();
+  try {
     const {
       data: { user },
       error: errorAuth,
     } = await supabase.auth.getUser();
-
     if (!user) {
-      throw errorAuth;
+      return null; // Return null if there's no user
     }
     const { data, error } = await supabase
       .from('user_profiles')

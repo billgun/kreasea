@@ -10,7 +10,11 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
-import { getUserProfile, getUserProfileByUsername } from '@/lib/auth';
+import {
+  getUserProfile,
+  getUserProfileByUsername,
+  getUserProfileNonStrict,
+} from '@/lib/auth';
 import {
   ChevronRight,
   FacebookIcon,
@@ -40,7 +44,7 @@ export default async function UsernameLayout({
   params,
   children,
 }: UsernameLayoutProps) {
-  const session = await getUserProfile();
+  const user = await getUserProfileNonStrict();
   const userProfile = await getUserProfileByUsername({
     username: params.username,
   });
@@ -53,7 +57,7 @@ export default async function UsernameLayout({
   });
 
   return (
-    <div className='w-full shadow-lg'>
+    <div className='min-h-screen w-full shadow-lg'>
       {userProfile.background_url ? (
         <Image
           alt='User background'
@@ -78,7 +82,7 @@ export default async function UsernameLayout({
           </AvatarFallback>
         </Avatar>
         <div>
-          {session.username === params.username ? (
+          {(user ? user.username : '') === params.username ? (
             <div>
               <Button>Create</Button>
               <ProfileEdit username={params.username}>

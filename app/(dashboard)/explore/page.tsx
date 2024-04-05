@@ -41,9 +41,6 @@ export default async function ExplorePage() {
           <h2 className='text-2xl font-semibold tracking-tight'>
             Temukan kreator favoritmu
           </h2>
-          <p className='text-sm text-muted-foreground'>
-            Kita mencari kreator favoritmu
-          </p>
         </div>
       </div>
       <Separator className='my-4' />
@@ -52,7 +49,7 @@ export default async function ExplorePage() {
         <div className='flex w-full items-center space-x-2'>
           <div className='relative w-full'>
             <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
-            <Input placeholder='Temukan kreator di Ko-fi' className='pl-8' />
+            <Input placeholder='Cari kreatormu di Kreasea' className='pl-8' />
             <Button
               className='absolute right-4 top-3 h-4 w-4 text-muted-foreground'
               type='submit'
