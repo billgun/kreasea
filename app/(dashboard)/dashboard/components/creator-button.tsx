@@ -11,7 +11,7 @@ export function CreatorButton() {
         <div className='text-sm text-muted-foreground'>
           {enabled
             ? 'Kamu sudah aktif! Ayo berkreasea!'
-            : 'Aktifkan agar kamu dapat memulai kreaseamu!'}
+            : 'Aktifkan agar kamu dapat ditemukan dihalaman kreator!'}
         </div>
       </div>
       <div>
