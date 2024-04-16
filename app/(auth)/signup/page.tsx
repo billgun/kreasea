@@ -5,10 +5,11 @@ import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { GoogleButton } from '../components/google-button';
 import SignupForm from './signup-form';
+import { Suspense } from 'react';
 
 export default function Signup() {
   return (
-    <>
+    <Suspense>
       <div className='flex min-h-full w-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8'>
         <Button variant={'outline'} asChild>
           <Link
@@ -62,6 +63,6 @@ export default function Signup() {
           </p>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
