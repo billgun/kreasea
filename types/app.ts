@@ -1,4 +1,3 @@
-//TODO: Fix user_post_likes & is_liked typing
 export interface Post {
   id: string;
   title: string | null;

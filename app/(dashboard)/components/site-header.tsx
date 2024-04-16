@@ -1,29 +1,7 @@
 import { MainNav } from './main-nav';
 import { MobileNav } from './mobile-nav';
-import { ModeToggle } from '@/components/mode-toggle';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { BellIcon, LogOutIcon, UserIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { AvatarNav } from './avatar-nav';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Button  } from '@/components/ui/button';
 import Link from 'next/link';
 
 export function SiteHeader() {
@@ -41,7 +19,7 @@ export function SiteHeader() {
             <Button asChild>
               <Link href={'/signup'}>Get Started</Link>
             </Button>
-            <ModeToggle />
+            <ThemeToggle />
           </nav>
         </div>
       </div>

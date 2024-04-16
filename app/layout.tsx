@@ -76,6 +76,34 @@ const nunitoSans = Nunito_Sans({
   display: 'swap',
 });
 
+// TODO: Console to remove when supabase fixed
+// Reference: https://github.com/supabase/auth-js/issues/873
+const conWarn = console.warn
+const conLog = console.log
+
+const IGNORE_WARNINGS = [
+  'Using supabase.auth.getSession() is potentially insecure',
+  'Using the user object as returned from supabase.auth.getSession()',
+]
+
+console.warn = function (...args) {
+  const match = args.find((arg) =>
+    typeof arg === 'string' ? IGNORE_WARNINGS.find((warning) => arg.includes(warning)) : false,
+  )
+  if (!match) {
+    conWarn(...args)
+  }
+}
+
+console.log = function (...args) {
+  const match = args.find((arg) =>
+    typeof arg === 'string' ? IGNORE_WARNINGS.find((warning) => arg.includes(warning)) : false,
+  )
+  if (!match) {
+    conLog(...args)
+  }
+}
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }

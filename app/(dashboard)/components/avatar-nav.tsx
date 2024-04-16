@@ -1,6 +1,6 @@
 'use client';
 
-import { ModeToggle } from '@/components/mode-toggle';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -67,7 +67,7 @@ export function AvatarNav({ profile }: AvatarNavProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuItem>
-          <ModeToggle />
+          <ThemeToggle />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

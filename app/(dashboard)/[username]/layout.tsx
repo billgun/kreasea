@@ -58,7 +58,7 @@ export default async function UsernameLayout({
 
   return (
     <div className='min-h-screen w-full shadow-lg'>
-      {userProfile.background_url ? (
+      {/* {userProfile.background_url ? (
         <Image
           alt='User background'
           className='aspect-square h-64 w-full bg-card object-cover'
@@ -68,15 +68,15 @@ export default async function UsernameLayout({
         />
       ) : (
         <div className='aspect-square h-64 w-full object-cover'></div>
-      )}
-      <div className='container flex flex-row justify-between px-5 py-2'>
-        <div className='w-1/3'> </div>
+      )} */}
+      <div className='container flex flex-row items-end justify-between px-5 py-2'>
+        <div className='w-1/3'></div>
         <div className='flex w-1/3 items-center justify-center'>
-          <Avatar className='-mt-20 h-28 w-28 border-2 lg:h-36 lg:w-36'>
+          <Avatar className='h-28 w-28 border-2 lg:h-36 lg:w-36'>
             <AvatarImage
               alt='user avatar'
               src={userProfile.avatar_url || undefined}
-              className='aspect-square w-full'
+              className='w-full object-cover'
             />
             <AvatarFallback>
               {userProfile.name?.slice(0, 1).toUpperCase()}

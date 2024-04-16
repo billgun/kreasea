@@ -2,19 +2,6 @@ import { createClient } from '@/lib/supabase/server';
 import { Post } from '@/types/app';
 import { redirect } from 'next/navigation';
 
-export async function getSession() {
-  const supabase = createClient();
-  try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    return session;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-}
-
 export async function getUser() {
   const supabase = createClient();
   try {
@@ -28,6 +15,22 @@ export async function getUser() {
     return user;
   } catch (error) {
     console.error('Error:', error);
+    throw error;
+  }
+}
+
+export async function getUserNonStrict() {
+  const supabase = createClient();
+  try {
+    const {
+      data: {user},
+      error,
+    } = await supabase.auth.getUser();
+    if (error) {
+      return null
+    }
+    return user;
+  } catch (error) {
     throw error;
   }
 }
@@ -60,8 +63,8 @@ export async function getUserProfileNonStrict() {
       data: { user },
       error: errorAuth,
     } = await supabase.auth.getUser();
-    if (!user) {
-      return null; // Return null if there's no user
+    if (!user || errorAuth) {
+      return null; 
     }
     const { data, error } = await supabase
       .from('user_profiles')
@@ -185,7 +188,7 @@ export async function getUserDetails() {
   const supabase = createClient();
   try {
     const { data: userDetails } = await supabase
-      .from('users')
+      .from('user_social_links')
       .select('*')
       .single();
     return userDetails;

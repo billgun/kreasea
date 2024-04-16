@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-interface ModeToggleProps {
+interface ThemeToggleProps {
   className?: string;
 }
-export function ModeToggle({ className }: ModeToggleProps) {
+export function ThemeToggle({ className }: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 

@@ -72,7 +72,7 @@ export async function getPosts() {
       throw errorAuth;
     }
 
-    const { data, error } = await supabase.from('user_post').select('*');
+    const { data, error } = await supabase.from('user_posts').select('*');
     return data;
   } catch (error) {
     console.error('Error:', error);

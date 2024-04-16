@@ -4,11 +4,13 @@ import { siteConfig } from '@/config/site';
 import { getUserProfile } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 import {
+  ArchiveIcon,
   BarChart2Icon,
   BellIcon,
   CogIcon,
   HomeIcon,
   SearchIcon,
+  ShoppingBagIcon,
   UserIcon,
   UsersIcon,
 } from 'lucide-react';
@@ -34,7 +36,7 @@ export async function Sidebar({ className }: SidebarProps) {
         </div>
         <div className='flex-1'>
           <Tabs defaultValue='member' className='w-full '>
-            <TabsList className='grid w-full grid-cols-2 px-4'>
+            <TabsList className='grid w-full grid-cols-2 rounded-none px-4'>
               <TabsTrigger value='member'>Member</TabsTrigger>
               <TabsTrigger value='creator'>Creator</TabsTrigger>
             </TabsList>
@@ -86,6 +88,10 @@ export async function Sidebar({ className }: SidebarProps) {
                   <SidebarButton href={`/supporters`}>
                     <UsersIcon className='mr-2 h-4 w-4' />
                     Supporters
+                  </SidebarButton>
+                  <SidebarButton href={`/products`}>
+                    <ArchiveIcon className='mr-2 h-4 w-4' />
+                    Products
                   </SidebarButton>
                 </div>
               </div>
