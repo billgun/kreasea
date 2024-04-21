@@ -1,6 +1,7 @@
 'use client';
 
 import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggleTab } from '@/components/theme-toggle-tab';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -66,8 +67,8 @@ export function AvatarNav({ profile }: AvatarNavProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
-        <DropdownMenuItem>
-          <ThemeToggle />
+        <DropdownMenuItem className=''>
+          <ThemeToggleTab className='w-full' />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
