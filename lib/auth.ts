@@ -23,11 +23,11 @@ export async function getUserNonStrict() {
   const supabase = createClient();
   try {
     const {
-      data: {user},
+      data: { user },
       error,
     } = await supabase.auth.getUser();
     if (error) {
-      return null
+      return null;
     }
     return user;
   } catch (error) {
@@ -42,7 +42,7 @@ export async function getUserProfile() {
 
     const { data, error } = await supabase
       .from('user_profiles')
-      .select('username, name, avatar_url')
+      .select('username, name, avatar_url, is_creator')
       .eq('id', user.id)
       .single();
 
@@ -64,7 +64,7 @@ export async function getUserProfileNonStrict() {
       error: errorAuth,
     } = await supabase.auth.getUser();
     if (!user || errorAuth) {
-      return null; 
+      return null;
     }
     const { data, error } = await supabase
       .from('user_profiles')

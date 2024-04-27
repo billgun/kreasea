@@ -15,8 +15,11 @@ import {
   UsersIcon,
   WalletIcon,
 } from 'lucide-react';
+import { getUserProfile } from '@/lib/auth';
 
 export default async function DashboardPage() {
+  const profile = await getUserProfile();
+
   return (
     <div className='w-full flex-1 space-y-4 p-8 pt-6'>
       <div className='flex items-center justify-between space-y-2'>
@@ -24,7 +27,7 @@ export default async function DashboardPage() {
       </div>
       <div className='flex'>
         <div className='w-1/2'>
-          <CreatorButton />
+          <CreatorButton isCreator={profile.is_creator} />
         </div>
       </div>
 
