@@ -4,6 +4,7 @@ import { Editor, useCurrentEditor } from '@tiptap/react';
 import {
   BoldIcon,
   CodeIcon,
+  CodeSquareIcon,
   Heading1Icon,
   Heading2Icon,
   Heading3Icon,
@@ -13,6 +14,8 @@ import {
   ItalicIcon,
   ListIcon,
   ListOrderedIcon,
+  QuoteIcon,
+  RulerIcon,
   StrikethroughIcon,
   TextIcon,
 } from 'lucide-react';
@@ -205,8 +208,11 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             ? 'bg-primary text-primary-foreground'
             : ''
         }
+        variant={'outline'}
+        type='button'
+        size={'sm'}
       >
-        code block
+        <CodeSquareIcon className='h-4 w-4' />
       </Button>
       <Button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -215,11 +221,24 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             ? 'bg-primary text-primary-foreground'
             : ''
         }
+        variant={'outline'}
+        type='button'
+        size={'sm'}
       >
-        blockquote
+        <QuoteIcon className='h-4 w-4' />
       </Button>
-      <Button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-        horizontal rule
+      <Button
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        className={
+          editor.isActive('horizontalRule')
+            ? 'bg-primary text-primary-foreground'
+            : ''
+        }
+        variant={'outline'}
+        type='button'
+        size={'sm'}
+      >
+        <RulerIcon className='h-4 w-4' />
       </Button>
       <Button onClick={() => editor.chain().focus().setHardBreak().run()}>
         hard break

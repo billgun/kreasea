@@ -19,7 +19,6 @@ import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useMail } from '../use-message';
 import { MessageList } from './message-list';
 import { MessageDisplay } from './message-display';
 import { Mail } from '../data';
@@ -35,8 +34,6 @@ interface MailProps {
 }
 
 export function Message({ accounts, mails, className }: MailProps) {
-  const [mail] = useMail();
-
   return (
     <>
       <Tabs defaultValue='all' className={cn('col-span-2', className)}>
@@ -74,10 +71,7 @@ export function Message({ accounts, mails, className }: MailProps) {
           <MessageList items={mails.filter((item) => !item.read)} />
         </TabsContent>
       </Tabs>
-      <MessageDisplay
-        mail={mails.find((item) => item.id === mail.selected) || null}
-        className='col-span-2'
-      />
+      {/* <MessageDisplay className='col-span-2' /> */}
     </>
   );
 }
