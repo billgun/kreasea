@@ -67,10 +67,10 @@ export function AvatarNav({ profile }: AvatarNavProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
-        <DropdownMenuItem className=''>
+        {/* <DropdownMenuItem className=''>
           <ThemeToggleTab className='w-full' />
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator /> */}
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Terms of Use</DropdownMenuItem>

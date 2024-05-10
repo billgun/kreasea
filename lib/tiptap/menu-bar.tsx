@@ -12,6 +12,7 @@ import {
   Heading5Icon,
   Heading6Icon,
   ItalicIcon,
+  LinkIcon,
   ListIcon,
   ListOrderedIcon,
   QuoteIcon,
@@ -19,11 +20,28 @@ import {
   StrikethroughIcon,
   TextIcon,
 } from 'lucide-react';
+import { useCallback } from 'react';
 
-const MenuBar = ({ editor }: { editor: Editor | null }) => {
-  if (!editor) {
-    return null;
-  }
+const MenuBar = ({ editor }: { editor: Editor }) => {
+  const setLink = useCallback(() => {
+    const previousUrl = editor.getAttributes('link').href;
+    const url = window.prompt('URL', previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === '') {
+      editor.chain().focus().extendMarkRange('link').unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+  }, [editor]);
 
   return (
     <>
@@ -228,6 +246,19 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         <QuoteIcon className='h-4 w-4' />
       </Button>
       <Button
+        onClick={setLink}
+        className={
+          editor.isActive('horizontalRule')
+            ? 'bg-primary text-primary-foreground'
+            : ''
+        }
+        variant={'outline'}
+        type='button'
+        size={'sm'}
+      >
+        <LinkIcon className='h-4 w-4' />
+      </Button>
+      <Button
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
         className={
           editor.isActive('horizontalRule')
@@ -240,7 +271,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
       >
         <RulerIcon className='h-4 w-4' />
       </Button>
-      <Button onClick={() => editor.chain().focus().setHardBreak().run()}>
+      {/* <Button onClick={() => editor.chain().focus().setHardBreak().run()}>
         hard break
       </Button>
       <Button
@@ -254,7 +285,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         disabled={!editor.can().chain().focus().redo().run()}
       >
         redo
-      </Button>
+      </Button> */}
     </>
   );
 };

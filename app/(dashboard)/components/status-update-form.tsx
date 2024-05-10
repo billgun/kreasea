@@ -10,11 +10,18 @@ import {
 } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ImageIcon } from 'lucide-react';
+import { ChevronDownIcon, ImageIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { postStatusUpdate } from '../[username]/actions';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 const statusUpdateSchema = z.object({
   status: z.string().min(2, {
@@ -68,13 +75,36 @@ export function StatusUpdateForm() {
           <div className='flex space-x-1 text-blue-400'>
             <ImageIcon />
           </div>
-          <Button variant={'default'} type='submit' disabled={isLoading}>
-            {' '}
-            {isLoading && (
-              <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
-            )}
-            Post
-          </Button>
+          <div className='inline-flex rounded-md shadow-sm'>
+            <Button
+              variant={'default'}
+              type='submit'
+              disabled={isLoading}
+              className='rounded-r-none'
+            >
+              {isLoading && (
+                <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+              )}
+              Post
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  className='rounded-l-none rounded-r-md'
+                  variant='outline'
+                >
+                  <ChevronDownIcon className='h-4 w-4' />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end'>
+                <DropdownMenuItem>
+                  <Link href={'/editor/blog'}>Create Post with an Editor</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Option 2</DropdownMenuItem>
+                <DropdownMenuItem>Option 3</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </form>
     </Form>

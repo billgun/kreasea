@@ -78,31 +78,35 @@ const nunitoSans = Nunito_Sans({
 
 // TODO: Console to remove when supabase fixed
 // Reference: https://github.com/supabase/auth-js/issues/873
-const conWarn = console.warn
-const conLog = console.log
+const conWarn = console.warn;
+const conLog = console.log;
 
 const IGNORE_WARNINGS = [
   'Using supabase.auth.getSession() is potentially insecure',
   'Using the user object as returned from supabase.auth.getSession()',
-]
+];
 
 console.warn = function (...args) {
   const match = args.find((arg) =>
-    typeof arg === 'string' ? IGNORE_WARNINGS.find((warning) => arg.includes(warning)) : false,
-  )
+    typeof arg === 'string'
+      ? IGNORE_WARNINGS.find((warning) => arg.includes(warning))
+      : false
+  );
   if (!match) {
-    conWarn(...args)
+    conWarn(...args);
   }
-}
+};
 
 console.log = function (...args) {
   const match = args.find((arg) =>
-    typeof arg === 'string' ? IGNORE_WARNINGS.find((warning) => arg.includes(warning)) : false,
-  )
+    typeof arg === 'string'
+      ? IGNORE_WARNINGS.find((warning) => arg.includes(warning))
+      : false
+  );
   if (!match) {
-    conLog(...args)
+    conLog(...args);
   }
-}
+};
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -121,8 +125,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <ThemeProvider
             attribute='class'
-            defaultTheme='system'
-            enableSystem
+            defaultTheme='light'
+            // enableSystem
             disableTransitionOnChange
           >
             {children}

@@ -37,7 +37,7 @@ export default async function DashboardPageLayout({
                 <Button asChild>
                   <Link href={'/signup'}>Get Started</Link>
                 </Button>
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
               </nav>
             </div>
           </div>
