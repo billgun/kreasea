@@ -12,7 +12,7 @@ import { Footer } from '@/components/footer';
 import Link from 'next/link';
 import { UsernameClaimForm } from './components/username-claim-form';
 import { ArrowDownIcon, CloudIcon, LockIcon } from 'lucide-react';
-import { BackgroundSvg } from '@/components/icons';
+import { BackgroundSvg, BackgroundSvgMobile } from '@/components/icons';
 
 const features = [
   {
@@ -42,7 +42,8 @@ export default async function IndexPage() {
   return (
     <>
       <div className='relative mx-auto h-[92vh] w-full'>
-        <BackgroundSvg className='absolute left-0 top-0 z-0 h-full bg-center object-cover lg:w-full' />
+        <BackgroundSvg className='absolute left-0 top-0  z-0 hidden h-full w-full bg-center object-cover lg:block' />
+        <BackgroundSvgMobile className='absolute left-0 top-0 z-0 h-full w-full bg-center object-cover lg:hidden' />
         <PageHeader className='relative z-10 space-y-4 bg-background/50 xl:pt-48'>
           <Announcement />
           <PageHeaderHeading className='text-balance'>

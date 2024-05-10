@@ -61,7 +61,7 @@ export default async function ExplorePage() {
         </div>
       </form>
 
-      <div className='mt-4 grid grid-cols-1 gap-4 md:grid-cols-4'>
+      <div className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4'>
         {users.map((user) => (
           <ProfileCard key={user.id} profile={user} />
         ))}

@@ -362,3 +362,93 @@ export const BackgroundSvg = (props: IconProps) => {
     </svg>
   );
 };
+
+export const BackgroundSvgMobile = (props: IconProps) => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      version='1.1'
+      width='425'
+      height='560'
+      preserveAspectRatio='none'
+      viewBox='0 0 425 560'
+      {...props}
+    >
+      <g mask='url("#SvgjsMask1008")' fill='none'>
+        <path
+          d='M-17.18 157.04a32.04 32.04 0 1 0 60.76 20.36z'
+          fill='rgba(253, 137, 115, 1)'
+        ></path>
+        <path
+          d='M-14.87 127.46 a33.45 33.45 0 1 0 66.9 0 a33.45 33.45 0 1 0 -66.9 0z'
+          fill='rgba(0, 58, 108, 1)'
+        ></path>
+        <path
+          d='M49.13 316.07a41.91 41.91 0 1 0 83.78-2.48z'
+          stroke='rgba(255, 191, 101, 1)'
+        ></path>
+        <path
+          d='M205.48 390.48a34.91 34.91 0 1 0 1.9-69.8z'
+          fill='rgba(255, 191, 101, 1)'
+        ></path>
+        <path
+          d='M406.9 273.51L444.46 273.51L444.46 315.52L406.9 315.52z'
+          fill='rgba(253, 137, 115, 1)'
+        ></path>
+        <path
+          d='M18.4 528.7a21.51 21.51 0 1 0 41.18 12.44z'
+          stroke='rgba(253, 137, 115, 1)'
+        ></path>
+        <path
+          d='M77.62 45.15L108.74 45.15L108.74 60.45L77.62 60.45z'
+          fill='rgba(0, 58, 108, 1)'
+        ></path>
+        <path
+          d='M285.73 539.71L326.41 539.71L326.41 564.56L285.73 564.56z'
+          stroke='rgba(0, 58, 108, 1)'
+        ></path>
+        <path
+          d='M380 225.4a40.05 40.05 0 1 0-26.18 75.69z'
+          stroke='rgba(0, 58, 108, 1)'
+        ></path>
+        <path
+          d='M-18.01 499.67 a42.17 42.17 0 1 0 84.34 0 a42.17 42.17 0 1 0 -84.34 0z'
+          fill='rgba(255, 191, 101, 1)'
+        ></path>
+        <path
+          d='M136.09 229.49a28.8 28.8 0 1 0 55.4 15.74z'
+          fill='rgba(0, 58, 108, 1)'
+        ></path>
+        <path
+          d='M310.8 291.23 a35.37 35.37 0 1 0 70.74 0 a35.37 35.37 0 1 0 -70.74 0z'
+          fill='rgba(255, 191, 101, 1)'
+        ></path>
+        <path
+          d='M172.63 197.75a22.29 22.29 0 1 0-20.77-39.45z'
+          fill='rgba(253, 137, 115, 1)'
+        ></path>
+        <path
+          d='M315.25 94.05L335.46 94.05L335.46 114.26L315.25 114.26z'
+          stroke='rgba(255, 191, 101, 1)'
+        ></path>
+        <path
+          d='M286.43 274.61 a3.9 3.9 0 1 0 7.8 0 a3.9 3.9 0 1 0 -7.8 0z'
+          stroke='rgba(0, 58, 108, 1)'
+        ></path>
+        <path
+          d='M225.91 291.85L242.57 291.85L242.57 332.28L225.91 332.28z'
+          stroke='rgba(255, 191, 101, 1)'
+        ></path>
+        <path
+          d='M108.76 432.74a13.17 13.17 0 1 0-21.29-15.5z'
+          stroke='rgba(253, 137, 115, 1)'
+        ></path>
+      </g>
+      <defs>
+        <mask id='SvgjsMask1008'>
+          <rect width='425' height='560' fill='#ffffff'></rect>
+        </mask>
+      </defs>
+    </svg>
+  );
+};
