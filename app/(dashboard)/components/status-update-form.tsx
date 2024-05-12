@@ -80,7 +80,7 @@ export function StatusUpdateForm() {
               variant={'default'}
               type='submit'
               disabled={isLoading}
-              className='rounded-r-none'
+              className='rounded-r-none px-6'
             >
               {isLoading && (
                 <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
@@ -89,10 +89,7 @@ export function StatusUpdateForm() {
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  className='rounded-l-none rounded-r-md'
-                  variant='outline'
-                >
+                <Button className='rounded-l-none px-2' variant='outline'>
                   <ChevronDownIcon className='h-4 w-4' />
                 </Button>
               </DropdownMenuTrigger>

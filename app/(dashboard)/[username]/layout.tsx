@@ -69,10 +69,10 @@ export default async function UsernameLayout({
       ) : (
         <div className='aspect-square h-64 w-full object-cover'></div>
       )}
-      <div className='container flex flex-row items-end justify-between px-5 py-2'>
+      <div className='container flex -translate-y-1/2 flex-row items-end justify-between px-5 py-2'>
         <div className='w-1/3'></div>
         <div className='flex w-1/3 items-center justify-center'>
-          <Avatar className='h-28 w-28 border-2 lg:h-36 lg:w-36'>
+          <Avatar className='h-28 w-28  border-2 lg:h-36 lg:w-36'>
             <AvatarImage
               alt='user avatar'
               src={userProfile.avatar_url as string}
@@ -102,7 +102,7 @@ export default async function UsernameLayout({
           )}
         </div>
       </div>
-      <div className='container mx-auto flex flex-col items-center gap-1'>
+      <div className='container mx-auto flex -translate-y-14 flex-col items-center gap-1'>
         <div className='flex flex-col items-center'>
           <h2 className='text-lg font-bold'>{userProfile.name}</h2>
           <div className='flex gap-x-2 text-sm font-semibold'>
