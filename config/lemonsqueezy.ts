@@ -20,7 +20,6 @@ export function configureLemonSqueezy() {
     );
   }
 
-  console.log('test');
   lemonSqueezySetup({
     apiKey: process.env.LEMONSQUEEZY_API_KEY,
     onError: (error) => {

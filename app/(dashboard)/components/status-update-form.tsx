@@ -14,7 +14,6 @@ import { ChevronDownIcon, ImageIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { postStatusUpdate } from '../[username]/actions';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +21,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
+import { postUserPost } from '@/lib/actions/user-posts';
 
 const statusUpdateSchema = z.object({
-  status: z.string().min(2, {
+  content: z.string().min(2, {
     message: 'Status must be at least 2 characters.',
   }),
 });
@@ -36,14 +36,14 @@ export function StatusUpdateForm() {
   const form = useForm<statusUpdateSchema>({
     resolver: zodResolver(statusUpdateSchema),
     defaultValues: {
-      status: '',
+      content: '',
     },
   });
 
   function onSubmit(values: statusUpdateSchema) {
     setIsLoading(true);
     try {
-      postStatusUpdate(values);
+      postUserPost({ content: values.content });
     } catch (error) {
       console.log(error);
     } finally {
@@ -56,7 +56,7 @@ export function StatusUpdateForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className='flex-1'>
         <FormField
           control={form.control}
-          name='status'
+          name='content'
           render={({ field }) => (
             <FormItem>
               <FormControl>

@@ -33,6 +33,7 @@ import {
 } from './actions';
 import { ProfileEdit } from './components/profile-edit';
 import { UserFollowButton } from './components/user-follow-button/user-follow-button';
+import DonateButton from './components/donate-button/donate-button';
 
 interface UsernameLayoutProps {
   params: {
@@ -93,7 +94,7 @@ export default async function UsernameLayout({
             </>
           ) : (
             <>
-              <Button>Donate</Button>
+              <DonateButton />
               <UserFollowButton
                 userId={userProfile.id}
                 hasFollowed={userProfile.has_followed}

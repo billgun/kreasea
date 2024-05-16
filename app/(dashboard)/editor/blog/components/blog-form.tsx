@@ -30,6 +30,11 @@ import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 import FilePondPluginImageEdit from 'filepond-plugin-image-edit';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { useState } from 'react';
+import { Icons } from '@/components/icons';
+import { postUserPost } from '@/lib/actions/user-posts';
+import { FilePondFile } from 'filepond';
+import { uploadToBucket } from '@/lib/actions/bucket';
+import { USER_POSTS_BUCKET } from '@/types/bucket';
 
 // Register the plugins
 registerPlugin(
@@ -42,30 +47,61 @@ registerPlugin(
   FilePondPluginImageEdit
 );
 
-const formSchema = z.object({
+const blogSchema = z.object({
   title: z.string().min(2, {
     message: 'Title must be at least 2 characters.',
   }),
   content: z.string().min(2, {
     message: 'Content must be at least 2 characters.',
   }),
+  featuredImage: z
+    .instanceof(File)
+    .optional()
+    .refine((file) => file === undefined || file instanceof File, {
+      message: 'Featured Image must be an instance of FilePondFile.',
+    }),
 });
 
-export default function BlogForm() {
-  const [files, setFiles] = useState([]);
+export type blogSchema = z.infer<typeof blogSchema>;
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export default function BlogForm() {
+  const [error, setError] = useState('');
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [files, setFiles] = useState<FilePondFile[]>([]);
+
+  const form = useForm<z.infer<typeof blogSchema>>({
+    resolver: zodResolver(blogSchema),
     defaultValues: {
       title: '',
       content: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  async function onSubmit(values: blogSchema) {
+    setIsLoading(true);
+    try {
+      let postData = {
+        title: values.title,
+        content: values.content,
+        imageUrl: '',
+      };
+      if (files.length > 0) {
+        const { path } = await uploadToBucket({
+          bucket: USER_POSTS_BUCKET,
+          file: files[0].file as File,
+        });
+        postData.imageUrl = path;
+      }
 
+      postUserPost(postData);
+    } catch (error) {
+      console.log('Error :', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
@@ -101,7 +137,12 @@ export default function BlogForm() {
                 </FormItem>
               )}
             />
-            <Button type='submit'>Submit</Button>
+            <Button type='submit' disabled={isLoading}>
+              {isLoading && (
+                <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+              )}
+              Submit
+            </Button>
           </div>
           <div className='col-span-4 bg-card px-4'>
             <FormLabel>Featured Image</FormLabel>
@@ -109,9 +150,9 @@ export default function BlogForm() {
               files={files}
               onupdatefiles={setFiles}
               maxFiles={1}
-              name='featuredImage'
               labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
               credits={false}
+              acceptedFileTypes={'image/*'}
             />
           </div>
         </div>

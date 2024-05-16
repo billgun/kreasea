@@ -32,33 +32,6 @@ export async function postUserSocialMedia(socialMediaData: socialLinksSchema) {
   }
 }
 
-export async function postStatusUpdate(statusUpdate: statusUpdateSchema) {
-  const supabase = createClient();
-  try {
-    const {
-      data: { user },
-      error: errorAuth,
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      throw errorAuth;
-    }
-
-    const statusUpdateWithUserId = {
-      content: statusUpdate.status,
-      user_id: user.id,
-    };
-
-    const { data, error } = await supabase
-      .from('user_posts')
-      .insert(statusUpdateWithUserId);
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-}
-
 export async function getPosts() {
   'use server';
   const supabase = createClient();

@@ -14,6 +14,7 @@ export function formatDate(input: string | number): string {
     year: 'numeric',
   });
 }
+
 export function formatPostDate(date: string): string {
   if (new Date(date).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)) {
     const array = formatDistanceToNowStrict(new Date(date)).split(' ');
