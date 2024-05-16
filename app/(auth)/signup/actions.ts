@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { SignUpWithPasswordCredentials } from '@supabase/supabase-js';
+import { redirect } from 'next/navigation';
 
 export async function signUp(credentials: SignUpWithPasswordCredentials) {
   const supabase = createClient();
@@ -9,16 +10,16 @@ export async function signUp(credentials: SignUpWithPasswordCredentials) {
   return { data, error };
 }
 
-export async function signUpWithGoogle() {
+export async function signInWithGoogle() {
   const supabase = createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback` },
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+    },
   });
 
-  if (!data.url) {
-    throw error;
+  if (data.url) {
+    redirect(data.url); // use the redirect API for your server framework
   }
-
-  // redirect(data.url);
 }

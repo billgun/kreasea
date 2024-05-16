@@ -3,6 +3,7 @@
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/lib/supabase/client';
+import { signInWithGoogle } from '../signup/actions';
 
 export function GoogleButton() {
   const supabase = createClient();
@@ -10,14 +11,7 @@ export function GoogleButton() {
     <Button
       variant={'secondary'}
       className='w-full font-semibold'
-      onClick={async () =>
-        await supabase.auth.signInWithOAuth({
-          provider: 'google',
-          options: {
-            redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
-          },
-        })
-      }
+      onClick={async () => await signInWithGoogle()}
     >
       <>
         <Icons.google className='mr-2 h-4 w-4' />

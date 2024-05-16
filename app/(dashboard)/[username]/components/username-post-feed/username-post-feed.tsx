@@ -95,7 +95,10 @@ export function UsernamePostFeed({
           </ProfilePostHeader>
           <ProfilePostContent>
             <p className='font-medium'>{post?.title || ''}</p>
-            <p>{post.content}</p>
+            <div
+              className='prose'
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            ></div>
             <div className='flex items-center justify-start gap-x-8'>
               <PostLikeButton
                 postId={post.id}
