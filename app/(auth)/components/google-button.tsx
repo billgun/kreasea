@@ -3,12 +3,8 @@
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/lib/supabase/client';
-import { signUpWithGoogle } from '../signup/actions';
 
 export function GoogleButton() {
-  async function onClickGoogle() {
-    await signUpWithGoogle();
-  }
   const supabase = createClient();
   return (
     <Button
@@ -18,11 +14,7 @@ export function GoogleButton() {
         await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
-            redirectTo: `${location.origin}/auth/callback?provider=google`,
-            queryParams: {
-              access_type: 'offline',
-              prompt: 'consent',
-            },
+            redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
           },
         })
       }
