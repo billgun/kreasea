@@ -8,4 +8,5 @@ export interface Post {
   username: string;
   name: string;
   avatar_url: string | null;
+  image_url: string | null;
 }

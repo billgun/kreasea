@@ -38,7 +38,7 @@ const Editor = ({ name, control, content }: EditorProps) => {
     editorProps: {
       attributes: {
         class:
-          'prose prose-p:m-0 prose-h1:my-2 prose-h2:my-2 prose-h3:my-2 prose-h4:my-2 prose-h5:my-2 prose-h6:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:m-0  prose-hr:m-4 min-h-[80px] max-w-full w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          'prose prose-p:m-0 prose-h1:my-2 prose-h2:my-2 prose-h3:my-2 prose-h4:my-2 prose-h5:my-2 prose-h6:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:m-0 prose-hr:m-4 min-h-[80px] max-w-full w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
       },
     },
     onUpdate: ({ editor }) => {

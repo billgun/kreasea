@@ -2,11 +2,9 @@
 
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
-import { createClient } from '@/lib/supabase/client';
 import { signInWithGoogle } from '../signup/actions';
 
 export function GoogleButton() {
-  const supabase = createClient();
   return (
     <Button
       variant={'secondary'}

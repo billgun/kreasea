@@ -1,6 +1,54 @@
 import { createClient } from '@/lib/supabase/server';
 import { Post } from '@/types/app';
 import { redirect } from 'next/navigation';
+import { JwtPayload, Secret, verify } from 'jsonwebtoken';
+
+//TODO: change it into 1 function with paramater
+export async function getSession() {
+  const supabase = createClient();
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      const jwt = verify(
+        session.access_token,
+        process.env.SUPABASE_JWT_SECRET as string
+      ) as JwtPayload;
+
+      return jwt;
+    }
+
+    return null;
+  } catch (error) {
+    console.error('JWT Error:', error);
+    throw error;
+  }
+}
+
+export async function getSessionStrict() {
+  const supabase = createClient();
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      const jwt = verify(
+        session.access_token,
+        process.env.SUPABASE_JWT_SECRET as string
+      ) as JwtPayload;
+
+      return jwt;
+    }
+
+    throw new Error('Unauthorized');
+  } catch (error) {
+    console.error('JWT Error:', error);
+    throw error;
+  }
+}
 
 export async function getUser() {
   const supabase = createClient();
@@ -19,31 +67,15 @@ export async function getUser() {
   }
 }
 
-export async function getUserNonStrict() {
-  const supabase = createClient();
-  try {
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-    if (error) {
-      return null;
-    }
-    return user;
-  } catch (error) {
-    throw error;
-  }
-}
-
 export async function getUserProfile() {
   const supabase = createClient();
   try {
-    const user = await getUser();
+    const user = await getSessionStrict();
 
     const { data, error } = await supabase
       .from('user_profiles')
       .select('username, name, avatar_url, is_creator')
-      .eq('id', user.id)
+      .eq('id', user.sub as string)
       .single();
 
     if (!data) {

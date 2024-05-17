@@ -1,4 +1,4 @@
-import { getUserNonStrict } from '@/lib/auth';
+import { getSession } from '@/lib/auth';
 import { MobileNav } from './components/mobile-nav';
 import { Sidebar } from './components/sidebar';
 import { cn } from '@/lib/utils';
@@ -13,11 +13,11 @@ interface DashboardPageLayoutProps {
 export default async function DashboardPageLayout({
   children,
 }: DashboardPageLayoutProps) {
-  const user = await getUserNonStrict();
+  const session = await getSession();
 
   return (
     <div className='relative flex min-h-screen flex-col bg-background'>
-      {user ? (
+      {session ? (
         <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:hidden'>
           <div className='container flex h-14 max-w-screen-2xl items-center'>
             <MobileNav />
@@ -45,11 +45,11 @@ export default async function DashboardPageLayout({
       )}
       <div className='bg-background'>
         <div className='grid grid-cols-6 '>
-          {user ? <Sidebar className={cn(`hidden lg:block`)} /> : <></>}
+          {session ? <Sidebar className={cn(`hidden lg:block`)} /> : <></>}
           <div
             className={cn(
               `flex lg:border-l`,
-              user ? `col-span-6 lg:col-span-5` : `col-span-6`
+              session ? `col-span-6 lg:col-span-5` : `col-span-6`
             )}
           >
             <main className='flex-1'>{children}</main>

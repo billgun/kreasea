@@ -6,6 +6,18 @@ interface UploadToBucketProps {
   file: File;
 }
 
+export function getPublicFileUrl({
+  bucket,
+  filename,
+}: {
+  bucket: string;
+  filename: string;
+}) {
+  const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${filename}`;
+  console.log(url);
+  return url;
+}
+
 export async function uploadToBucket({ bucket, file }: UploadToBucketProps) {
   const supabase = createClient();
   try {

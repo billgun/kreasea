@@ -87,16 +87,15 @@ export default function BlogForm() {
       let postData = {
         title: values.title,
         content: values.content,
-        imageUrl: '',
+        image_url: '',
       };
       if (files.length > 0) {
         const { path } = await uploadToBucket({
           bucket: USER_POSTS_BUCKET,
           file: files[0].file as File,
         });
-        postData.imageUrl = path;
+        postData.image_url = path;
       }
-
       postUserPost(postData);
     } catch (error) {
       console.log('Error :', error);

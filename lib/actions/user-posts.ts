@@ -6,19 +6,19 @@ import { uploadToBucket } from './bucket';
 export interface BlogPostProps {
   title?: string;
   content: string;
-  imageUrl?: string;
+  image_url?: string;
 }
 
 export async function postUserPost({
   title,
   content,
-  imageUrl,
+  image_url,
 }: BlogPostProps) {
   const supabase = createClient();
   try {
     const { data, error } = await supabase
       .from('user_posts')
-      .insert({ title, content, imageUrl });
+      .insert({ title, content, image_url });
 
     if (error) {
       throw new Error(error.message); // Throwing the error message as a string

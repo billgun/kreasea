@@ -26,6 +26,9 @@ import { useState } from 'react';
 import PostLikeButton from '../post-like-button/post-like-button';
 import { ProfilePostContent, ProfilePostHeader } from '../profile-post';
 import { deletePost } from './actions';
+import Image from 'next/image';
+import { USER_POSTS_BUCKET } from '@/types/bucket';
+import { getPublicFileUrl } from '@/lib/actions/bucket';
 
 interface UsernamePostFeedProps {
   sessionUsername: string;
@@ -95,8 +98,20 @@ export function UsernamePostFeed({
           </ProfilePostHeader>
           <ProfilePostContent>
             <p className='font-medium'>{post?.title || ''}</p>
+            <p>{post?.image_url}</p>
+            {post.image_url && (
+              <Image
+                src={getPublicFileUrl({
+                  bucket: USER_POSTS_BUCKET,
+                  filename: post.image_url,
+                })}
+                width={600}
+                height={600}
+                alt='Image post'
+              />
+            )}
             <div
-              className='prose'
+              className='prose prose-h1:my-2 prose-h2:my-2 prose-h3:my-2 prose-h4:my-2 prose-h5:my-2 prose-h6:my-2 prose-p:m-0 prose-ol:my-2 prose-ul:my-2 prose-li:m-0 prose-hr:m-4'
               dangerouslySetInnerHTML={{ __html: post.content }}
             ></div>
             <div className='flex items-center justify-start gap-x-8'>
