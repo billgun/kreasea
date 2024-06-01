@@ -35,8 +35,6 @@ interface UsernamePostFeedProps {
   posts: Post[];
 }
 
-export const revalidate = 0;
-
 export function UsernamePostFeed({
   sessionUsername,
   posts,
@@ -96,24 +94,24 @@ export function UsernamePostFeed({
               </DropdownMenuContent>
             </DropdownMenu>
           </ProfilePostHeader>
-          <ProfilePostContent>
-            <p className='font-medium'>{post?.title || ''}</p>
-            <p>{post?.image_url}</p>
-            {post.image_url && (
-              <Image
-                src={getPublicFileUrl({
-                  bucket: USER_POSTS_BUCKET,
-                  filename: post.image_url,
-                })}
-                width={600}
-                height={600}
-                alt='Image post'
-              />
-            )}
-            <div
-              className='prose prose-h1:my-2 prose-h2:my-2 prose-h3:my-2 prose-h4:my-2 prose-h5:my-2 prose-h6:my-2 prose-p:m-0 prose-ol:my-2 prose-ul:my-2 prose-li:m-0 prose-hr:m-4'
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            ></div>
+          <ProfilePostContent className='cursor-pointer'>
+            <Link href={`/posts/${post.id}`}>
+              <p className='font-medium'>{post?.title || ''}</p>
+              {post.image_url && (
+                <div className='relative h-48 w-full'>
+                  <Image
+                    src={getPublicFileUrl({
+                      bucket: USER_POSTS_BUCKET,
+                      filename: post.image_url,
+                    })}
+                    fill
+                    className='object-contain'
+                    alt='Image post'
+                  />
+                </div>
+              )}
+              <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+            </Link>
             <div className='flex items-center justify-start gap-x-8'>
               <PostLikeButton
                 postId={post.id}

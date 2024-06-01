@@ -6,11 +6,9 @@ import { redirect } from 'next/navigation';
 export async function postUserFollow({ userId }: { userId: string }) {
   const supabase = createClient();
   try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const { data } = await supabase.auth.getSession();
 
-    if (!user) {
+    if (!data) {
       redirect('/login');
     }
 
@@ -24,11 +22,9 @@ export async function postUserFollow({ userId }: { userId: string }) {
 export async function deleteUserFollow({ userId }: { userId: string }) {
   const supabase = createClient();
   try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const { data } = await supabase.auth.getSession();
 
-    if (!user) {
+    if (!data) {
       redirect('/login');
     }
 

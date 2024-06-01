@@ -18,7 +18,8 @@ export default function PostLikeButton({
   const [likes, setLikes] = useState(postLikes);
   const [isLiked, setIsLiked] = useState(postIsLiked);
 
-  const onClickLike = () => {
+  const onClickLike = (event: React.MouseEvent<HTMLDivElement>) => {
+    event?.stopPropagation();
     if (isLiked) {
       deletePostLike({ postId });
       setLikes(likes - 1); // Decrease likes if already liked
@@ -32,7 +33,7 @@ export default function PostLikeButton({
   return (
     <div
       className='flex cursor-pointer flex-row items-center gap-x-2'
-      onClick={onClickLike}
+      onClick={(event) => onClickLike(event)}
     >
       <HeartIcon
         className={cn(

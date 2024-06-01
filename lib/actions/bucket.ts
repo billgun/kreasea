@@ -14,7 +14,6 @@ export function getPublicFileUrl({
   filename: string;
 }) {
   const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${filename}`;
-  console.log(url);
   return url;
 }
 

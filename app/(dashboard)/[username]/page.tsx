@@ -8,10 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  getUserPostsByUsername,
-  getUserProfileNonStrict,
-} from '@/lib/auth';
+import { getUserPostsByUsername, getUserProfileNonStrict } from '@/lib/auth';
 import { UsernamePostFeed } from './components/username-post-feed/username-post-feed';
 
 interface UsernamePageProps {
@@ -26,23 +23,23 @@ export default async function UsernamePage({ params }: UsernamePageProps) {
   return (
     <div className='grid w-full grid-cols-2 gap-4'>
       <div className='col-span-1 flex flex-col pb-8'>
-        {posts.length > 0 ? 
-        <UsernamePostFeed
-          posts={posts}
-          sessionUsername={user ? user.username : ''}
-        />
-        :
-        <div className='flex min-h-[30vh] flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm'>
-        <div className='flex flex-col items-center gap-1 p-12 py-20 text-center'>
-          <h3 className='text-2xl font-bold tracking-tight'>
-            Belum ada postingan nih
-          </h3>
-          <p className='text-sm text-muted-foreground'>
-            Yuk ikuti dan dapatkan update terkini!
-          </p>
-        </div>
-      </div>
-        }
+        {posts.length > 0 ? (
+          <UsernamePostFeed
+            posts={posts}
+            sessionUsername={user ? user.username : ''}
+          />
+        ) : (
+          <div className='flex min-h-[30vh] flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm'>
+            <div className='flex flex-col items-center gap-1 p-12 py-20 text-center'>
+              <h3 className='text-2xl font-bold tracking-tight'>
+                Belum ada postingan nih
+              </h3>
+              <p className='text-sm text-muted-foreground'>
+                Yuk ikuti dan dapatkan update terkini!
+              </p>
+            </div>
+          </div>
+        )}
       </div>
       <div className='col-span-1'>
         <Card>
