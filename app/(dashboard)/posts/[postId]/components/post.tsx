@@ -12,9 +12,9 @@ import Image from 'next/image';
 
 export function Post({ post }: { post: Tables<'user_posts'> }) {
   return (
-    <Card>
-      <CardHeader className='py-3'>
-        <CardTitle>{post.title}</CardTitle>
+    <Card className='py-4'>
+      <CardHeader className='py-4'>
+        <CardTitle className='text-4xl'>{post.title}</CardTitle>
       </CardHeader>
       <CardContent>
         {post.image_url && (

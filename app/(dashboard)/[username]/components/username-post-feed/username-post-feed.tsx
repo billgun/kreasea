@@ -110,7 +110,10 @@ export function UsernamePostFeed({
                   />
                 </div>
               )}
-              <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+              <div
+                className='line-clamp-2'
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
             </Link>
             <div className='flex items-center justify-start gap-x-8'>
               <PostLikeButton
