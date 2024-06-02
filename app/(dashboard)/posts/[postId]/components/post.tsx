@@ -1,3 +1,5 @@
+import PostLikeButton from '@/app/(dashboard)/[username]/components/post-like-button/post-like-button';
+import { ShareToSocial } from '@/components/share-to-social';
 import {
   Card,
   CardContent,
@@ -6,11 +8,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { getPublicFileUrl } from '@/lib/actions/bucket';
+import { Post as PostType } from '@/types/app';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
-import { Tables } from '@/types/database';
 import Image from 'next/image';
 
-export function Post({ post }: { post: Tables<'user_posts'> }) {
+export function Post({ post }: { post: PostType }) {
   return (
     <Card className='py-4'>
       <CardHeader className='py-4'>
@@ -36,7 +38,14 @@ export function Post({ post }: { post: Tables<'user_posts'> }) {
         />
       </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <div className='flex items-center justify-start gap-x-8'>
+          <PostLikeButton
+            postId={post.id}
+            postLikes={post.like_count}
+            postIsLiked={post.is_liked}
+          />
+          <ShareToSocial />
+        </div>{' '}
       </CardFooter>
     </Card>
   );

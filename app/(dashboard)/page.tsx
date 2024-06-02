@@ -25,7 +25,7 @@ export default async function DashboardPage() {
   const posts = await getUserPostsBySessionAndFollowing();
 
   return (
-    <div className='container grid grid-cols-3 px-4 py-6 lg:px-8'>
+    <div className='container grid grid-cols-3 py-6'>
       <Tabs
         defaultValue='following'
         className='col-span-3 w-full lg:col-span-2'

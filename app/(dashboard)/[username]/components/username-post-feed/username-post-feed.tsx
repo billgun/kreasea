@@ -29,6 +29,7 @@ import { deletePost } from './actions';
 import Image from 'next/image';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
 import { getPublicFileUrl } from '@/lib/actions/bucket';
+import { ShareToSocial } from '@/components/share-to-social';
 
 interface UsernamePostFeedProps {
   sessionUsername: string;
@@ -122,27 +123,7 @@ export function UsernamePostFeed({
                 postIsLiked={post.is_liked}
               />
               <MessageCircleIcon className='h-5 w-5 fill-muted-foreground stroke-none' />
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <ShareIcon className='h-5 w-5 stroke-muted-foreground' />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Share this post</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <LinkIcon className='mr-2 h-4 w-4' />
-                    Copy link
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Icons.twitter className='mr-2 h-4 w-4 fill-current' />
-                    Share on X
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <FacebookIcon className='mr-2 h-4 w-4' />
-                    Share on Facebook
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ShareToSocial />
             </div>
           </ProfilePostContent>
         </div>
