@@ -22,8 +22,10 @@ export async function getPostByPostId({ postId }: { postId: string }) {
 
 export async function getRecentPostByUsername({
   username,
+  postId,
 }: {
   username: string;
+  postId: string;
 }) {
   const supabase = createClient();
   try {
@@ -32,6 +34,7 @@ export async function getRecentPostByUsername({
       .select(`*`)
       .eq('username', username)
       .neq('title', '')
+      .neq('id', postId)
       .limit(5)
       .order('created_at', { ascending: false })
       .returns<Post[]>();

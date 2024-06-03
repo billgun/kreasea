@@ -6,12 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { ImageWithFallback } from '@/components/ui/image-with-fallback';
 import { getPublicFileUrl } from '@/lib/actions/bucket';
 import { cn, formatPostDate } from '@/lib/utils';
 import { Post } from '@/types/app';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
+import Image from 'next/image';
 import Link from 'next/link';
+import fallbackImage from '@/public/fallback.jpg';
 
 export function RecentPost({ recentPost }: { recentPost: Post[] }) {
   return (
@@ -23,6 +24,12 @@ export function RecentPost({ recentPost }: { recentPost: Post[] }) {
       </CardHeader>
       <CardContent>
         {recentPost.map((post) => {
+          let image =
+            getPublicFileUrl({
+              bucket: USER_POSTS_BUCKET,
+              filename: post.image_url,
+            }) || fallbackImage;
+
           return (
             <Link href={`/posts/${post.id}`} key={post.id}>
               <div
@@ -31,15 +38,8 @@ export function RecentPost({ recentPost }: { recentPost: Post[] }) {
                   'flex w-full cursor-pointer justify-start gap-x-4 whitespace-normal py-8'
                 )}
               >
-                <ImageWithFallback
-                  src={getPublicFileUrl({
-                    bucket: USER_POSTS_BUCKET,
-                    filename: post.image_url as string,
-                  })}
-                  alt='image'
-                  width={50}
-                  height={50}
-                />
+                <Image src={image} alt='image' width={50} height={50} />
+
                 <div className='flex w-full flex-col'>
                   <div className='line-clamp-1'>{post.title}</div>
                   <div
@@ -52,9 +52,6 @@ export function RecentPost({ recentPost }: { recentPost: Post[] }) {
           );
         })}
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   );
 }

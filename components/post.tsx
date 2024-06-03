@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-const ProfilePostHeader = React.forwardRef<
+const PostHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -12,9 +12,9 @@ const ProfilePostHeader = React.forwardRef<
     {...props}
   />
 ));
-ProfilePostHeader.displayName = 'ProfilePostHeader';
+PostHeader.displayName = 'PostHeader';
 
-const ProfilePostContent = React.forwardRef<
+const PostContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -27,6 +27,6 @@ const ProfilePostContent = React.forwardRef<
     {...props}
   />
 ));
-ProfilePostContent.displayName = 'ProfilePostContent';
+PostContent.displayName = 'PostContent';
 
-export { ProfilePostContent, ProfilePostHeader };
+export { PostContent, PostHeader };

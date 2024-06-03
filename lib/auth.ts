@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { Post } from '@/types/app';
+import { PostType } from '@/types/app';
 import { redirect } from 'next/navigation';
 import { JwtPayload, Secret, verify } from 'jsonwebtoken';
 
@@ -17,6 +17,7 @@ export async function getSession() {
         process.env.SUPABASE_JWT_SECRET as string
       ) as JwtPayload;
 
+      console.log(jwt);
       return jwt;
     }
 
@@ -91,17 +92,12 @@ export async function getUserProfile() {
 export async function getUserProfileNonStrict() {
   const supabase = createClient();
   try {
-    const {
-      data: { user },
-      error: errorAuth,
-    } = await supabase.auth.getUser();
-    if (!user || errorAuth) {
-      return null;
-    }
+    const user = await getSessionStrict();
+
     const { data, error } = await supabase
       .from('user_profiles')
       .select('username, name, avatar_url')
-      .eq('id', user.id)
+      .eq('id', user.sub as string)
       .single();
 
     if (!data) {
@@ -160,7 +156,7 @@ export async function getUserPostsByUsername({
       .select(`*`)
       .eq('username', username)
       .order('created_at', { ascending: false })
-      .returns<Post[]>();
+      .returns<PostType[]>();
 
     if (!data) {
       throw error;
@@ -179,7 +175,7 @@ export async function getUserPostsBySessionAndFollowing() {
       .from('user_home_feed')
       .select(`*`)
       .order('created_at', { ascending: false })
-      .returns<Post[]>();
+      .returns<PostType[]>();
 
     if (!data) {
       throw error;
