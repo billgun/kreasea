@@ -30,6 +30,7 @@ import Image from 'next/image';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
 import { getPublicFileUrl } from '@/lib/actions/bucket';
 import { ShareToSocial } from '@/components/share-to-social';
+import { ImageWithFallback } from '@/components/ui/image-with-fallback';
 
 interface UsernamePostFeedProps {
   sessionUsername: string;
@@ -100,7 +101,7 @@ export function UsernamePostFeed({
               <p className='font-medium'>{post?.title || ''}</p>
               {post.image_url && (
                 <div className='relative h-48 w-full'>
-                  <Image
+                  <ImageWithFallback
                     src={getPublicFileUrl({
                       bucket: USER_POSTS_BUCKET,
                       filename: post.image_url,

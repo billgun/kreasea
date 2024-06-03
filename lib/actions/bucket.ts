@@ -13,6 +13,7 @@ export function getPublicFileUrl({
   bucket: string;
   filename: string;
 }) {
+  if (!filename) return '';
   const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${filename}`;
   return url;
 }

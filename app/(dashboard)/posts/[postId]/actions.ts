@@ -19,3 +19,29 @@ export async function getPostByPostId({ postId }: { postId: string }) {
     throw error;
   }
 }
+
+export async function getRecentPostByUsername({
+  username,
+}: {
+  username: string;
+}) {
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase
+      .from('user_posts_feed')
+      .select(`*`)
+      .eq('username', username)
+      .neq('title', '')
+      .limit(5)
+      .order('created_at', { ascending: false })
+      .returns<Post[]>();
+
+    if (!data) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}

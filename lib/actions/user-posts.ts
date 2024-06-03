@@ -1,7 +1,6 @@
 'use server';
 
 import { createClient } from '../supabase/server';
-import { uploadToBucket } from './bucket';
 
 export interface BlogPostProps {
   title?: string;
@@ -21,7 +20,7 @@ export async function postUserPost({
       .insert({ title, content, image_url });
 
     if (error) {
-      throw new Error(error.message); // Throwing the error message as a string
+      throw new Error(error.message);
     }
 
     return data;
