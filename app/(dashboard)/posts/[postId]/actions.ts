@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { Post } from '@/types/app';
+import { PostType } from '@/types/app';
 
 export async function getPostByPostId({ postId }: { postId: string }) {
   const supabase = createClient();
@@ -8,7 +8,7 @@ export async function getPostByPostId({ postId }: { postId: string }) {
       .from('user_posts_feed')
       .select(`*`)
       .eq('id', postId)
-      .single<Post>();
+      .single<PostType>();
 
     if (!data) {
       throw error;
@@ -37,7 +37,7 @@ export async function getRecentPostByUsername({
       .neq('id', postId)
       .limit(5)
       .order('created_at', { ascending: false })
-      .returns<Post[]>();
+      .returns<PostType[]>();
 
     if (!data) {
       throw error;

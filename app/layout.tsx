@@ -129,7 +129,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             // enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div vaul-drawer-wrapper=''>{children}</div>
             <Toaster />
             <TailwindIndicator />
             <Analytics />

@@ -17,7 +17,6 @@ export async function getSession() {
         process.env.SUPABASE_JWT_SECRET as string
       ) as JwtPayload;
 
-      console.log(jwt);
       return jwt;
     }
 
