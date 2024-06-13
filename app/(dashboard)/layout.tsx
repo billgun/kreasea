@@ -44,7 +44,7 @@ export default async function DashboardPageLayout({
         </header>
       )}
       <div className='bg-background'>
-        <div className='grid grid-cols-6 '>
+        <div className='grid grid-cols-6'>
           {session ? <Sidebar className={cn(`hidden lg:block`)} /> : <></>}
           <div
             className={cn(

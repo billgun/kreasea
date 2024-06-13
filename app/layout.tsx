@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     'trakteer gratis',
     'karyakarsa',
     'sociabuzz',
+    'creator platform',
+    'indonesia creator',
+    'creator support',
   ],
   authors: [
     {

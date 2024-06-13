@@ -52,7 +52,10 @@ export default function DonateButton({}: DonateButtonProps) {
     console.log('onSubmit');
     setIsLoading(true);
 
-    const { invoiceUrl } = await createInvoice();
+    const { invoiceUrl } = await createInvoice({
+      amount: formData.amount,
+      description: formData.message || '',
+    });
 
     console.log(invoiceUrl);
     setIsLoading(false);

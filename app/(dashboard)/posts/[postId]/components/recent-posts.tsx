@@ -8,13 +8,13 @@ import {
 } from '@/components/ui/card';
 import { getPublicFileUrl } from '@/lib/actions/bucket';
 import { cn, formatPostDate } from '@/lib/utils';
-import { Post } from '@/types/app';
+import { PostType } from '@/types/app';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
 import Image from 'next/image';
 import Link from 'next/link';
 import fallbackImage from '@/public/fallback.jpg';
 
-export function RecentPost({ recentPost }: { recentPost: Post[] }) {
+export function RecentPost({ recentPost }: { recentPost: PostType[] }) {
   return (
     <Card>
       <CardHeader className='py-3'>

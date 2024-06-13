@@ -9,15 +9,19 @@ const xenditClient = new Xendit({
   secretKey: process.env.XENDIT_SECRET_KEY!,
 });
 
-const createInvoice = async () => {
-  console.log('create invoice');
+type InvoiceProps = {
+  amount: number;
+  description: string;
+};
+
+const createInvoice = async ({ amount, description }: InvoiceProps) => {
   const { Invoice } = xenditClient;
 
   const data: CreateInvoiceRequest = {
-    amount: 10000,
+    amount: amount,
     invoiceDuration: '172800',
     externalId: 'test1234',
-    description: 'Test Invoice',
+    description: description,
     currency: 'IDR',
     reminderTime: 1,
   };
