@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signIn } from './actions';
+import { createClient } from '@/lib/supabase/client';
 
 const loginFormSchema = z.object({
   email: z
@@ -34,7 +35,7 @@ const loginFormSchema = z.object({
   rememberMe: z.boolean().optional(),
 });
 
-type LoginFormValues = z.infer<typeof loginFormSchema>;
+export type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 const defaultValues: Partial<LoginFormValues> = {
   email: '',
@@ -53,7 +54,8 @@ export default function LoginForm() {
   async function onSubmit(formData: LoginFormValues) {
     setIsLoading(true);
 
-    const { error } = await signIn({
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });

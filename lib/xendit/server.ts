@@ -1,5 +1,6 @@
 'use server';
-import { Invoice, Xendit } from 'xendit-node';
+import { v4 as uuidv4 } from 'uuid';
+import { Xendit } from 'xendit-node';
 import {
   CreateInvoiceRequest,
   Invoice as InvoiceType,
@@ -20,7 +21,7 @@ const createInvoice = async ({ amount, description }: InvoiceProps) => {
   const data: CreateInvoiceRequest = {
     amount: amount,
     invoiceDuration: '172800',
-    externalId: 'test1234',
+    externalId: uuidv4(),
     description: description,
     currency: 'IDR',
     reminderTime: 1,

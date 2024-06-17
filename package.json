@@ -6,7 +6,8 @@
     "start": "next start",
     "format": "prettier --check --ignore-path .gitignore .",
     "prettier": "prettier --write --ignore-path .gitignore .",
-    "supabase:db": "npx supabase gen types typescript --project-id mubdexekdfjhiwgkbdef --schema public > types/database.ts"
+    "supabase:db": "npx supabase gen types typescript --project-id mubdexekdfjhiwgkbdef --schema public > types/database.ts",
+    "localtunnel": "npx localtunnel --port 3000"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",

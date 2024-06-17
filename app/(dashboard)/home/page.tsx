@@ -1,12 +1,10 @@
 import { Button } from '@/components/ui/button';
 import {
-  PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from './components/page-header';
 import { Announcement } from './components/announcements';
-import { Input } from '@/components/ui/input';
 import { FAQ } from './components/faq';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
@@ -42,7 +40,7 @@ export default async function IndexPage() {
   return (
     <>
       <div className='relative mx-auto h-[92vh] w-full'>
-        <BackgroundSvg className='absolute left-0 top-0  z-0 hidden h-full w-full bg-center object-cover lg:block' />
+        <BackgroundSvg className='absolute left-0 top-0 z-0 hidden h-full w-full bg-center object-cover lg:block' />
         <BackgroundSvgMobile className='absolute left-0 top-0 z-0 h-full w-full bg-center object-cover lg:hidden' />
         <PageHeader className='relative z-10 space-y-4 bg-background/50 xl:pt-48'>
           <Announcement />
@@ -56,16 +54,14 @@ export default async function IndexPage() {
           <UsernameClaimForm />
         </PageHeader>
       </div>
-      <div className=' py-24 sm:py-32'>
+      <div className='py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl lg:text-center'>
-            <h2 className='text-base font-semibold leading-7 '>
-              Deploy faster
-            </h2>
-            <p className='mt-2 text-3xl font-bold tracking-tight  sm:text-4xl'>
+            <h2 className='text-base font-semibold leading-7'>Deploy faster</h2>
+            <p className='mt-2 text-3xl font-bold tracking-tight sm:text-4xl'>
               Everything you need to deploy your app
             </p>
-            <p className='mt-6 text-lg leading-8 '>
+            <p className='mt-6 text-lg leading-8'>
               Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
               Suspendisse eget egestas a elementum pulvinar et feugiat blandit
               at. In mi viverra elit nunc.
@@ -82,7 +78,7 @@ export default async function IndexPage() {
                     />
                     {feature.name}
                   </dt>
-                  <dd className='mt-4 flex flex-auto flex-col text-base leading-7 '>
+                  <dd className='mt-4 flex flex-auto flex-col text-base leading-7'>
                     <p className='flex-auto'>{feature.description}</p>
                   </dd>
                 </div>
@@ -104,7 +100,7 @@ export default async function IndexPage() {
         </PageHeader>
         <FAQ />
       </div>
-      <section className='w-full bg-secondary py-12  md:py-24 lg:py-32'>
+      <section className='w-full bg-secondary py-12 md:py-24 lg:py-32'>
         <div className='container px-4 md:px-6'>
           <div className='mx-auto max-w-2xl text-center'>
             <div className='space-y-3'>

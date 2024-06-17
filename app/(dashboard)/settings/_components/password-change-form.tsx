@@ -18,26 +18,32 @@ import {
   Form,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { passwordChange } from './actions';
+import { useRouter } from 'next/navigation';
 
-const passwordChangeSchema = z.object({
-  currentPassword: z.string().min(2, {
-    message: 'password must be at least 2 characters.',
-  }),
-  newPassword: z.string().min(2, {
-    message: 'password must be at least 2 characters.',
-  }),
-  newPasswordConfirmation: z.string().min(2, {
-    message: 'password must be at least 2 characters.',
-  }),
-});
+const passwordChangeSchema = z
+  .object({
+    currentPassword: z.string(),
+    newPassword: z.string().min(2, {
+      message: 'password must be at least 2 characters.',
+    }),
+    newPasswordConfirmation: z.string().min(2, {
+      message: 'password must be at least 2 characters.',
+    }),
+  })
+  .refine((data) => data.newPassword === data.newPasswordConfirmation, {
+    message: 'New password and confirmation must match',
+    path: ['newPasswordConfirmation'], // Error will be shown at the confirmation field
+  });
 
-type passwordChangeSchema = z.infer<typeof passwordChangeSchema>;
+export type passwordChangeSchema = z.infer<typeof passwordChangeSchema>;
 
 export default function PasswordChangeForm() {
+  const router = useRouter();
+
   const form = useForm<passwordChangeSchema>({
     resolver: zodResolver(passwordChangeSchema),
     defaultValues: {
@@ -47,7 +53,15 @@ export default function PasswordChangeForm() {
     },
   });
 
-  function onSubmit(values: passwordChangeSchema) {}
+  async function onSubmit(values: passwordChangeSchema) {
+    const { error } = await passwordChange(values);
+    if (error) {
+      form.setError('root', { message: error.message });
+      throw new Error('Could not authenticate user');
+    }
+
+    router.push('/');
+  }
 
   return (
     <Form {...form}>
@@ -61,6 +75,7 @@ export default function PasswordChangeForm() {
             </CardDescription>
           </CardHeader>
           <CardContent className='space-y-2'>
+            <FormMessage>{form.formState.errors.root?.message}</FormMessage>
             <FormField
               control={form.control}
               name='currentPassword'

@@ -190,14 +190,7 @@ export async function getUserPostsBySessionAndFollowing() {
 export async function getUserSocialLinks() {
   const supabase = createClient();
   try {
-    const {
-      data: { user },
-      error: errorAuth,
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      throw errorAuth;
-    }
+    const user = await getSession();
 
     const { data, error } = await supabase
       .from('user_social_links')

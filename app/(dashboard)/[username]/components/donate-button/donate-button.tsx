@@ -24,6 +24,7 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 
 const donateFormSchema = z.object({
   amount: z.number().min(10000, {
@@ -41,6 +42,7 @@ const defaultValues: Partial<DonateFormValues> = {
 
 interface DonateButtonProps {}
 export default function DonateButton({}: DonateButtonProps) {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<DonateFormValues>({
@@ -52,12 +54,15 @@ export default function DonateButton({}: DonateButtonProps) {
     console.log('onSubmit');
     setIsLoading(true);
 
+    console.log(formData);
+
     const { invoiceUrl } = await createInvoice({
       amount: formData.amount,
-      description: formData.message || '',
+      description: formData.message || 'Donate to Baskoro',
     });
 
     console.log(invoiceUrl);
+    router.push(invoiceUrl);
     setIsLoading(false);
     // if (error) {
     //   console.log(error.message);
