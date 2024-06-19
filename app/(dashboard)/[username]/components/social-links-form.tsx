@@ -11,7 +11,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
 import { Tables } from '@/types/database';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -131,7 +130,6 @@ export default function SocialLinksForm({
   userSocialLinks,
 }: SocialLinksFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
 
   // 1. Define your form.
   const form = useForm<socialLinksSchema>({
@@ -150,12 +148,7 @@ export default function SocialLinksForm({
   function onSubmit(values: socialLinksSchema) {
     setIsLoading(true);
     try {
-      postUserSocialMedia(values).then(() => {
-        toast({
-          title: '✅ Saved',
-          description: 'Your changes have been saved.',
-        });
-      });
+      postUserSocialMedia(values);
     } catch (error) {
       console.log(error);
     } finally {

@@ -41,6 +41,6 @@ export async function usernameChange({ username }: usernameChangeSchema) {
   if (!data) {
     return { error };
   }
-  revalidatePath('/explore', 'page');
+  revalidatePath('/explore');
   return { data };
 }

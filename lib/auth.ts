@@ -43,6 +43,7 @@ export async function getSessionStrict() {
       return jwt;
     }
 
+    redirect('/login');
     throw new Error('Unauthorized');
   } catch (error) {
     console.error('JWT Error:', error);

@@ -22,6 +22,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { usernameChange } from './actions';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const usernameChangeSchema = z.object({
   username: z.string().min(2, {
@@ -32,6 +34,8 @@ const usernameChangeSchema = z.object({
 export type usernameChangeSchema = z.infer<typeof usernameChangeSchema>;
 
 export default function UsernameChangeForm({ username }: { username: string }) {
+  const router = useRouter();
+
   const form = useForm<usernameChangeSchema>({
     resolver: zodResolver(usernameChangeSchema),
     defaultValues: {
@@ -45,6 +49,8 @@ export default function UsernameChangeForm({ username }: { username: string }) {
       form.setError('root', { message: error.message });
       throw new Error('Could not authenticate user');
     }
+    router.refresh();
+    toast.success('Username changed');
   }
 
   return (
@@ -74,7 +80,7 @@ export default function UsernameChangeForm({ username }: { username: string }) {
             />
           </CardContent>
           <CardFooter>
-            <Button type='submit'>Save password</Button>
+            <Button type='submit'>Save</Button>
           </CardFooter>
         </Card>
       </form>
