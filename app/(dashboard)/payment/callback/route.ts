@@ -24,26 +24,26 @@ export async function POST(request: Request) {
   const totalFee = calculateTotalFee(payload.fees);
 
   const transaction: Partial<Tables<'user_transaction'>> = {
-    id: payload.externalId,
+    id: payload.external_id,
     invoice_id: payload.id,
     amount: payload.amount,
-    paid_amount: payload.paidAmount,
+    paid_amount: payload.paid_amount,
     fees: payload.fees as Json[] | undefined,
     adjusted_received_amount: payload.amount - totalFee,
-    paid_at: payload.paidAt,
-    payer_email: payload.payerEmail,
+    paid_at: payload.paid_at,
+    payer_email: payload.payer_email,
     updated_at: payload.updated,
     currency: payload.currency,
     status: payload.status,
-    payment_method: payload.paymentMethod,
-    payment_channel: payload.paymentChannel,
+    payment_method: payload.payment_method,
+    payment_channel: payload.payment_channel,
   };
   const supabase = createClient();
 
   const { error } = await supabase
     .from('user_transaction')
     .update(transaction)
-    .eq('id', payload.externalId);
+    .eq('id', payload.external_id);
 
   if (error) {
     throw error;
