@@ -40,7 +40,10 @@ export async function POST(request: Request) {
   };
   const supabase = createClient();
 
-  const { error } = await supabase.from('user_transaction').update(transaction);
+  const { error } = await supabase
+    .from('user_transaction')
+    .update(transaction)
+    .eq('id', payload.externalId);
 
   if (error) {
     throw error;
