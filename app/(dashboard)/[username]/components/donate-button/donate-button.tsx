@@ -56,18 +56,22 @@ export default function DonateButton({ userId }: DonateButtonProps) {
   async function onSubmit(formData: DonateFormValues) {
     setIsLoading(true);
 
-    createUserTransation({
+    const { data, error } = await createUserTransation({
       userId,
       amount: formData.amount,
       description: formData.message || '',
     });
 
+    if (!data || error) {
+      throw new Error('Something went wrong');
+    }
+
     const { invoiceUrl } = await createInvoice({
       amount: formData.amount,
       description: formData.message || 'Donate to Baskoro',
+      externalId: data.id,
     });
 
-    console.log(invoiceUrl);
     router.push(invoiceUrl);
     setIsLoading(false);
     // if (error) {
