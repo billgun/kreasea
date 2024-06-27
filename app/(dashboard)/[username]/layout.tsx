@@ -73,7 +73,7 @@ export default async function UsernameLayout({
       <div className='container flex -translate-y-1/2 flex-row items-end justify-between px-5 py-2'>
         <div className='w-1/3'></div>
         <div className='flex w-1/3 items-center justify-center'>
-          <Avatar className='h-28 w-28  border-2 lg:h-36 lg:w-36'>
+          <Avatar className='h-28 w-28 border-2 lg:h-36 lg:w-36'>
             <AvatarImage
               alt='user avatar'
               src={userProfile.avatar_url as string}
@@ -94,7 +94,7 @@ export default async function UsernameLayout({
             </>
           ) : (
             <>
-              <DonateButton />
+              <DonateButton userId={userProfile.id} />
               <UserFollowButton
                 userId={userProfile.id}
                 hasFollowed={userProfile.has_followed}
@@ -126,7 +126,7 @@ export default async function UsernameLayout({
               <p className='line-clamp-3 overflow-hidden text-ellipsis text-sm text-accent-foreground/60'>
                 {userProfile.description || 'No Description'}
               </p>
-              <ChevronRight className='h-4 w-4 ' />
+              <ChevronRight className='h-4 w-4' />
             </div>
           </DialogTrigger>
           <DialogContent className='sm:max-w-lg'>

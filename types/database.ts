@@ -293,40 +293,58 @@ export type Database = {
       }
       user_transaction: {
         Row: {
+          adjusted_received_amount: number | null
           amount: number
           created_at: string
+          currency: string | null
+          description: string | null
+          fees: Json[] | null
           from: string | null
           id: string
-          invoice_id: string
+          invoice_id: string | null
+          paid_amount: number | null
           paid_at: string | null
-          payment_channel: string
-          payment_method: string
+          payer_email: string | null
+          payment_channel: string | null
+          payment_method: string | null
           status: string
           to: string
           updated_at: string
         }
         Insert: {
+          adjusted_received_amount?: number | null
           amount: number
           created_at?: string
+          currency?: string | null
+          description?: string | null
+          fees?: Json[] | null
           from?: string | null
           id?: string
-          invoice_id: string
+          invoice_id?: string | null
+          paid_amount?: number | null
           paid_at?: string | null
-          payment_channel: string
-          payment_method: string
+          payer_email?: string | null
+          payment_channel?: string | null
+          payment_method?: string | null
           status: string
           to: string
           updated_at?: string
         }
         Update: {
+          adjusted_received_amount?: number | null
           amount?: number
           created_at?: string
+          currency?: string | null
+          description?: string | null
+          fees?: Json[] | null
           from?: string | null
           id?: string
-          invoice_id?: string
+          invoice_id?: string | null
+          paid_amount?: number | null
           paid_at?: string | null
-          payment_channel?: string
-          payment_method?: string
+          payer_email?: string | null
+          payment_channel?: string | null
+          payment_method?: string | null
           status?: string
           to?: string
           updated_at?: string
@@ -370,6 +388,7 @@ export type Database = {
           content: string | null
           created_at: string | null
           id: string | null
+          image_url: string | null
           is_liked: boolean | null
           like_count: number | null
           name: string | null
@@ -384,6 +403,7 @@ export type Database = {
           content: string | null
           created_at: string | null
           id: string | null
+          image_url: string | null
           is_liked: boolean | null
           like_count: number | null
           name: string | null

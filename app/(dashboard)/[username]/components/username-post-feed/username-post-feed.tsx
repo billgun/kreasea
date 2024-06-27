@@ -81,7 +81,9 @@ export function UsernamePostFeed({
               )}
               <div
                 className='line-clamp-2'
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{
+                  __html: post.content.replace(/<img[^>]*>/g, ''),
+                }}
               />
             </Link>
             <div className='flex items-center justify-start gap-x-8'>

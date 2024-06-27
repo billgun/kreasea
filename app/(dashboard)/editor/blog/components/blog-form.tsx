@@ -37,6 +37,7 @@ import { postUserPost } from '@/lib/actions/user-posts';
 import { FilePondFile } from 'filepond';
 import { uploadToBucket } from '@/lib/actions/bucket';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
+import { MinimalTiptapEditor } from '@/components/minimal-tiptap';
 
 // Register the plugins
 registerPlugin(
@@ -98,6 +99,7 @@ export default function BlogForm() {
       }
       postUserPost(postData);
     } catch (error) {
+      setError(error.message);
       console.log('Error :', error);
     } finally {
       setIsLoading(false);
@@ -128,10 +130,10 @@ export default function BlogForm() {
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <FormControl>
-                    <Editor
-                      name={field.name}
-                      control={form.control}
-                      content={field.value}
+                    <MinimalTiptapEditor
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      disabled={false}
                     />
                   </FormControl>
                   <FormMessage />

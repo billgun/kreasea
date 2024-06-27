@@ -25,6 +25,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
+import { createUserTransation } from './actions';
 
 const donateFormSchema = z.object({
   amount: z.number().min(10000, {
@@ -40,8 +41,10 @@ const defaultValues: Partial<DonateFormValues> = {
   message: '',
 };
 
-interface DonateButtonProps {}
-export default function DonateButton({}: DonateButtonProps) {
+interface DonateButtonProps {
+  userId: string;
+}
+export default function DonateButton({ userId }: DonateButtonProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -51,10 +54,13 @@ export default function DonateButton({}: DonateButtonProps) {
   });
 
   async function onSubmit(formData: DonateFormValues) {
-    console.log('onSubmit');
     setIsLoading(true);
 
-    console.log(formData);
+    createUserTransation({
+      userId,
+      amount: formData.amount,
+      description: formData.message || '',
+    });
 
     const { invoiceUrl } = await createInvoice({
       amount: formData.amount,
