@@ -33,9 +33,9 @@ import FilePondPluginImageEdit from 'filepond-plugin-image-edit';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { useState } from 'react';
 import { Icons } from '@/components/icons';
-import { postUserPost } from '@/lib/actions/user-posts';
+import { postUserPost } from '@/lib/queries/user-posts';
 import { FilePondFile } from 'filepond';
-import { uploadToBucket } from '@/lib/actions/bucket';
+import { uploadToBucket } from '@/lib/queries/bucket';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
 import { MinimalTiptapEditor } from '@/components/minimal-tiptap';
 

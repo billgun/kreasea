@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { getPublicFileUrl } from '@/lib/actions/bucket';
+import { getPublicFileUrl } from '@/lib/queries/bucket';
 import { formatPostDate } from '@/lib/utils';
 import { PostType } from '@/types/app';
 import { USER_POSTS_BUCKET } from '@/types/bucket';

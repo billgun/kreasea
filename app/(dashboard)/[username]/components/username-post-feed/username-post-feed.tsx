@@ -10,7 +10,7 @@ import PostLikeButton from '../post-like-button/post-like-button';
 import { deletePost } from './actions';
 import Image from 'next/image';
 import { USER_POSTS_BUCKET } from '@/types/bucket';
-import { getPublicFileUrl } from '@/lib/actions/bucket';
+import { getPublicFileUrl } from '@/lib/queries/bucket';
 import { ShareToSocial } from '@/components/share-to-social';
 import { PostMoreMenu } from '@/components/more-post-menu';
 import { PostContent, PostHeader } from '@/components/post';

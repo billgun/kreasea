@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
-import { postUserPost } from '@/lib/actions/user-posts';
+import { postUserPost } from '@/lib/queries/user-posts';
 
 const statusUpdateSchema = z.object({
   content: z.string().min(2, {

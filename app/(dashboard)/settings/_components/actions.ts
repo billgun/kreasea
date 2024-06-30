@@ -5,6 +5,7 @@ import { passwordChangeSchema } from './password-change-form';
 import { getSessionStrict } from '@/lib/auth';
 import { usernameChangeSchema } from './username-change-form';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function passwordChange({
   currentPassword,
@@ -28,19 +29,20 @@ export async function passwordChange({
   return { error: null };
 }
 
-//TODO: revalidate path not working
 export async function usernameChange({ username }: usernameChangeSchema) {
   const supabase = createClient();
   const user = await getSessionStrict();
 
-  const { data, error } = await supabase
-    .from('user_profiles')
-    .update({ username })
-    .eq('id', user.sub as string);
-
-  if (!data) {
+  try {
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .update({ username })
+      .eq('id', user.sub as string);
+  } catch (error) {
     return { error };
   }
+
   revalidatePath('/explore');
-  return { data };
+  revalidatePath('/settings');
+  // return { data };
 }

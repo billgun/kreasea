@@ -44,12 +44,12 @@ export default function UsernameChangeForm({ username }: { username: string }) {
   });
 
   async function onSubmit(values: usernameChangeSchema) {
-    const { error } = await usernameChange(values);
-    if (error) {
-      form.setError('root', { message: error.message });
-      throw new Error('Could not authenticate user');
-    }
-    router.refresh();
+    await usernameChange(values);
+    // if (error) {
+    //   form.setError('root', { message: error.message });
+    //   throw new Error('Could not authenticate user');
+    // }
+    // router.refresh();
     toast.success('Username changed');
   }
 

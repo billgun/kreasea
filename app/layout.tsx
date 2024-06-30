@@ -7,6 +7,7 @@ import { Metadata, Viewport } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
+import { ReactQueryClientProvider } from '@/components/provider/react-query-client-provider';
 
 export const metadata: Metadata = {
   title: {
@@ -117,7 +118,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <>
+    <ReactQueryClientProvider>
       <html lang='en' suppressHydrationWarning>
         <head />
         <body
@@ -139,6 +140,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </ThemeProvider>
         </body>
       </html>
-    </>
+    </ReactQueryClientProvider>
   );
 }
